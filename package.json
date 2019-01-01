@@ -14,11 +14,14 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.0.76",
+    "gatsby-plugin-styled-components": "^3.0.4",
     "gatsby-plugin-typography": "^2.2.4",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-typography": "^0.16.18",
+    "styled-components": "^4.1.3",
     "typography": "^0.16.18",
     "typography-theme-de-young": "^0.16.18"
   },

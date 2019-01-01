@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ErrorPageView from "../components/ErrorPageView";
+import ErrorPageView from "../components/Error/ErrorPageView";
 
 class ErrorPage extends Component {
   render() {

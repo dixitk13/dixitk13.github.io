@@ -6,7 +6,9 @@ import { device } from "../utils/device";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #ef9a9a;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
+  z-index: 2;
   border-radius: ${rhythm(0.5)};
   overflow: hidden;
   margin: 5px 0;

@@ -9,6 +9,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: ${rhythm(1)};
+  margin: ${rhythm(1)};
   @media ${device.mobile} {
     flex-direction: column;
   }

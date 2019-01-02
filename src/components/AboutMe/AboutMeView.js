@@ -7,21 +7,25 @@ import { device } from "../../utils/device";
 import Logos from "../Logos";
 
 const AboutMeContainer = styled.div`
-  border: 1px solid #ef9a9a;
   height: 95vh;
   width: 20vw;
   display: flex;
   flex-direction: column;
   padding: ${rhythm(0.5)};
   border-radius: ${rhythm(0.5)};
+  background: rgba(255, 255, 255, 1);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
+  z-index: 2;
+  margin-right: 10px;
   @media ${device.mobile} {
     height: unset;
+    margin-right: unset;
     width: 100%;
   }
 `;
 
 const Name = styled.h1`
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.75);
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
 `;

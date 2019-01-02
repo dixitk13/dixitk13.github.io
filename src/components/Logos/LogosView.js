@@ -10,7 +10,7 @@ const Mentions = styled.div`
   height: 48px;
   margin-bottom: 1rem;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const MentionsLogo = styled.img`
@@ -47,25 +47,27 @@ export default () => {
       href: "https://www.quora.com/profile/Dixit-Patel-4",
       imgsrc: quora,
       alt: "Quora",
-      width: "75px"
+      width: "75px",
+      transform: "scale(0.85)"
     },
     {
       href: "http://strava.com/athletes/19109068/badge",
       imgsrc: strava,
       alt: "Strava",
-      transform: "scale(0.85)"
+      transform: "scale(0.65)"
     },
     {
       href: "https://twitter.com/dixitk13",
       imgsrc: twitter,
       alt: "Twitter",
-      transform: "scale(0.85)"
+      transform: "scale(0.65)"
     },
     {
       href: "https://github.com/dixitk13",
       imgsrc: github,
       alt: "Github",
-      width: "65px"
+      width: "65px",
+      transform: "scale(0.85)"
     }
   ];
 

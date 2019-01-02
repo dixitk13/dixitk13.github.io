@@ -40,16 +40,11 @@ const Username = styled.h2`
   padding: 0;
 `;
 
-const Excerpt = styled.p`
-  margin: 0;
-`;
-
 const User = props => (
   <UserWrapper>
     <Avatar src={props.avatar} alt="" />
     <Description>
       <Username>{props.username}</Username>
-      <Excerpt>{props.excerpt}</Excerpt>
     </Description>
   </UserWrapper>
 );

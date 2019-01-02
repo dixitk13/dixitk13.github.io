@@ -8,7 +8,7 @@ export const Container = styled.div`
   border-radius: 4px;
   overflow: hidden;
   margin: 5px;
-  padding: ${rhythm(2)};
+  padding: ${rhythm(0.5)};
   &:first-child {
     margin-top: 0;
   }
@@ -17,6 +17,7 @@ export const Container = styled.div`
 export const Header = styled.div`
   color: #d32f2f;
   text-align: center;
+  align-self: flex-start;
   font-size: 12px;
   font-weight: 600;
   border-bottom: 1px solid #ef9a9a;

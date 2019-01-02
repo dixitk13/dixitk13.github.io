@@ -3,16 +3,19 @@ import styled from "styled-components";
 import strava from "./strava.png";
 import twitter from "./twitter.svg";
 import quora from "./quora.svg";
+import github from "./github.jpg";
 
 const Mentions = styled.div`
   display: flex;
   height: 48px;
+  margin-bottom: 1rem;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 
 const MentionsLogo = styled.img`
   width: ${props => props.width || "48px"};
+  transform: ${props => props.transform || ""};
   height: 48px;
   margin-bottom: 0;
 `;
@@ -39,24 +42,38 @@ const Href = ({ href, title, imgsrc, ...rest }) => {
 };
 
 export default () => {
+  const mentions = [
+    {
+      href: "https://www.quora.com/profile/Dixit-Patel-4",
+      imgsrc: quora,
+      alt: "Quora",
+      width: "75px"
+    },
+    {
+      href: "http://strava.com/athletes/19109068/badge",
+      imgsrc: strava,
+      alt: "Strava",
+      transform: "scale(0.85)"
+    },
+    {
+      href: "https://twitter.com/dixitk13",
+      imgsrc: twitter,
+      alt: "Twitter",
+      transform: "scale(0.85)"
+    },
+    {
+      href: "https://github.com/dixitk13",
+      imgsrc: github,
+      alt: "Github",
+      width: "65px"
+    }
+  ];
+
   return (
     <Mentions>
-      <Href
-        href="https://www.quora.com/profile/Dixit-Patel-4"
-        imgsrc={quora}
-        alt="quora"
-        width="75px"
-      />
-      <Href
-        href="http://strava.com/athletes/19109068/badge"
-        imgsrc={strava}
-        alt="strava"
-      />
-      <Href
-        href="https://twitter.com/dixitk13"
-        imgsrc={twitter}
-        alt="twitter"
-      />
+      {mentions.map((mention, i) => (
+        <Href key={`mentions-${i}`} {...mention} />
+      ))}
     </Mentions>
   );
 };

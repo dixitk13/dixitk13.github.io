@@ -1,16 +1,20 @@
 import styled from "styled-components";
 import { rhythm } from "../utils/typography";
 
+import { device } from "../utils/device";
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #ef9a9a;
-  border-radius: 4px;
+  border-radius: ${rhythm(0.5)};
   overflow: hidden;
   margin: 5px;
   padding: ${rhythm(0.5)};
-  &:first-child {
-    margin-top: 0;
+  @media not screen and ${device.mobile} {
+    &:first-child {
+      margin-top: 0;
+    }
   }
 `;
 

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { device } from "../../utils/device";
+
 import Project from "../Project";
 
 export default () => {
@@ -16,6 +18,8 @@ export default () => {
 };
 
 const ProjectsContainer = styled.div`
-  overflow: scroll;
-  height: 90vh;
+  @media not screen and ${device.mobile} {
+    overflow: scroll;
+    height: 95vh;
+  }
 `;

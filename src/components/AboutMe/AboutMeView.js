@@ -28,13 +28,20 @@ const Name = styled.h1`
   color: rgba(0, 0, 0, 0.75);
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
+  cursor: pointer;
 `;
 
 const Footer = styled.div`
   justify-self: flex-end;
   color: #666;
   margin-top: auto;
-  text-decoration: none;
+  a {
+    transition: all 0.5s;
+    &:hover {
+      color: #555;
+      z-index: 1;
+    }
+  }
 `;
 
 const Heart = styled.span`
@@ -49,10 +56,51 @@ const Quote = styled.blockquote`
   margin-bottom: 1rem;
 `;
 
-const AboutMeView = () => {
+const ToggleHeartContainer = styled.span`
+  position: relative;
+  top: -25px;
+  display: flex;
+  left: 40px;
+  height: 0;
+  transform: rotate(45deg);
+  margin-left: auto;
+
+  @keyframes heart {
+    0%,
+    17.5% {
+      font-size: 0;
+    }
+  }
+
+  [for="toggle-heart"] {
+    color: #aab8c2;
+    font-size: 2em;
+    cursor: pointer;
+    visibility: hidden;
+  }
+
+  [id="toggle-heart"] {
+    display: none;
+    &:checked + label {
+      color: #e2264d;
+      visibility: unset;
+      will-change: font-size;
+      animation: heart 1s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+    }
+    &:unchecked + label {
+      transition: 1s ease-all;
+    }
+  }
+`;
+
+const AboutMeView = ({ on, toggleOn }) => {
   return (
     <AboutMeContainer>
-      <Name>Dixit Keshavbhai Patel</Name>
+      <ToggleHeartContainer>
+        <input id="toggle-heart" checked={on} type="checkbox" />
+        <label htmlFor="toggle-heart">❤</label>
+      </ToggleHeartContainer>
+      <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
       <img src={dixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />

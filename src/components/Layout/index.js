@@ -8,8 +8,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${rhythm(1)};
-  margin: ${rhythm(1)};
+  padding: ${rhythm(0.75)};
   @media ${device.mobile} {
     flex-direction: column;
   }

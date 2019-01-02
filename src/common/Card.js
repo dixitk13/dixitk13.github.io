@@ -9,12 +9,13 @@ export const Container = styled.div`
   border: 1px solid #ef9a9a;
   border-radius: ${rhythm(0.5)};
   overflow: hidden;
-  margin: 5px;
+  margin: 5px 0;
   padding: ${rhythm(0.5)};
   @media not screen and ${device.mobile} {
     &:first-child {
       margin-top: 0;
     }
+    margin: 5px;
   }
 `;
 

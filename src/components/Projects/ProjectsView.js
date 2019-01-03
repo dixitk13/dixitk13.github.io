@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { device } from "../../utils/device";
-
 import Project from "../Project";
 
-export default () => {
+export default ({ data }) => {
+  const { edges } = data.allMarkdownRemark;
+  console.log("edges ", edges);
+
   const projects = Array(10)
     .fill(1)
     .map((x, i) => i);

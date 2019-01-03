@@ -64,13 +64,12 @@ const Buttons = styled.div`
   display: inline-flex;
   flex-direction: row;
   margin-bottom: 1rem;
-
   justify-content: space-evenly;
 `;
 
 const DownloadButtonsView = () => (
   <Buttons>
-    <DownloadLink target="_blank" href={resume}>
+    <DownloadLink download target="_blank" href={resume}>
       <DownloadButton
         type="button"
         data-hover="Download"

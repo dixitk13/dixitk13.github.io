@@ -2,9 +2,11 @@ import React from "react";
 import { rhythm } from "../../utils/typography";
 import styled from "styled-components";
 
-import dixitk13 from "./dixitk13.jpg";
+import dixitk13 from "../../../static/dixitk13.jpg";
+
 import { device } from "../../utils/device";
 import Logos from "../Logos";
+import DownloadButtons from "../DownloadButtons";
 
 const AboutMeContainer = styled.div`
   height: 95vh;
@@ -29,6 +31,11 @@ const Name = styled.h1`
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
   cursor: pointer;
+
+  &:hover {
+    font-size: ${rhythm(1.51)};
+    color: rgba(0, 0, 0, 0.66);
+  }
 `;
 
 const Footer = styled.div`
@@ -97,13 +104,19 @@ const AboutMeView = ({ on, toggleOn }) => {
   return (
     <AboutMeContainer>
       <ToggleHeartContainer>
-        <input id="toggle-heart" checked={on} type="checkbox" />
+        <input
+          id="toggle-heart"
+          checked={on}
+          onChange={toggleOn}
+          type="checkbox"
+        />
         <label htmlFor="toggle-heart">❤</label>
       </ToggleHeartContainer>
       <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
       <img src={dixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />
+      <DownloadButtons />
       <Footer>
         Made with {<Heart />} using{" "}
         <a href="https://www.gatsbyjs.org/">Gatsby</a> and{" "}

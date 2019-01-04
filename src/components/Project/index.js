@@ -3,7 +3,7 @@ import ProjectView from "./ProjectView";
 
 class Project extends Component {
   render() {
-    return <ProjectView />;
+    return <ProjectView {...this.props} />;
   }
 }
 

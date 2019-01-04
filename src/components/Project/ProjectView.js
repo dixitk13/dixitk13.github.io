@@ -1,22 +1,12 @@
 import React from "react";
 import * as Card from "../../common/Card";
 
-export default () => {
+export default ({ title, link, tags, body }) => {
   return (
     <Card.Container>
-      <Card.Header>Richard Hamming on Luck</Card.Header>
+      <Card.Header>{title}</Card.Header>
       <Card.Description>
-        <blockquote>
-          <p>
-            There is indeed an element of luck, and no, there isn’t. The
-            prepared mind sooner or later finds something important and does it.
-            So yes, it is luck.{" "}
-            <em>
-              The particular thing you do is luck, but that you do something is
-              not.
-            </em>
-          </p>
-        </blockquote>
+        <blockquote>{body}</blockquote>
       </Card.Description>
     </Card.Container>
   );

@@ -4,11 +4,12 @@ module.exports = {
   },
   pathPrefix: "/dixitk13-gatsby.github.io",
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/src/markdowns/`
+        path: `${__dirname}/static/markdowns/`
       }
     },
     {

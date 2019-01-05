@@ -13,7 +13,7 @@ class Projects extends Component {
   }
 }
 
-export const query = graphql`
+const query = graphql`
   query {
     allMarkdownRemark {
       edges {

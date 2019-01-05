@@ -17,6 +17,7 @@ export const Container = styled.div`
   padding: ${rhythm(0.25)} ${rhythm(0.5)};
   position: relative;
   border-top: 6px solid #3f4eae;
+  // transition: all 1s ease;
 
   @media not screen and ${device.mobile} {
     &:first-child {
@@ -36,7 +37,11 @@ export const HeaderContainer = styled.div`
 export const Header = styled.div`
   color: rgba(0, 0, 0, 0.5);
   font-size: ${rhythm(0.75)};
+  cursor: pointer;
   font-weight: 600;
+  &:hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 export const OpenLink = styled.a`
@@ -52,17 +57,20 @@ export const Title = styled.div`
   align-items: center;
   padding: 15px 0;
 `;
-
+// hate this transition!
 export const Description = styled.div`
   font-size: ${rhythm(0.5)};
   color: rgba(0, 0, 0, 0.8);
+  transition: all 0.5s ease-in-out;
+  opacity: ${props => (props.open ? "1" : "0")};
+  height: ${props => (props.open ? "100%" : "0")};
 `;
 
 export const Tags = styled.div`
   display: flex;
   align-self: end;
   font-size: ${rhythm(0.5)};
-  justify-items: space-between;
+  justify-content: center;
 `;
 
 export const Tag = styled.div`
@@ -72,6 +80,17 @@ export const Tag = styled.div`
   font-weight: ${rhythm(0.25)};
   color: rgba(0, 0, 0, 0.8);
   background: rgba(0, 0, 0, 0.1);
+  @media ${device.desktop} {
+    &:nth-child(n + 7) {
+      opacity: 0;
+    }
+  }
+
+  @media ${device.mobile} {
+    &:nth-child(n + 5) {
+      opacity: 0;
+    }
+  }
   &:first-child {
     margin-left: 0;
   }

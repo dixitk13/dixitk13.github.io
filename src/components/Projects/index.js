@@ -15,10 +15,11 @@ class Projects extends Component {
 
 const query = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
           id
+          html
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")

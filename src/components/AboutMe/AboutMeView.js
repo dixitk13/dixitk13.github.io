@@ -2,11 +2,12 @@ import React from "react";
 import { rhythm } from "../../utils/typography";
 import styled from "styled-components";
 
-import dixitk13 from "../../../static/dixitk13.jpg";
+import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
 import Logos from "../Logos";
 import DownloadButtons from "../DownloadButtons";
+import MadeWithView from "./MadeWithView";
 
 const AboutMeContainer = styled.div`
   height: 95vh;
@@ -35,26 +36,6 @@ const Name = styled.h1`
   &:hover {
     font-size: ${rhythm(1.51)};
     color: rgba(0, 0, 0, 0.66);
-  }
-`;
-
-const Footer = styled.div`
-  justify-self: flex-end;
-  color: #666;
-  margin-top: auto;
-  a {
-    transition: all 0.5s;
-    &:hover {
-      color: #555;
-      z-index: 1;
-    }
-  }
-`;
-
-const Heart = styled.span`
-  color: #d32f2f;
-  &:after {
-    content: "❤";
   }
 `;
 
@@ -117,11 +98,7 @@ const AboutMeView = ({ on, toggleOn }) => {
       <Quote>just another software engineer</Quote>
       <Logos />
       <DownloadButtons />
-      <Footer>
-        Made with {<Heart />} using{" "}
-        <a href="https://www.gatsbyjs.org/">Gatsby</a> and{" "}
-        <a href="https://www.styled-components.com/">Styled Components</a>
-      </Footer>
+      <MadeWithView />
     </AboutMeContainer>
   );
 };

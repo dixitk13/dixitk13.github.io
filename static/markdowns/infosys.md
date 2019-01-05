@@ -6,7 +6,7 @@ tags:
   - java
   - sql
   - oracle
-  - jax-ws
+  - jaxws
   - reflections
   - soa
   - hibernate

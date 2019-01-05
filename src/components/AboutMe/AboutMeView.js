@@ -39,6 +39,14 @@ const Name = styled.h1`
   }
 `;
 
+const Image = styled.img`
+  flex: 1 5 30%;
+  min-height: 0;
+  // min-height: calc(0.3 * 95vh);
+  max-height: 400px;
+  margin-bottom: 1rem;
+`;
+
 const Quote = styled.blockquote`
   margin-left: unset;
   margin-bottom: 1rem;
@@ -94,7 +102,7 @@ const AboutMeView = ({ on, toggleOn }) => {
         <label htmlFor="toggle-heart">❤</label>
       </ToggleHeartContainer>
       <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
-      <img src={dixitk13} alt="Dixit" />
+      <Image src={dixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />
       <DownloadButtons />

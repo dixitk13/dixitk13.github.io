@@ -65,8 +65,8 @@ const ProjectsViewContainer = styled.div`
     padding: ${rhythm(0.5)} 0;
   }
   @media ${device.mobile} {
-    overflow: scroll;
-    height: 95vh;
+    // overflow: scroll;
+    // height: 95vh;
     width: 90vw;
   }
   &:first-child {

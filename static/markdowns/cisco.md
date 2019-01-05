@@ -18,4 +18,4 @@ tags:
 - I have implemented a generic notification system which notifies based on the latest record, insufficient
   state, threshold levels, etc.
 - Also designed an Admin System to grant access control for the entire organization.
-- Integrated cflow into test-automation code base system to achieve code-coverage.
+- Integrated cflow into automation code base system to achieve code-coverage.

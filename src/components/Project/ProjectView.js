@@ -6,7 +6,7 @@ export default ({ title, link, tags, body, html, toggleOpen, open }) => {
     <Card.Container>
       <Card.HeaderContainer>
         <Card.Header onClick={toggleOpen}>{title}</Card.Header>
-        <Card.OpenLink href={link}>⬀</Card.OpenLink>
+        <Card.OpenLink href={link}>↗</Card.OpenLink>
       </Card.HeaderContainer>
 
       <Card.Description

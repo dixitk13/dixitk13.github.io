@@ -11,6 +11,7 @@ const Mentions = styled.div`
   margin-bottom: 1rem;
   flex-direction: row;
   justify-content: space-around;
+  flex: 0 1 auto;
 `;
 
 const MentionsLogo = styled.img`

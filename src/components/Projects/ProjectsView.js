@@ -58,9 +58,12 @@ const SubHeader = styled.span`
 `;
 
 const ProjectsViewContainer = styled.div`
-  @media not screen and ${device.mobile} {
+  @media ${device.desktop} {
+    width: 40vw;
+  }
+  @media ${device.mobile} {
     overflow: scroll;
     height: 95vh;
-    flex-basis: 50vw;
+    width: 90vw;
   }
 `;

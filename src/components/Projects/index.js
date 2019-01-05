@@ -25,7 +25,7 @@ const query = graphql`
             link
             tags
           }
-          excerpt
+          excerpt(truncate: false)
         }
       }
     }

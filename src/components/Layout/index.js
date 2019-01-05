@@ -6,7 +6,6 @@ import { device } from "../../utils/device";
 
 const Container = styled.div`
   display: flex;
-  // align-items: center;
   justify-content: center;
   padding: ${rhythm(0.75)};
   @media ${device.mobile} {

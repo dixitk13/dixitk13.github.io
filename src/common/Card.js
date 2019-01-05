@@ -57,6 +57,7 @@ export const Title = styled.div`
   align-items: center;
   padding: 15px 0;
 `;
+
 // hate this transition!
 export const Description = styled.div`
   font-size: ${rhythm(0.5)};

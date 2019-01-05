@@ -6,6 +6,7 @@ import Project from "../Project";
 import { rhythm } from "../../utils/typography";
 
 export default ({ data }) => {
+  console.log(data);
   const { edges } = data.allMarkdownRemark;
 
   return (

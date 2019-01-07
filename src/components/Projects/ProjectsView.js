@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { device } from "../../utils/device";
-import Project from "../Project";
+import Project from "./Project";
 import { rhythm } from "../../utils/typography";
 
 export default ({ data }) => {
@@ -10,10 +10,6 @@ export default ({ data }) => {
 
   return (
     <ProjectsContainer>
-      {/*<HeaderSection>*/}
-      {/*<Header>Projects</Header>*/}
-      {/*<SubHeader>A set of Cool Projects which I spawn when bored</SubHeader>*/}
-      {/*</HeaderSection>*/}
       <ProjectsViewContainer>
         {edges.map((edge, i) => {
           const { node } = edge;
@@ -39,23 +35,6 @@ const ProjectsContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-// const HeaderSection = styled.div`
-//   margin: ${rhythm(0.25)} 0;
-//   text-align: center;
-// `;
-//
-// const Header = styled.h1`
-//   font-size: 24px;
-//   cursor: pointer;
-//   margin: ${rhythm(0.25)} 0;
-// `;
-//
-// const SubHeader = styled.span`
-//   font-size: 18px;
-//   font-weight: 400;
-//   color: rgb(92, 97, 102);
-// `;
 
 const ProjectsViewContainer = styled.div`
   @media ${device.desktop} {

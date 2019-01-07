@@ -5,9 +5,9 @@ import styled from "styled-components";
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
-import Logos from "../Logos";
-import DownloadButtons from "../DownloadButtons";
-import MadeWithView from "./MadeWithView";
+import Logos from "./Logos";
+import DownloadButtons from "./DownloadButtons";
+import MadeWithView from "./MadeWith";
 
 const AboutMeContainer = styled.div`
   height: 95vh;

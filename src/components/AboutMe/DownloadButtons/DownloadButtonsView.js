@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { rhythm } from "../../utils/typography";
+import { rhythm } from "../../../utils/typography";
 
-import resume from "../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
+import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
 
 const DownloadLink = styled.a`
   text-align: center;

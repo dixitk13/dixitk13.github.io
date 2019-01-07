@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import gatsbyIcon from "../../../static/svg/gatsby.svg";
-import reactIcon from "../../../static/svg/react.svg";
-import graphqlIcon from "../../../static/svg/graphql.svg";
-import styledIcon from "../../../static/svg/styled.png";
-import webpackIcon from "../../../static/svg/webpack.svg";
-import babelIcon from "../../../static/svg/babel.svg";
-import githubIcon from "../../../static/svg/github.svg";
+import gatsbyIcon from "../../../../static/svg/gatsby.svg";
+import reactIcon from "../../../../static/svg/react.svg";
+import graphqlIcon from "../../../../static/svg/graphql.svg";
+import styledIcon from "../../../../static/svg/styled.png";
+import webpackIcon from "../../../../static/svg/webpack.svg";
+import babelIcon from "../../../../static/svg/babel.svg";
+import githubIcon from "../../../../static/svg/github.svg";
 
 const items = [
   { name: "gatsby", url: "https://www.gatsbyjs.org/", svg: gatsbyIcon },

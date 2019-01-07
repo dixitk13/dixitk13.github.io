@@ -1,11 +1,13 @@
 import React from "react";
-import * as Card from "../../common/Card";
+import * as Card from "../../../common/Card";
 
 export default ({ title, link, tags, body, html, toggleOpen, open }) => {
   return (
     <Card.Container>
       <Card.HeaderContainer>
-        <Card.Header onClick={toggleOpen}>{title}</Card.Header>
+        <Card.Header open={open} onClick={toggleOpen}>
+          {title}
+        </Card.Header>
         <Card.OpenLink href={link}>↗</Card.OpenLink>
       </Card.HeaderContainer>
 

@@ -14,7 +14,7 @@ const AboutMeContainer = styled.div`
   width: 20vw;
   display: flex;
   flex-direction: column;
-  padding: ${rhythm(0.5)};
+  padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.5)};
   background: rgba(255, 255, 255, 1);
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
@@ -24,6 +24,7 @@ const AboutMeContainer = styled.div`
     height: unset;
     margin-right: unset;
     width: 100%;
+    margin-bottom: 5px;
   }
 `;
 

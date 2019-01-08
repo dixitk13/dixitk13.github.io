@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 import { device } from "../../utils/device";
 import ProjectCard from "./ProjectCard";
-import { rhythm } from "../../utils/typography";
 
-export default ({ data }) => {
+export default ({ data, cardNumber, ...rest }) => {
   const { edges } = data.allMarkdownRemark;
 
   return (
@@ -17,11 +16,15 @@ export default ({ data }) => {
         return (
           <ProjectCard
             key={i}
+            id={i}
+            open={cardNumber === i}
+            active={cardNumber !== -1}
             html={html}
             title={title}
             link={link}
             tags={tags}
             body={excerpt}
+            {...rest}
           />
         );
       })}
@@ -30,56 +33,17 @@ export default ({ data }) => {
 };
 
 const CardsContainer = styled.div`
-  display: flex;
-  padding: ${rhythm(0.25)};
   @media ${device.desktop} {
+    display: flex;
+    flex-flow: row wrap;
     width: 40vw;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 95vh;
-    // padding: ${rhythm(0.5)} 0;
+    padding: 0 10px 0 0px;
+    height: 100%;
   }
   @media ${device.mobile} {
     width: 90vw;
+    display: flex;
+    padding: 0;
     flex-direction: column;
-  }
-`;
-
-// const CardsViewContainer = styled.div`
-//   @media ${device.desktop} {
-//     width: 40vw;
-//     height: 95vh;
-//     overflow: scroll;
-//     padding: ${rhythm(0.5)} 0;
-//   }
-//   @media ${device.mobile} {
-//     // overflow: scroll;
-//     // height: 95vh;
-//     width: 90vw;
-//   }
-//   &:first-child {
-//     padding-top: 3px;
-//   }
-// `;
-
-const ProjectsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ProjectsViewContainer = styled.div`
-  @media ${device.desktop} {
-    width: 40vw;
-    height: 95vh;
-    overflow: scroll;
-    padding: ${rhythm(0.5)} 0;
-  }
-  @media ${device.mobile} {
-    // overflow: scroll;
-    // height: 95vh;
-    width: 90vw;
-  }
-  &:first-child {
-    padding-top: 3px;
   }
 `;

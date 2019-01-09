@@ -2,24 +2,128 @@ import styled from "styled-components";
 import { rhythm } from "../utils/typography";
 import { device } from "../utils/device";
 
-export const ExpandableCardContainer = styled.div`
-  flex-basis: 45%;
-  height: 150px;
+// magic number
+const numberOfCards = 2;
+
+export const Expander = styled.div`
+  transition: all 0.2s ease-in-out;
+  background-color: slate;
+  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 1);
+  justify-content: start;
+  align-items: center;
+
+  max-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+  ${props =>
+    props.open
+      ? `
+        max-height: 1000px;
+        min-height: 200px;
+        width: calc(200% + 20px);
+        overflow: visible;
+        margin-top: 30px;
+        opacity: 1;
+        z-index: 10;
+        padding: ${rhythm(1)};
+        background: #ced4da;
+        border: 1px solid #ced4da;
+        `
+      : ""};
+
+  @media ${device.mobile} {
+    width: ${props => (props.open ? "100%" : "")};
+  }
+`;
+
+export const ExpanderBody = styled.div`
+  font-size: ${rhythm(0.65)};
+`;
+
+export const Card = styled.div`
+  margin: 10px;
+  width: calc((100% / ${numberOfCards}) - 20px);
+  transition: all 0.5s ease-in-out;
+  border-radius: ${rhythm(0.5)};
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
-  z-index: 2;
+
+  @media ${device.desktop} {
+    // top-cards shouldn't have any margin
+    &:nth-child(-n + ${numberOfCards}) {
+      margin-top: 0;
+    }
+
+    // odd cards have no left margin for the expander
+    &:nth-of-type(odd) ${Expander} {
+      margin-left: 0;
+    }
+
+    // even cards have a special margin for the expanded for obvious CSS reasons
+    &:nth-of-type(even) ${Expander} {
+      margin-left: calc(-100% - 20px);
+    }
+
+    // only on desktop
+    &:hover {
+      transform: ${props => (props.open ? "" : "scale(0.95)")};
+    }
+  }
+
+  @media ${device.mobile} {
+    width: 100%;
+    margin: 10px 0;
+    min-height: ${rhythm(4)};
+    &:first-child {
+      margin-top: 20px;
+    }
+  }
+
+  // if some card is active this card isn't open then opacity 0.5
+  ${props =>
+    props.active && !props.open
+      ? `
+        opacity: 0.5;
+        transform: scale(1);
+        `
+      : ""};
+`;
+
+export const CardContainer = styled.div`
+  width: 100%;
+  padding: ${rhythm(0.25)} ${rhythm(0.5)};
   border-radius: ${rhythm(0.25)};
   min-height: ${rhythm(4)};
-  border-top: ${rhythm(0.5)} solid transparent;
-  // overflow: hidden;
-  margin: 5px 0;
-  transition: all 0.5s ease;
-  padding: ${rhythm(0.25)} ${rhythm(0.5)};
   position: relative;
-  &:hover {
-    transform: ${props => (props.open ? "" : "scale(0.95)")};
+  cursor: pointer;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  transition: all 0.2s ease-in-out;
+  background-color: ${props =>
+    props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
+
+  // just the triangle after the div
+  &:after {
+    transition: all 0.3s ease-in-out;
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -30px;
+    left: calc(50% - 15px);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    opacity: ${props => (props.open ? "1" : "0")};
+    border-bottom: ${props => (props.open ? "15" : "0")}px solid #ced4da;
   }
 `;
 
@@ -28,70 +132,36 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-
-  ${props =>
-    props.open
-      ? `
-      &:after {
-        top: auto;
-        border: solid transparent;
-        content: " ";
-        // content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-bottom-color: #ddd;
-        border-width: 15px;
-        left: 50%;
-        top: 100%;
-        margin: -20px 0 0 -15px;
-       }
-      `
-      : ""};
 `;
 
-export const Header = styled.div`
-  color: ${props =>
-    props.open ? "rgba(0, 0, 0, 0.8);" : "rgba(0, 0, 0, 0.5)"};
+export const Title = styled.div`
+  color: rgba(0, 0, 0, 0.7);
   font-size: ${rhythm(0.75)};
   cursor: pointer;
   font-weight: 600;
   &:hover {
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.5);
   }
 `;
 
-export const OpenLink = styled.a`
+export const OpenLink = styled.div`
   margin-left: auto;
   font-size: ${rhythm(0.75)};
   margin-top: -3px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  padding: 3px;
+  &:hover {
+    background: rgb(236, 237, 238);
+    border-radius: 3px;
+  }
 `;
 
-export const ExpandedDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  transition: height 350ms ease 0s;
-  height: 0;
-  ${props =>
-    props.open
-      ? `
-         height: 500px;
-         padding: 50px 30px;
-        `
-      : ""};
-`;
-
-export const ExpandedInner = styled.div`
-  display: flex;
-  justify-items: space-between;
-`;
-
-export const Close = styled.div`
+export const ExpanderClose = styled.div`
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   top: 20px;
   right: 20px;
   cursor: pointer;
@@ -117,4 +187,37 @@ export const Close = styled.div`
   }
 `;
 
-export const Body = styled.div``;
+export const Footer = styled.div`
+  display: flex;
+  align-self: end;
+  font-size: ${rhythm(0.25)};
+  justify-content: center;
+`;
+
+export const Tag = styled.div`
+  padding: 3px 6px;
+  margin: ${rhythm(0.25)};
+  border-radius: ${rhythm(0.25)};
+  font-weight: ${rhythm(0.25)};
+  color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.1);
+  @media ${device.desktop} {
+    &:nth-child(n + 4) {
+      opacity: 0;
+    }
+  }
+
+  @media ${device.mobile} {
+    &:nth-child(n + 5) {
+      opacity: 0;
+    }
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+`;
+
+export const Body = styled.div`
+  font-size: ${rhythm(0.5)};
+  text-align: left;
+`;

@@ -39,6 +39,7 @@ const CardsContainer = styled.div`
     width: 40vw;
     padding: 0 10px 0 0px;
     height: 100%;
+    overflow: scroll;
   }
   @media ${device.mobile} {
     width: 90vw;

@@ -3,23 +3,26 @@ import { rhythm } from "../utils/typography";
 import { device } from "../utils/device";
 
 // magic number
-const numberOfCards = 2;
+export const numberOfCards = 2;
 
+/* Expander Card Classes */
 export const Expander = styled.div`
   transition: all 0.2s ease-in-out;
-  background-color: slate;
+  // background-color: rgba(206, 212, 218, 0.51);
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  border-radius: ${rhythm(0.25)};
 
   max-height: 0;
   min-height: 0;
   overflow: hidden;
   margin-top: 0;
   opacity: 0;
+
   ${props =>
     props.open
       ? `
@@ -31,7 +34,7 @@ export const Expander = styled.div`
         opacity: 1;
         z-index: 10;
         padding: ${rhythm(1)};
-        background: #ced4da;
+        background: rgba(206, 212, 218, 0.7);
         border: 1px solid #ced4da;
         `
       : ""};
@@ -43,8 +46,71 @@ export const Expander = styled.div`
 
 export const ExpanderBody = styled.div`
   font-size: ${rhythm(0.65)};
+  align-self: start;
 `;
 
+export const ExpanderClose = styled.div`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    height: 1px;
+    background: #888;
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover:before,
+  &:hover:after {
+    background: #333;
+  }
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  align-self: end;
+  font-size: ${rhythm(0.5)};
+  justify-content: center;
+`;
+
+export const Tag = styled.div`
+  padding: 3px 6px;
+  margin: ${rhythm(0.25)};
+  border-radius: ${rhythm(0.25)};
+  font-weight: ${rhythm(0.25)};
+  color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.1);
+  max-height: 25px;
+  white-space: nowrap;
+  @media ${device.desktop} {
+    &:nth-child(n + 7) {
+      opacity: 0;
+    }
+  }
+
+  @media ${device.mobile} {
+    &:nth-child(n + 5) {
+      opacity: 0;
+    }
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+`;
+
+/* Normal Card Classes */
 export const Card = styled.div`
   margin: 10px;
   width: calc((100% / ${numberOfCards}) - 20px);
@@ -89,6 +155,8 @@ export const Card = styled.div`
       ? `
         opacity: 0.5;
         transform: scale(1);
+        box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
+        
         `
       : ""};
 `;
@@ -132,6 +200,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 30px;
 `;
 
 export const Title = styled.div`
@@ -158,66 +227,8 @@ export const OpenLink = styled.div`
   }
 `;
 
-export const ExpanderClose = styled.div`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    height: 1px;
-    background: #888;
-    transform: rotate(45deg);
-  }
-
-  &:after {
-    transform: rotate(-45deg);
-  }
-
-  &:hover:before,
-  &:hover:after {
-    background: #333;
-  }
-`;
-
-export const Footer = styled.div`
-  display: flex;
-  align-self: end;
-  font-size: ${rhythm(0.25)};
-  justify-content: center;
-`;
-
-export const Tag = styled.div`
-  padding: 3px 6px;
-  margin: ${rhythm(0.25)};
-  border-radius: ${rhythm(0.25)};
-  font-weight: ${rhythm(0.25)};
-  color: rgba(0, 0, 0, 0.8);
-  background: rgba(0, 0, 0, 0.1);
-  @media ${device.desktop} {
-    &:nth-child(n + 4) {
-      opacity: 0;
-    }
-  }
-
-  @media ${device.mobile} {
-    &:nth-child(n + 5) {
-      opacity: 0;
-    }
-  }
-  &:first-child {
-    margin-left: 0;
-  }
-`;
-
 export const Body = styled.div`
   font-size: ${rhythm(0.5)};
   text-align: left;
+  min-height: 85px;
 `;

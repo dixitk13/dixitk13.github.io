@@ -13,12 +13,15 @@ import {
   ExpanderClose
 } from "../../../common/ExpandableCard";
 
+import FannedImages from "../../../common/FannedImages";
+
 export default ({
   id,
   title,
   link,
   tags,
   body,
+  images,
   html,
   toggleOpen,
   open,
@@ -33,6 +36,7 @@ export default ({
     e.stopPropagation();
     toggleOpen(id);
   };
+
   return (
     <Card active={active} open={open} onClick={() => toggleOpen(id)}>
       <CardContainer open={open}>
@@ -41,15 +45,16 @@ export default ({
           <OpenLink onClick={e => onClickHandler(e, link)}>↗</OpenLink>
         </HeaderContainer>
 
-        <Body>{body}</Body>
+        <FannedImages images={images} />
 
-        <Footer>
-          {tags.map((tag, i) => <Tag key={`card-tag-${i}-${tag}`}>{tag}</Tag>)}
-        </Footer>
+        <Body>{body}</Body>
       </CardContainer>
       <Expander open={open}>
         <ExpanderClose onClick={e => closeHandler(e, id)} />
         <ExpanderBody dangerouslySetInnerHTML={{ __html: html }} />
+        <Footer>
+          {tags.map((tag, i) => <Tag key={`card-tag-${i}-${tag}`}>{tag}</Tag>)}
+        </Footer>
       </Expander>
     </Card>
   );

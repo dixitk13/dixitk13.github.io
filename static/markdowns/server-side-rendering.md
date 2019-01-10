@@ -4,9 +4,9 @@ date: "2018-06-17"
 link: "https://github.com/dixitk13/basic-react-server-side"
 tags: 
   - react
-  - react-dom
-  - styled-components
+  - reactdom
   - cra
+  - styled-components
 ---
 
 - A basic application with server side rendering for ReactJS.

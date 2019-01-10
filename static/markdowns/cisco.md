@@ -12,6 +12,8 @@ tags:
   - mongodb
   - aws
   - cloudfront
+images:
+  - cisco.png
 ---
 
 - I am currently working on a Web Application based on Flask, MongoDB, MySQL, React & Redux.

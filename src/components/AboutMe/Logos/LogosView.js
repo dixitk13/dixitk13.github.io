@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import strava from "../../../static/img/strava.png";
-import twitter from "../../../static/svg/twitter.svg";
-import quora from "../../../static/svg/quora.svg";
-import github from "../../../static/img/github.jpg";
+import strava from "../../../../static/img/strava.png";
+import twitter from "../../../../static/svg/twitter.svg";
+import quora from "../../../../static/svg/quora.svg";
+import github from "../../../../static/img/github.jpg";
 
 const Mentions = styled.div`
   display: flex;

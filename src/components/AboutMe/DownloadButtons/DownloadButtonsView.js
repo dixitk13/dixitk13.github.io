@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { rhythm } from "../../utils/typography";
+import { rhythm } from "../../../utils/typography";
 
-import resume from "../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
+import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
 
 const DownloadLink = styled.a`
   text-align: center;
@@ -68,7 +68,7 @@ const Buttons = styled.div`
   justify-content: space-evenly;
 `;
 
-const DownloadButtonsView = () => (
+const DownloadButtonsView = ({ toggleOn }) => (
   <Buttons>
     <DownloadLink download target="_blank" href={resume}>
       <DownloadButton
@@ -80,7 +80,7 @@ const DownloadButtonsView = () => (
       </DownloadButton>
     </DownloadLink>
     <SimpleButton>
-      <span>no-op</span>
+      <span onClick={toggleOn}>no-op</span>
     </SimpleButton>
   </Buttons>
 );

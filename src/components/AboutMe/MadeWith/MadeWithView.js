@@ -1,27 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-
-import gatsbyIcon from "../../../static/svg/gatsby.svg";
-import reactIcon from "../../../static/svg/react.svg";
-import graphqlIcon from "../../../static/svg/graphql.svg";
-import styledIcon from "../../../static/svg/styled.png";
-import webpackIcon from "../../../static/svg/webpack.svg";
-import babelIcon from "../../../static/svg/babel.svg";
-import githubIcon from "../../../static/svg/github.svg";
+import { IconDict } from "../../../../static/svg";
 
 const items = [
-  { name: "gatsby", url: "https://www.gatsbyjs.org/", svg: gatsbyIcon },
-  { name: "react", url: "https://reactjs.org/", svg: reactIcon },
-  { name: "graphql", url: "http://graphql.org/", svg: graphqlIcon },
+  { name: "gatsby", url: "https://www.gatsbyjs.org/" },
+  { name: "react", url: "https://reactjs.org/" },
+  { name: "graphql", url: "http://graphql.org/" },
   {
-    name: "styled-components",
+    name: "styledcomponents",
     url: "https://styled-components.com",
-    background: "#e0a90eba",
-    svg: styledIcon
+    background: "#e0a90eba"
   },
-  { name: "webpack", url: "https://webpack.js.org/", svg: webpackIcon },
-  { name: "babel", url: "https://babeljs.io/", svg: babelIcon },
-  { name: "github", url: "https://www.github.com/", svg: githubIcon }
+  { name: "webpack", url: "https://webpack.js.org/" },
+  { name: "babel", url: "https://babeljs.io/" },
+  { name: "github", url: "https://www.github.com/" }
 ];
 
 const Footer = styled.div`
@@ -79,7 +71,7 @@ const MadeWithView = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon src={item.svg} background={item.background} />
+            <Icon src={IconDict[item.name]} background={item.background} />
           </Link>
         ))}
       </Icons>

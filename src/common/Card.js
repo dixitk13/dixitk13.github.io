@@ -35,7 +35,8 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Header = styled.div`
-  color: rgba(0, 0, 0, 0.5);
+  color: ${props =>
+    props.open ? "rgba(0, 0, 0, 0.8);" : "rgba(0, 0, 0, 0.5)"};
   font-size: ${rhythm(0.75)};
   cursor: pointer;
   font-weight: 600;

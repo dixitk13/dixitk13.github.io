@@ -5,16 +5,16 @@ import styled from "styled-components";
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
-import Logos from "../Logos";
-import DownloadButtons from "../DownloadButtons";
-import MadeWithView from "./MadeWithView";
+import Logos from "./Logos";
+import DownloadButtons from "./DownloadButtons";
+import MadeWith from "./MadeWith";
 
 const AboutMeContainer = styled.div`
   height: 95vh;
   width: 20vw;
   display: flex;
   flex-direction: column;
-  padding: ${rhythm(0.5)};
+  padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.5)};
   background: rgba(255, 255, 255, 1);
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
@@ -24,6 +24,7 @@ const AboutMeContainer = styled.div`
     height: unset;
     margin-right: unset;
     width: 100%;
+    margin-bottom: 5px;
   }
 `;
 
@@ -105,8 +106,8 @@ const AboutMeView = ({ on, toggleOn }) => {
       <Image src={dixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />
-      <DownloadButtons />
-      <MadeWithView />
+      <DownloadButtons toggleOn={toggleOn} />
+      <MadeWith />
     </AboutMeContainer>
   );
 };

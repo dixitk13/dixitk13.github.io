@@ -2,74 +2,46 @@ import React from "react";
 import styled from "styled-components";
 
 import { device } from "../../utils/device";
-import Project from "../Project";
-import { rhythm } from "../../utils/typography";
+import ProjectCard from "./ProjectCard";
 
-export default ({ data }) => {
+export default ({ data, cardNumber, ...rest }) => {
   const { edges } = data.allMarkdownRemark;
 
   return (
-    <ProjectsContainer>
-      {/*<HeaderSection>*/}
-      {/*<Header>Projects</Header>*/}
-      {/*<SubHeader>A set of Cool Projects which I spawn when bored</SubHeader>*/}
-      {/*</HeaderSection>*/}
-      <ProjectsViewContainer>
-        {edges.map((edge, i) => {
-          const { node } = edge;
-          const { excerpt, frontmatter, html } = node;
-          const { link, title, tags } = frontmatter;
-          return (
-            <Project
-              key={i}
-              html={html}
-              title={title}
-              link={link}
-              tags={tags}
-              body={excerpt}
-            />
-          );
-        })}
-      </ProjectsViewContainer>
-    </ProjectsContainer>
+    <CardsContainer>
+      {edges.map((edge, i) => {
+        const { node } = edge;
+        const { excerpt, frontmatter, html } = node;
+        return (
+          <ProjectCard
+            key={i}
+            id={i}
+            open={cardNumber === i}
+            active={cardNumber !== -1}
+            html={html}
+            body={excerpt}
+            {...frontmatter}
+            {...rest}
+          />
+        );
+      })}
+    </CardsContainer>
   );
 };
 
-const ProjectsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-// const HeaderSection = styled.div`
-//   margin: ${rhythm(0.25)} 0;
-//   text-align: center;
-// `;
-//
-// const Header = styled.h1`
-//   font-size: 24px;
-//   cursor: pointer;
-//   margin: ${rhythm(0.25)} 0;
-// `;
-//
-// const SubHeader = styled.span`
-//   font-size: 18px;
-//   font-weight: 400;
-//   color: rgb(92, 97, 102);
-// `;
-
-const ProjectsViewContainer = styled.div`
+const CardsContainer = styled.div`
   @media ${device.desktop} {
+    display: flex;
+    flex-flow: row wrap;
     width: 40vw;
-    height: 95vh;
+    padding: 0 10px 0 0px;
+    height: 100%;
     overflow: scroll;
-    padding: ${rhythm(0.5)} 0;
   }
   @media ${device.mobile} {
-    // overflow: scroll;
-    // height: 95vh;
     width: 90vw;
-  }
-  &:first-child {
-    padding-top: 3px;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
   }
 `;

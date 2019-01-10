@@ -8,6 +8,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: ${rhythm(0.75)};
+  @media ${device.desktop} {
+    height: 100vh;
+  }
   @media ${device.mobile} {
     flex-direction: column;
   }

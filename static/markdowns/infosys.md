@@ -5,11 +5,17 @@ link: "https://www.infosys.com/"
 tags:  
   - java
   - sql
-  - oracle
-  - jaxws
-  - reflections
-  - soa
   - hibernate
+  - reflections
+  - infosys
+  - soa
+  - jaxws
+images:  
+  - java
+  - sql
+  - hibernate
+  - reflections
+  - infosys
 ---
 
 I was an Application Developer for a J2EE application which deal with “VPN automation” automating the entire VPN order processing till the step of provisioning.

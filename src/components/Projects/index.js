@@ -40,6 +40,7 @@ const query = graphql`
             date(formatString: "DD MMMM, YYYY")
             link
             tags
+            images
           }
           excerpt(truncate: false)
         }

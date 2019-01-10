@@ -12,7 +12,6 @@ export default ({ data, cardNumber, ...rest }) => {
       {edges.map((edge, i) => {
         const { node } = edge;
         const { excerpt, frontmatter, html } = node;
-        const { link, title, tags } = frontmatter;
         return (
           <ProjectCard
             key={i}
@@ -20,10 +19,8 @@ export default ({ data, cardNumber, ...rest }) => {
             open={cardNumber === i}
             active={cardNumber !== -1}
             html={html}
-            title={title}
-            link={link}
-            tags={tags}
             body={excerpt}
+            {...frontmatter}
             {...rest}
           />
         );

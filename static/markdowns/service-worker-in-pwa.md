@@ -7,6 +7,10 @@ tags:
   - cra
   - pwa
   - service workers
+images: 
+  - react
+  - cra
+  - pwa 
 ---
 
 - Creating a custom service worker in a simple PWA(Progressive Web Application) because as Steve Jobs dreamed long ago, its the future!

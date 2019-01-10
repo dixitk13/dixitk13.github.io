@@ -4,12 +4,16 @@ date: "2015-11-26"
 link: "https://github.com/dixitk13/readmes.md/blob/master/personal-projects.md"
 tags:  
   - graph
-  - algorithms
   - java
-  - visualizations
+  - d3js
+  - algorithms
+images:
+  - graph
+  - java
+  - d3js 
 ---
 
-- Few graph algorithms on a famous data set, Enron Data Set. 
+Personal project where I've implemented a few graph algorithms on a famous data set, Enron Data Set. 
 
 - Algorithms viz.
 

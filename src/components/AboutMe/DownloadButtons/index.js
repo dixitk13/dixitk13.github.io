@@ -3,7 +3,7 @@ import DownloadButtonsView from "./DownloadButtonsView";
 
 class DownloadButtons extends Component {
   render() {
-    return <DownloadButtonsView />;
+    return <DownloadButtonsView toggleOn={this.props.toggleOn} />;
   }
 }
 

@@ -4,10 +4,17 @@ date: "2015-04-04"
 link: "https://www.linkedin.com/company/genesys/"
 tags:  
   - logstash
+  - linux
   - elasticsearch
   - kibana
+  - genesys
   - logcourier
-  - operations
+images:  
+  - logstash
+  - linux
+  - elasticsearch
+  - kibana
+  - genesys
 ---
 
 As an intern I was tasked with improving the operations and debugging experience with the core application of Genesys(soundbite) at the center of the task.

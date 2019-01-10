@@ -7,7 +7,7 @@ import dixitk13 from "../../../static/img/dixitk13.jpg";
 import { device } from "../../utils/device";
 import Logos from "./Logos";
 import DownloadButtons from "./DownloadButtons";
-import MadeWithView from "./MadeWith";
+import MadeWith from "./MadeWith";
 
 const AboutMeContainer = styled.div`
   height: 95vh;
@@ -106,8 +106,8 @@ const AboutMeView = ({ on, toggleOn }) => {
       <Image src={dixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />
-      <DownloadButtons />
-      <MadeWithView />
+      <DownloadButtons toggleOn={toggleOn} />
+      <MadeWith />
     </AboutMeContainer>
   );
 };

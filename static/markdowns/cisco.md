@@ -12,12 +12,19 @@ tags:
   - mongodb
   - aws
   - cloudfront
-images:
-  - cisco.png
+images:  
+  - react
+  - redux
+  - javascript
+  - blueprintjs
+  - sql
+  - python
 ---
 
-- I am currently working on a Web Application based on Flask, MongoDB, MySQL, React & Redux.
-- I have implemented a generic notification system which notifies based on the latest record, insufficient
+I am currently working on a Web Application based on Flask, MongoDB, MySQL, React & Redux.
+
+- We use blueprintJS for UI Components and follow airbnb standards for ECMAScript 6
+- Single handedly, I have implemented a generic notification system which notifies based on the latest record, insufficient
   state, threshold levels, etc.
 - Also designed an Admin System to grant access control for the entire organization.
 - Integrated cflow into automation code base system to achieve code-coverage.

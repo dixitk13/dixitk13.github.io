@@ -68,7 +68,7 @@ const Buttons = styled.div`
   justify-content: space-evenly;
 `;
 
-const DownloadButtonsView = () => (
+const DownloadButtonsView = ({ toggleOn }) => (
   <Buttons>
     <DownloadLink download target="_blank" href={resume}>
       <DownloadButton
@@ -80,7 +80,7 @@ const DownloadButtonsView = () => (
       </DownloadButton>
     </DownloadLink>
     <SimpleButton>
-      <span>no-op</span>
+      <span onClick={toggleOn}>no-op</span>
     </SimpleButton>
   </Buttons>
 );

@@ -13,7 +13,7 @@ import {
   ExpanderClose
 } from "../../../common/ExpandableCard";
 
-import FannedImages from "../../../common/FannedImages";
+import FannedCards from "../../../common/FannedCards";
 
 export default ({
   id,
@@ -45,7 +45,7 @@ export default ({
           <OpenLink onClick={e => onClickHandler(e, link)}>↗</OpenLink>
         </HeaderContainer>
 
-        <FannedImages images={images} />
+        <FannedCards images={images} />
 
         <Body>{body}</Body>
       </CardContainer>

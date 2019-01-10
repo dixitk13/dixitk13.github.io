@@ -3,10 +3,15 @@ title: "What I did @ Northeastern"
 date: "2014-08-15"
 link: "https://www.khoury.northeastern.edu/program/computer-science-ms/"
 tags:  
+  - northeastern
   - graduate
   - computerscience
   - algorithms
   - datascience
+images:  
+  - northeastern
+  - hat
+  - computerscience
 ---
 
 - I studied computer science at Northeastern University during the Fall '14 Semester.

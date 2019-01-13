@@ -5,9 +5,12 @@ import styled from "styled-components";
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
+
 import Logos from "./Logos";
 import DownloadButtons from "./DownloadButtons";
 import MadeWith from "./MadeWith";
+
+// import { slideIn } from "../../common/animations";
 
 const AboutMeContainer = styled.div`
   height: 95vh;
@@ -20,6 +23,8 @@ const AboutMeContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
   z-index: 2;
   margin-right: 10px;
+  @media ${device.desktop} {
+  }
   @media ${device.mobile} {
     height: unset;
     margin-right: unset;

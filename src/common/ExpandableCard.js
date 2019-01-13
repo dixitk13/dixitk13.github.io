@@ -117,6 +117,8 @@ export const Card = styled.div`
   transition: all 0.5s ease-in-out;
   border-radius: ${rhythm(0.5)};
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
+  background-color: ${props =>
+    props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
 
   @media ${device.desktop} {
     // top-cards shouldn't have any margin
@@ -200,7 +202,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 30px;
+  min-height: 60px;
 `;
 
 export const Title = styled.div`

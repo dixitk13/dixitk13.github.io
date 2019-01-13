@@ -20,7 +20,8 @@ import northeasternIcon from "./northeastern.png";
 import hiberanteIcon from "./hibernate.svg";
 import reflectionsIcon from "./reflections.png";
 import computerscienceIcon from "./computerscience.png";
-import hat from "./hat.png";
+import hatIcon from "./hat.png";
+import apolloIcon from "./apollo.svg";
 
 export const FannedImages = {
   ...IconDict,
@@ -45,5 +46,6 @@ export const FannedImages = {
   hibernate: hiberanteIcon,
   reflections: reflectionsIcon,
   computerscience: computerscienceIcon,
-  hat: hat
+  hat: hatIcon,
+  apollo: apolloIcon
 };

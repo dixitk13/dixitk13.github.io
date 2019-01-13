@@ -1,5 +1,5 @@
 ---
-title: "What I did @ Genesys"
+title: "What I did as Intern @ Genesys"
 date: "2015-04-04"
 link: "https://www.linkedin.com/company/genesys/"
 tags:  

@@ -20,9 +20,6 @@ const Img = styled.img`
       }
       `
       : `
-      &:second-child {
-        transform: translateX(40px);
-      }
       &:nth-child(2) {
         transform: translateX(60px);
       }
@@ -35,14 +32,14 @@ const Img = styled.img`
   `};
 `;
 const FanCardContainer = styled.div`
-  height: 100px;
+  height: 80px;
 `;
 const FanCard = styled.div`
   height: 60px;
   width: 70%;
   margin: 6px;
   position: relative;
-  margin: 20px 0;
+  margin: 5px 0;
   &:hover,
   &:focus {
   

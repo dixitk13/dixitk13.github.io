@@ -13,7 +13,7 @@ images:
   - react
 ---
 
-A basic application which started with learnig GraphQL and started to take shape as a TODOs app
+A basic application which started with learning GraphQL and is transforming as a TODOs app
 
 - Query and view markdowns via graphQL backend 
 

@@ -18,11 +18,11 @@ images:
   - infosys
 ---
 
-I was an Application Developer for a J2EE application which deal with “VPN automation” automating the entire VPN order processing till the step of provisioning.
+I was an Application Developer for a J2EE application which dealt with “VPN automation” automating the entire VPN order processing till the step of provisioning.
 
 There's a lot one does in 3 years, so I'll mention a few highlights:
 
-- Design and developed a lot of web-services to integrate in the application.
+- Designed and developed a lot of web-services to integrate in the application.
 
 - Reduced redundancy in code and number of database connections by implementing a Generic Database Service in Hibernate using JAX-WS framework & Java Reflections.
 

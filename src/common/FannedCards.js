@@ -36,10 +36,10 @@ const FanCardContainer = styled.div`
 `;
 const FanCard = styled.div`
   height: 60px;
-  width: 70%;
-  margin: 6px;
+  width: 80%;
+  // margin: 6px;
   position: relative;
-  margin: 5px 0;
+  margin: 6px 0;
   &:hover,
   &:focus {
   

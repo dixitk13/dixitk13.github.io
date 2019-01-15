@@ -13,6 +13,7 @@ const Container = styled.div`
   }
   @media ${device.mobile} {
     flex-direction: column;
+    overflow-x: hidden;
   }
 `;
 

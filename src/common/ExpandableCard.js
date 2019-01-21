@@ -8,7 +8,6 @@ export const numberOfCards = 2;
 /* Expander Card Classes */
 export const Expander = styled.div`
   transition: all 0.2s ease-in-out;
-  // background-color: rgba(206, 212, 218, 0.51);
   width: 100%;
   position: relative;
   display: flex;

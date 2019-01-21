@@ -9,7 +9,8 @@ const Container = styled.div`
   justify-content: center;
   padding: ${rhythm(0.75)};
   @media ${device.desktop} {
-    height: 100vh;
+    // height: 100vh;
+    height: 100%;
   }
   @media ${device.mobile} {
     flex-direction: column;

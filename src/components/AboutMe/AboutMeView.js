@@ -22,8 +22,8 @@ const AboutMeContainer = styled.div`
   background: rgba(255, 255, 255, 1);
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
   z-index: 2;
-  margin-right: 10px;
   @media ${device.desktop} {
+    margin: 0 10px;
   }
   @media ${device.mobile} {
     height: unset;

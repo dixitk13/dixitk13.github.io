@@ -25,7 +25,7 @@ images:
    + Computer Systems
    + Algorithms
    + Natural Language Processing
-   + Information Retrival
+   + Information Retrieval
    + Data Mining Techniques
    + Parallel Data Processing with Map-Reduce
    + Programming Design Paradigm

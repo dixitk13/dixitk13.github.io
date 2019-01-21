@@ -13,7 +13,7 @@ images:
   - pwa 
 ---
 
-- Creating a custom service worker in a simple PWA(Progressive Web Application) because as Steve Jobs dreamed long ago, its the future!
+- Creating a custom service worker in a simple PWA(Progressive Web Application) just because, Steve Jobs dreamed of it long ago, its going to be the future!
 
 - Its a React Application with a CRA boilerplate, ejected to enable writing custom service worker.
 

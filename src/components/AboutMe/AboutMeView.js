@@ -2,7 +2,8 @@ import React from "react";
 import { rhythm } from "../../utils/typography";
 import styled from "styled-components";
 
-import dixitk13 from "../../../static/img/dixitk13.jpg";
+// import dixitk13 from "../../../static/img/dixitk13.jpg";
+import croppedDixitk13 from "../../../static/img/cropped_dixitk13.jpg";
 
 import { device } from "../../utils/device";
 
@@ -49,8 +50,10 @@ const Image = styled.img`
   flex: 1 5 30%;
   min-height: 0;
   // min-height: calc(0.3 * 95vh);
-  max-height: 400px;
+  max-height: 350px;
   margin-bottom: 1rem;
+  clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);
+  background-size: cover;
 `;
 
 const Quote = styled.blockquote`
@@ -108,7 +111,7 @@ const AboutMeView = ({ on, toggleOn }) => {
         <label htmlFor="toggle-heart">❤</label>
       </ToggleHeartContainer>
       <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
-      <Image src={dixitk13} alt="Dixit" />
+      <Image src={croppedDixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />
       <DownloadButtons toggleOn={toggleOn} />

@@ -62,7 +62,7 @@ const DownloadButton = styled(SimpleButton)`
 `;
 
 const Buttons = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
   justify-content: space-evenly;

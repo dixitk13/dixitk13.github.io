@@ -8,23 +8,28 @@ import { device } from "../../utils/device";
 
 import Logos from "./Logos";
 import DownloadButtons from "./DownloadButtons";
+import RealFlex from "./RealFlex";
 import MadeWith from "./MadeWith";
 
 // import { slideIn } from "../../common/animations";
 
-const AboutMeContainer = styled.div`
-  height: 95vh;
-  width: 20vw;
+const AboutMeFlex = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const AboutMeContainer = styled.div`
+  width: 20vw;
   padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.5)};
   background: rgba(255, 255, 255, 1);
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
   z-index: 2;
+
   @media ${device.desktop} {
-    margin: 0 10px;
+    margin: 0 10px ${rhythm(0.25)} 10px;
   }
+
   @media ${device.mobile} {
     height: unset;
     margin-right: unset;
@@ -59,14 +64,12 @@ const Quote = styled.blockquote`
 `;
 
 const ToggleHeartContainer = styled.span`
-  position: relative;
-  top: -25px;
   display: flex;
-  left: 40px;
   height: 0;
+  width: 0;
   transform: rotate(45deg);
   margin-left: auto;
-
+  background: red;
   @keyframes heart {
     0%,
     17.5% {
@@ -97,23 +100,26 @@ const ToggleHeartContainer = styled.span`
 
 const AboutMeView = ({ on, toggleOn }) => {
   return (
-    <AboutMeContainer>
-      <ToggleHeartContainer>
-        <input
-          id="toggle-heart"
-          checked={on}
-          onChange={toggleOn}
-          type="checkbox"
-        />
-        <label htmlFor="toggle-heart">❤</label>
-      </ToggleHeartContainer>
-      <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
-      <Image src={dixitk13} alt="Dixit" />
-      <Quote>just another software engineer</Quote>
-      <Logos />
-      <DownloadButtons toggleOn={toggleOn} />
-      <MadeWith />
-    </AboutMeContainer>
+    <AboutMeFlex>
+      <RealFlex />
+      <AboutMeContainer>
+        <ToggleHeartContainer>
+          <input
+            id="toggle-heart"
+            checked={on}
+            onChange={toggleOn}
+            type="checkbox"
+          />
+          <label htmlFor="toggle-heart">❤</label>
+        </ToggleHeartContainer>
+        <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
+        <Image src={dixitk13} alt="Dixit" />
+        <Quote>just another software engineer</Quote>
+        <Logos />
+        <DownloadButtons toggleOn={toggleOn} />
+        <MadeWith />
+      </AboutMeContainer>
+    </AboutMeFlex>
   );
 };
 

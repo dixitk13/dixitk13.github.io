@@ -2,8 +2,7 @@ import React from "react";
 import { rhythm } from "../../utils/typography";
 import styled from "styled-components";
 
-// import dixitk13 from "../../../static/img/dixitk13.jpg";
-import croppedDixitk13 from "../../../static/img/cropped_dixitk13.jpg";
+import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
 
@@ -111,7 +110,7 @@ const AboutMeView = ({ on, toggleOn }) => {
         <label htmlFor="toggle-heart">❤</label>
       </ToggleHeartContainer>
       <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
-      <Image src={croppedDixitk13} alt="Dixit" />
+      <Image src={dixitk13} alt="Dixit" />
       <Quote>just another software engineer</Quote>
       <Logos />
       <DownloadButtons toggleOn={toggleOn} />

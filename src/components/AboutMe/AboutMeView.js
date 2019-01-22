@@ -21,7 +21,7 @@ const AboutMeFlex = styled.div`
 const AboutMeContainer = styled.div`
   width: 20vw;
   padding: ${rhythm(0.25)};
-  border-radius: ${rhythm(0.5)};
+  border-radius: ${rhythm(0.25)};
   background: rgba(255, 255, 255, 1);
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
   z-index: 2;
@@ -53,7 +53,6 @@ const Name = styled.h1`
 const Image = styled.img`
   flex: 1 5 30%;
   min-height: 0;
-  // min-height: calc(0.3 * 95vh);
   max-height: 350px;
   margin-bottom: 1rem;
   clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);

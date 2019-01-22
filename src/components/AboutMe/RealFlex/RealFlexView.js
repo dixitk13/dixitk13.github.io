@@ -7,9 +7,8 @@ const heightOfMyView = 830;
 const maxHeightPossible = 1850;
 
 const RealFlexDiv = styled.div`
-  @media ${device.desktop} {
+  @media ${device.desktop} and (min-height: ${heightOfMyView}px) {
     flex-basis: ${props => (props.height ? props.height : 0)}px;
-    // flex: 0 1 auto;
     transition: height 0.5s ease-all;
   }
 

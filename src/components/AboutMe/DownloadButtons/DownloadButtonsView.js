@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { rhythm } from "../../../utils/typography";
 
 import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
+import Switch from "../../Switch";
 
 const DownloadLink = styled.a`
   text-align: center;
@@ -79,9 +80,12 @@ const DownloadButtonsView = ({ toggleOn }) => (
         <span>Resume</span>
       </DownloadButton>
     </DownloadLink>
-    <SimpleButton>
-      <span onClick={toggleOn}>no-op</span>
-    </SimpleButton>
+
+    <Switch toggleOn={toggleOn}>
+      <SimpleButton>
+        <span>no-op</span>
+      </SimpleButton>
+    </Switch>
   </Buttons>
 );
 

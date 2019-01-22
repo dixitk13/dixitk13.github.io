@@ -15,7 +15,6 @@ class Container extends Component {
 
   handleScroll = () => {
     this.setState({ y: window.scrollY });
-    console.log(this.state);
   };
 
   themeToggle = theme => {

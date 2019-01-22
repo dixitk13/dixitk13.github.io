@@ -54,8 +54,10 @@ const Image = styled.img`
   flex: 1 5 30%;
   min-height: 0;
   // min-height: calc(0.3 * 95vh);
-  max-height: 400px;
+  max-height: 350px;
   margin-bottom: 1rem;
+  clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);
+  background-size: cover;
 `;
 
 const Quote = styled.blockquote`

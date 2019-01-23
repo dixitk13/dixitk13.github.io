@@ -18,7 +18,7 @@ const AboutMeFlex = styled.div`
   flex-direction: column;
 `;
 
-const AboutMeContainer = styled.div`
+const AboutMeContainer = styled(AboutMeFlex)`
   width: 20vw;
   padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.25)};
@@ -54,6 +54,8 @@ const Image = styled.img`
   flex: 1 5 30%;
   min-height: 0;
   max-height: 350px;
+  width: 350px;
+  align-self: center;
   margin-bottom: 1rem;
   clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);
   background-size: cover;

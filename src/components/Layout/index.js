@@ -1,20 +1,37 @@
-import React from "react";
-import styled from "styled-components";
+import React, { Component } from "react";
+import { ContainerView } from "./ContainerView";
+import { LayoutContext } from "./LayoutContext";
 
-import { rhythm } from "../../utils/typography";
-import { device } from "../../utils/device";
+class Container extends Component {
+  state = { y: 0 };
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: ${rhythm(0.75)};
-  @media ${device.desktop} {
-    height: 100vh;
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
   }
-  @media ${device.mobile} {
-    flex-direction: column;
-    overflow-x: hidden;
-  }
-`;
 
-export default ({ children }) => <Container>{children}</Container>;
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = () => {
+    this.setState({ y: window.scrollY });
+  };
+
+  themeToggle = theme => {
+    this.setState({ theme: theme });
+  };
+
+  render() {
+    const value = {
+      ...this.state,
+      themeToggle: this.themeToggle
+    };
+    return (
+      <LayoutContext.Provider value={value}>
+        <ContainerView>{this.props.children}</ContainerView>
+      </LayoutContext.Provider>
+    );
+  }
+}
+
+export default Container;

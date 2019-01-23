@@ -2,8 +2,8 @@
   "name": "dixitk13-gatsby.github.io",
   "author": "Dixit Keshavbhai Patel",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
-  "version": "0.1.0",
+  "description": "Dixits Home Page",
+  "version": "0.2.0",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",

@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import Layout from "../components/Layout";
 import Projects from "../components/Projects";
 import AboutMe from "../components/AboutMe";
+import Cubbles from "../components/Cubbles";
 
 import favicon from "../../static/favicon.ico";
 
@@ -24,8 +25,10 @@ export default ({ data }) => (
       ]}
       link={[{ rel: "shortcut icon", type: "image/png", href: `${favicon}` }]}
     />
+    <Cubbles />
     <AboutMe />
     <Projects />
+    <Cubbles />
   </Layout>
 );
 

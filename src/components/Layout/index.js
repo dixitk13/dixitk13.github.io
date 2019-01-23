@@ -22,8 +22,12 @@ class Container extends Component {
   };
 
   render() {
+    const value = {
+      ...this.state,
+      themeToggle: this.themeToggle
+    };
     return (
-      <LayoutContext.Provider value={this.state}>
+      <LayoutContext.Provider value={value}>
         <ContainerView>{this.props.children}</ContainerView>
       </LayoutContext.Provider>
     );

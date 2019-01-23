@@ -15,13 +15,7 @@ const SwitchViewContainer = styled.span`
   }
 `;
 
-export const SwitchView = ({
-  selected,
-  children,
-  styles,
-  handleClick,
-  toggleOn
-}) => {
+export const SwitchView = ({ selected, children, handleClick, toggleOn }) => {
   const handleClicks = () => {
     handleClick();
     toggleOn();

@@ -74,7 +74,6 @@ const ToggleHeartContainer = styled.span`
   width: 0;
   transform: rotate(45deg);
   margin-left: auto;
-  background: red;
   @keyframes heart {
     0%,
     17.5% {

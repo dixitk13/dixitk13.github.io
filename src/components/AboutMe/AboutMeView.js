@@ -11,7 +11,7 @@ import DownloadButtons from "./DownloadButtons";
 import RealFlex from "./RealFlex";
 import MadeWith from "./MadeWith";
 
-// import { slideIn } from "../../common/animations";
+import { polygons } from "../../common/animations";
 
 const AboutMeFlex = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const Name = styled.h1`
   cursor: pointer;
 
   &:hover {
-    font-size: ${rhythm(1.51)};
+    // font-size: ${rhythm(1.51)};
     color: rgba(0, 0, 0, 0.66);
   }
 `;
@@ -57,8 +57,10 @@ const Image = styled.img`
   width: 350px;
   align-self: center;
   margin-bottom: 1rem;
-  clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);
+  // clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);
   background-size: cover;
+  clip-path: polygon(0, 0);
+  animation: ${polygons} 60s infinite;
 `;
 
 const Quote = styled.blockquote`

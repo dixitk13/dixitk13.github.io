@@ -7,10 +7,6 @@ class Switch extends Component {
     selected: 0
   };
 
-  // 0 => normal
-  // 1 => dark
-  // 2 => other?
-
   handleClick = themeToggle => {
     this.setState(
       prevState => ({

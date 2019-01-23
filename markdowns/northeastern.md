@@ -4,8 +4,7 @@ date: "2014-08-15"
 link: "https://www.khoury.northeastern.edu/program/computer-science-ms/"
 tags:  
   - northeastern
-  - graduate
-  - computerscience
+  - cs
   - algorithms
   - datascience
 images:  

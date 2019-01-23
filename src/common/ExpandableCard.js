@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { rhythm } from "../utils/typography";
 import { device } from "../utils/device";
+import { background, boxShadow, borderColor, fontColor } from "../styles";
 
 // magic number
 export const numberOfCards = 2;
@@ -22,6 +23,9 @@ export const Expander = styled.div`
   margin-top: 0;
   opacity: 0;
 
+  // background: ${background};
+  // color: ${fontColor};
+
   ${props =>
     props.open
       ? `
@@ -33,7 +37,8 @@ export const Expander = styled.div`
         opacity: 1;
         z-index: 10;
         padding: ${rhythm(1)};
-        background: rgba(206, 212, 218, 0.7);
+        // background: rgba(206, 212, 218, 0.7);
+        opacity: 0.7;
         border: 1px solid #ced4da;
         `
       : ""};
@@ -115,10 +120,15 @@ export const Card = styled.div`
   width: calc((100% / ${numberOfCards}) - 20px);
   transition: all 0.5s ease-in-out;
   border-radius: ${rhythm(0.5)};
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
-  background-color: ${props =>
-    props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
-
+  
+  /* box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
+     background-color: ${props =>
+       props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
+   */
+   
+  background: ${background};
+  color: ${fontColor};
+  
   @media ${device.desktop} {
     // top-cards shouldn't have any margin
     &:nth-child(-n + ${numberOfCards}) {
@@ -157,7 +167,6 @@ export const Card = styled.div`
         opacity: 0.5;
         transform: scale(1);
         box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
-        
         `
       : ""};
 `;
@@ -176,9 +185,14 @@ export const CardContainer = styled.div`
   justify-content: start;
 
   transition: all 0.2s ease-in-out;
-  background-color: ${props =>
-    props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
+  
+  /*
+    background-color: ${props =>
+      props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
+  */
 
+  background: ${background};
+  
   // just the triangle after the div
   &:after {
     transition: all 0.3s ease-in-out;
@@ -205,7 +219,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  color: rgba(0, 0, 0, 0.7);
+  color: ${fontColor};
   font-size: ${rhythm(0.75)};
   cursor: pointer;
   font-weight: 600;

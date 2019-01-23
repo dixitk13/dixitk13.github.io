@@ -34,9 +34,7 @@ const CardsContainer = styled.div`
     display: flex;
     flex-flow: row wrap;
     width: 40vw;
-    // TODO: scrollbar? padding: 0 10px 0 0px;
     height: 100%;
-    // overflow: scroll;
   }
   @media ${device.mobile} {
     width: 90vw;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
-
+import { background, boxShadow, borderColor, fontColor } from "../../styles";
 import Logos from "./Logos";
 import DownloadButtons from "./DownloadButtons";
 import RealFlex from "./RealFlex";
@@ -22,8 +22,8 @@ const AboutMeContainer = styled(AboutMeFlex)`
   width: 20vw;
   padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.25)};
-  background: rgba(255, 255, 255, 1);
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
+  background: ${background};
+  box-shadow: ${boxShadow};
   z-index: 2;
 
   @media ${device.desktop} {
@@ -39,14 +39,13 @@ const AboutMeContainer = styled(AboutMeFlex)`
 `;
 
 const Name = styled.h1`
-  color: rgba(0, 0, 0, 0.75);
+  color: ${fontColor};
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
   cursor: pointer;
 
   &:hover {
-    // font-size: ${rhythm(1.51)};
-    color: rgba(0, 0, 0, 0.66);
+    opacity: 0.66;
   }
 `;
 
@@ -57,7 +56,6 @@ const Image = styled.img`
   width: 350px;
   align-self: center;
   margin-bottom: 1rem;
-  // clip-path: polygon(33% 0, 100% 0, 100% 66%, 66% 100%, 0 100%, 0 33%);
   background-size: cover;
   clip-path: polygon(0, 0);
   animation: ${polygons} 60s infinite;
@@ -65,6 +63,7 @@ const Image = styled.img`
 
 const Quote = styled.blockquote`
   margin-left: unset;
+  color: ${fontColor};
   margin-bottom: 1rem;
 `;
 

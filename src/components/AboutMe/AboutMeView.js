@@ -5,7 +5,7 @@ import styled from "styled-components";
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
-import { background, boxShadow, borderColor, fontColor } from "../../styles";
+import { background, boxShadow, fontColor } from "../../styles";
 import Logos from "./Logos";
 import DownloadButtons from "./DownloadButtons";
 import RealFlex from "./RealFlex";
@@ -64,6 +64,7 @@ const Image = styled.img`
 const Quote = styled.blockquote`
   margin-left: unset;
   color: ${fontColor};
+  border-left-color: ${fontColor};
   margin-bottom: 1rem;
 `;
 

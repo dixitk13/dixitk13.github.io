@@ -8,10 +8,10 @@ export const LayoutContext = React.createContext({
 
 // 0 => normal
 // 1 => dark
-// 2 => other
+// 2 => other, lets call it love
 
 export const themesConstants = {
   0: "light",
   1: "dark",
-  2: "other"
+  2: "love"
 };

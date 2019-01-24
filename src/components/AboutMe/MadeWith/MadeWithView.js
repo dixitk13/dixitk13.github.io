@@ -21,7 +21,6 @@ const Footer = styled.div`
   justify-self: flex-end;
   display: flex;
   flex-direction: column;
-  color: #666;
   margin-top: auto;
   a {
     transition: all 0.5s;

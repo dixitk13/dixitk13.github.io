@@ -7,6 +7,9 @@ import webpackIcon from "./webpack.svg";
 import babelIcon from "./babel.svg";
 import githubIcon from "./github.svg";
 
+import stravaIcon from "./strava.png";
+import twitterIcon from "./twitter.svg";
+import quoraIcon from "./quora.svg";
 export const gatsby = gatsbyIcon;
 
 export const IconDict = {
@@ -17,5 +20,8 @@ export const IconDict = {
   "styled-components": styledIcon,
   webpack: webpackIcon,
   babel: babelIcon,
+  strava: stravaIcon,
+  twitter: twitterIcon,
+  quora: quoraIcon,
   github: githubIcon
 };

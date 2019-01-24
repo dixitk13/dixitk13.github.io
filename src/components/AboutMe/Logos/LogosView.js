@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import strava from "../../../../static/img/strava.png";
-import twitter from "../../../../static/svg/twitter.svg";
-import quora from "../../../../static/svg/quora.svg";
-import github from "../../../../static/img/github.jpg";
+import { IconDict } from "../../../../static/svg";
 
 const Mentions = styled.div`
   display: flex;
@@ -16,9 +13,13 @@ const Mentions = styled.div`
 
 const MentionsLogo = styled.img`
   width: ${props => props.width || "48px"};
-  transform: ${props => props.transform || ""};
   height: 48px;
   margin-bottom: 0;
+  transition: all 0.2s ease-in-out;
+  transform: ${props => props.scale};
+  &:hover {
+    transform: ${props => props.transform};
+  }
 `;
 
 const Link = styled.a`
@@ -46,36 +47,44 @@ export default () => {
   const mentions = [
     {
       href: "https://www.quora.com/profile/Dixit-Patel-4",
-      imgsrc: quora,
+      imageName: "quora",
       alt: "Quora",
       width: "75px",
-      transform: "scale(0.85)"
+      transform: "scale(0.95)",
+      scale: "scale(0.85)"
     },
     {
       href: "http://strava.com/athletes/19109068/badge",
-      imgsrc: strava,
+      imageName: "strava",
       alt: "Strava",
-      transform: "scale(0.65)"
+      transform: "scale(0.75)",
+      scale: "scale(0.65)"
     },
     {
       href: "https://twitter.com/dixitk13",
-      imgsrc: twitter,
+      imageName: "twitter",
       alt: "Twitter",
-      transform: "scale(0.65)"
+      transform: "scale(0.75)",
+      scale: "scale(0.65)"
     },
     {
       href: "https://github.com/dixitk13",
-      imgsrc: github,
+      imageName: "github",
       alt: "Github",
       width: "65px",
-      transform: "scale(0.85)"
+      transform: "scale(0.75)",
+      scale: "scale(0.85)"
     }
   ];
 
   return (
     <Mentions>
       {mentions.map((mention, i) => (
-        <Href key={`mentions-${i}`} {...mention} />
+        <Href
+          key={`mentions-${i}`}
+          {...mention}
+          imgsrc={IconDict[mention.imageName]}
+        />
       ))}
     </Mentions>
   );

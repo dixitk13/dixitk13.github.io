@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { ContainerView } from "./ContainerView";
 import { LayoutContext } from "./LayoutContext";
+import { ThemeProvider } from "styled-components";
 
 class Container extends Component {
-  state = { y: 0 };
+  state = { y: 0, theme: "light" };
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -28,7 +29,9 @@ class Container extends Component {
     };
     return (
       <LayoutContext.Provider value={value}>
-        <ContainerView>{this.props.children}</ContainerView>
+        <ThemeProvider theme={{ theme: this.state.theme }}>
+          <ContainerView>{this.props.children}</ContainerView>
+        </ThemeProvider>
       </LayoutContext.Provider>
     );
   }

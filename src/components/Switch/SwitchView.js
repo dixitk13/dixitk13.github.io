@@ -1,19 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-const SwitchViewContainer = styled.span`
-  button {
-    ${props =>
-      props.selected === 0
-        ? `
-        color: rgb(0, 0, 0);
-        `
-        : props.selected === 1
-          ? `
-          color: rgb(255,255,255); background: black;
-          `
-          : `color: red;`};
-  }
-`;
+import { fontColor } from "../../styles";
+
+// TODO: fix with provider prop
+const SwitchViewContainer = styled.span``;
 
 export const SwitchView = ({ selected, children, handleClick, toggleOn }) => {
   const handleClicks = () => {

@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { rhythm } from "../utils/typography";
 import { device } from "../utils/device";
+import {
+  background,
+  expandedCardContent,
+  borderColor,
+  fontColor,
+  boxShadow
+} from "../styles";
 
 // magic number
 export const numberOfCards = 2;
@@ -21,6 +28,8 @@ export const Expander = styled.div`
   overflow: hidden;
   margin-top: 0;
   opacity: 0;
+  border: 1px solid ${borderColor};
+  background: ${expandedCardContent};
 
   ${props =>
     props.open
@@ -32,9 +41,7 @@ export const Expander = styled.div`
         margin-top: 30px;
         opacity: 1;
         z-index: 10;
-        padding: ${rhythm(1)};
-        background: rgba(206, 212, 218, 0.7);
-        border: 1px solid #ced4da;
+        padding: ${rhythm(1)};       
         `
       : ""};
 
@@ -63,7 +70,7 @@ export const ExpanderClose = styled.div`
     width: 100%;
     top: 50%;
     height: 1px;
-    background: #888;
+    background: ${fontColor};
     transform: rotate(45deg);
   }
 
@@ -73,7 +80,7 @@ export const ExpanderClose = styled.div`
 
   &:hover:before,
   &:hover:after {
-    background: #333;
+    opacity: 0.7;
   }
 `;
 
@@ -89,8 +96,10 @@ export const Tag = styled.div`
   margin: ${rhythm(0.25)};
   border-radius: ${rhythm(0.25)};
   font-weight: ${rhythm(0.25)};
-  color: rgba(0, 0, 0, 0.8);
-  background: rgba(0, 0, 0, 0.1);
+  color: ${fontColor};
+  background: ${background};
+  border: 0.5px solid ${fontColor};
+  line-height: 15px;
   max-height: 25px;
   white-space: nowrap;
   @media ${device.desktop} {
@@ -115,9 +124,10 @@ export const Card = styled.div`
   width: calc((100% / ${numberOfCards}) - 20px);
   transition: all 0.5s ease-in-out;
   border-radius: ${rhythm(0.5)};
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 8px;
-  background-color: ${props =>
-    props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
+  box-shadow: ${boxShadow};
+
+  background: ${background};
+  color: ${fontColor};
 
   @media ${device.desktop} {
     // top-cards shouldn't have any margin
@@ -157,7 +167,6 @@ export const Card = styled.div`
         opacity: 0.5;
         transform: scale(1);
         box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
-        
         `
       : ""};
 `;
@@ -176,8 +185,8 @@ export const CardContainer = styled.div`
   justify-content: start;
 
   transition: all 0.2s ease-in-out;
-  background-color: ${props =>
-    props.open ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
+
+  background: ${background};
 
   // just the triangle after the div
   &:after {
@@ -192,7 +201,7 @@ export const CardContainer = styled.div`
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     opacity: ${props => (props.open ? "1" : "0")};
-    border-bottom: ${props => (props.open ? "15" : "0")}px solid #ced4da;
+    border-bottom: ${props => (props.open ? "15" : "0")}px solid ${borderColor};
   }
 `;
 
@@ -205,12 +214,12 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  color: rgba(0, 0, 0, 0.7);
+  color: ${fontColor};
   font-size: ${rhythm(0.75)};
   cursor: pointer;
   font-weight: 600;
   &:hover {
-    color: rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
   }
 `;
 
@@ -223,7 +232,9 @@ export const OpenLink = styled.div`
   width: 30px;
   padding: 3px;
   &:hover {
-    background: rgb(236, 237, 238);
+    color: black;
+    opacity: 0.7;
+    background: rgb(240, 240, 240);
     border-radius: 3px;
   }
 `;

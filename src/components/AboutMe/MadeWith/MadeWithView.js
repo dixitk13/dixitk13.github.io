@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IconDict } from "../../../../static/svg";
+import { fontColor } from "../../../styles";
 
 const items = [
   { name: "gatsby", url: "https://www.gatsbyjs.org/" },
@@ -20,7 +21,6 @@ const Footer = styled.div`
   justify-self: flex-end;
   display: flex;
   flex-direction: column;
-  color: #666;
   margin-top: auto;
   a {
     transition: all 0.5s;
@@ -57,6 +57,7 @@ const Icon = styled.img`
 
 const Title = styled.div`
   text-align: center;
+  color: ${fontColor};
 `;
 
 const MadeWithView = () => {

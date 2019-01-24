@@ -4,6 +4,7 @@ import { rhythm } from "../../../utils/typography";
 
 import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
 import Switch from "../../Switch";
+import { fontColor, expandedCardContent } from "../../../styles";
 
 const DownloadLink = styled.a`
   text-align: center;
@@ -20,10 +21,11 @@ const SimpleButton = styled.button`
   border: none;
   width: 90px;
   cursor: pointer;
+  color: ${fontColor};
   margin: ${rhythm(0.25)};
   font-size: ${rhythm(0.5)};
   text-align: center;
-  background: rgb(236, 237, 238);
+  background: rgb(236, 237, 238, 0.7);
   border-radius: 3px;
   outline: none;
   &:active {
@@ -32,6 +34,7 @@ const SimpleButton = styled.button`
 `;
 
 const DownloadButton = styled(SimpleButton)`
+  color: black;
   &:hover {
     background: rgb(226, 227, 228);
     transition-delay: 0.2s;
@@ -69,7 +72,7 @@ const Buttons = styled.div`
   justify-content: space-evenly;
 `;
 
-const DownloadButtonsView = ({ toggleOn }) => (
+const DownloadButtonsView = ({ theme, toggleOn }) => (
   <Buttons>
     <DownloadLink download target="_blank" href={resume}>
       <DownloadButton
@@ -83,7 +86,7 @@ const DownloadButtonsView = ({ toggleOn }) => (
 
     <Switch toggleOn={toggleOn}>
       <SimpleButton>
-        <span>no-op</span>
+        <span>{theme}</span>
       </SimpleButton>
     </Switch>
   </Buttons>

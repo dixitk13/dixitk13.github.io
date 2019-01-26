@@ -21,10 +21,14 @@ images:
   - python
 ---
 
-I am currently working on a Web Application based on Flask, MongoDB, MySQL, React & Redux.
+I am currently working on a Web Application based on Flask, MongoDB, MySQL, 
+React & Redux.
 
 - We use blueprintJS for UI Components and follow Airbnb standards for ECMAScript 6
-- I have unilaterally implemented a generic notification system which notifies based on the latest record, insufficient
-  state, threshold levels, etc.
-- Also designed an Admin System to grant access control for the entire organization.
+- I have unilaterally implemented a custom notification system, using SNS/SQS 
+and AWS Lambda, which notifies based on the latest record, insufficient state, 
+threshold levels, etc.
+- Spearheaded the team to achieve CATO(Cloud Allowed to Operate), 
+a security process by Cisco, for operating in external cloud.
+- Designed an Admin System to grant access control for the entire organization.
 - Integrated cflow into automation code base system to achieve code-coverage.

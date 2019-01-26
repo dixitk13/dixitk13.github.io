@@ -35,7 +35,7 @@ const SimpleButton = styled.button`
 `;
 
 const DownloadButton = styled(SimpleButton)`
-  color: black;
+  // color: #cdd4db;
   &:hover {
     background: rgb(226, 227, 228);
     transition-delay: 0.2s;

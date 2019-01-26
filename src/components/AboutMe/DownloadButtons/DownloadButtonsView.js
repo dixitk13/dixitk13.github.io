@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { rhythm } from "../../../utils/typography";
 
-import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2018.pdf";
+import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2019.pdf";
 import Switch from "../../Switch";
-import { fontColor, expandedCardContent } from "../../../styles";
+import { fontColor } from "../../../styles";
 
 const DownloadLink = styled.a`
   text-align: center;
@@ -26,6 +26,7 @@ const SimpleButton = styled.button`
   font-size: ${rhythm(0.5)};
   text-align: center;
   background: rgb(236, 237, 238, 0.7);
+  border: 1px solid #cdd4db;
   border-radius: 3px;
   outline: none;
   &:active {

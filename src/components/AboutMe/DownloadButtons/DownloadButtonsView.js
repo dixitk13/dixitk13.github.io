@@ -15,10 +15,8 @@ const DownloadLink = styled.a`
 
 const SimpleButton = styled.button`
   text-decoration: none;
-  background: transparent;
   padding: 0;
   height: 21px;
-  border: none;
   width: 90px;
   cursor: pointer;
   color: ${fontColor};
@@ -35,7 +33,6 @@ const SimpleButton = styled.button`
 `;
 
 const DownloadButton = styled(SimpleButton)`
-  // color: #cdd4db;
   &:hover {
     background: rgb(226, 227, 228);
     transition-delay: 0.2s;

@@ -31,9 +31,11 @@ const Img = styled.img`
       }
   `};
 `;
+
 const FanCardContainer = styled.div`
   height: 80px;
 `;
+
 const FanCard = styled.div`
   height: 60px;
   width: 80%;

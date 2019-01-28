@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { fontColor } from "../../styles";
 
-// TODO: fix with provider prop
 const SwitchViewContainer = styled.span``;
 
 export const SwitchView = ({ selected, children, handleClick, toggleOn }) => {

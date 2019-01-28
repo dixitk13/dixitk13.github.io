@@ -90,14 +90,12 @@ const ToggleHeartContainer = styled.span`
 
   [id="toggle-heart"] {
     display: none;
+    transition: 1s ease-all;
     &:checked + label {
       color: #e2264d;
       visibility: unset;
       will-change: font-size;
       animation: heart 1s cubic-bezier(0.17, 0.89, 0.32, 1.49);
-    }
-    &:unchecked + label {
-      transition: 1s ease-all;
     }
   }
 `;

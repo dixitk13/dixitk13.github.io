@@ -29,6 +29,6 @@ React & Redux.
 and AWS Lambda, which notifies based on the latest record, insufficient state, 
 threshold levels, etc.
 - Spearheaded the team to achieve CATO(Cloud Allowed to Operate), 
-a security process by Cisco, for operating in external cloud.
+a security process by Cisco, for operating in an external cloud.
 - Designed an Admin System to grant access control for the entire organization.
 - Integrated cflow into automation code base system to achieve code-coverage.

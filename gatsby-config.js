@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Dixit's Home`
   },
-  pathPrefix: "/dixitk13-gatsby.github.io",
+  pathPrefix: "/dixitk13.github.io",
   plugins: [
     `gatsby-plugin-react-helmet`,
     {

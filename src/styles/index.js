@@ -7,6 +7,12 @@ export const fontColor = theme("theme", {
   love: "#ffa7c4"
 });
 
+export const fontHover = theme("theme", {
+  light: "rgba(39, 110, 241, 1)",
+  dark: "rgba(39, 110, 241, 1)",
+  love: "#ffa7c4"
+});
+
 export const borderColor = theme("theme", {
   light: "#ced4da",
   dark: "rgba(255, 255, 255, 0.75)",

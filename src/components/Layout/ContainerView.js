@@ -13,7 +13,6 @@ export const ContainerView = styled.div`
   justify-content: center;
   background-color: ${entireBackground};
   background: ${entireBackgroundImage};
-  background-size: fit;
 
   color: ${fontColor};
   padding: ${rhythm(0.75)};

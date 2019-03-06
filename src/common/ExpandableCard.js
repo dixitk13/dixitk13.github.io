@@ -120,60 +120,7 @@ export const Tag = styled.div`
   }
 `;
 
-/* Normal Card Classes */
-export const Card = styled.div`
-  margin: 10px;
-  width: calc((100% / ${numberOfCards}) - 20px);
-  transition: ${commonTransition};
-  border-radius: ${rhythm(0.5)};
-  box-shadow: ${boxShadow};
-
-  background: ${background};
-  color: ${fontColor};
-
-  @media ${device.desktop} {
-    // top-cards shouldn't have any margin
-    &:nth-child(-n + ${numberOfCards}) {
-      margin-top: 0;
-    }
-
-    // odd cards have no left margin for the expander
-    &:nth-of-type(odd) ${Expander} {
-      margin-left: 0;
-    }
-
-    // even cards have a special margin for the expanded for obvious CSS reasons
-    &:nth-of-type(even) ${Expander} {
-      margin-left: calc(-100% - 20px);
-    }
-
-    // only on desktop
-    &:hover {
-      transform: ${props => (props.open ? "" : "scale(0.95)")};
-    }
-  }
-
-  @media ${device.mobile} {
-    width: 100%;
-    margin: 10px 0;
-    min-height: ${rhythm(4)};
-    &:first-child {
-      margin-top: 20px;
-    }
-  }
-
-  // if some card is active this card isn't open then opacity 0.5
-  ${({ active, open }) =>
-    active && !open
-      ? `
-        opacity: 0.5;
-        box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
-        &:hover {
-          transform: unset;
-        }
-        `
-      : ``};
-`;
+// Specific Card container classes
 
 export const CardContainer = styled.div`
   width: 100%;
@@ -194,7 +141,6 @@ export const CardContainer = styled.div`
 
   // just the triangle after the div
   &:after {
-    //transition: all 0.1s ease-in-out;
     transition: ${commonTransition};
     content: "";
     display: block;
@@ -215,7 +161,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  min-height: 60px;
+  min-height: 60px; // <- debatable CSS
 `;
 
 export const Title = styled.div`
@@ -247,4 +193,62 @@ export const Body = styled.div`
   font-size: ${rhythm(0.5)};
   text-align: left;
   min-height: 85px;
+`;
+
+/* Normal Card Classes */
+export const Card = styled.div`
+  margin: 10px;
+  width: calc((100% / ${numberOfCards}) - 20px);
+  transition: ${commonTransition};
+  border-radius: ${rhythm(0.5)};
+  box-shadow: ${boxShadow};
+
+  background: ${background};
+  color: ${fontColor};
+
+  @media ${device.desktop} {
+    // top-cards shouldn't have any margin
+    &:nth-child(-n + ${numberOfCards}) {
+      margin-top: 0;
+    }
+
+    // odd cards have no left margin for the expander
+    &:nth-of-type(odd) ${Expander} {
+      margin-left: 0;
+    }
+
+    // even cards have a special margin for the expanded for obvious CSS reasons
+    &:nth-of-type(even) ${Expander} {
+      margin-left: calc(-100% - 20px);
+    }
+
+    // only on desktop
+    &:hover {
+      transform: ${props => (props.open ? "" : "scale(0.95)")};
+      ${Title} {
+        color: ${fontHover};
+      }
+    }
+  }
+
+  @media ${device.mobile} {
+    width: 100%;
+    margin: 10px 0;
+    min-height: ${rhythm(4)};
+    &:first-child {
+      margin-top: 20px;
+    }
+  }
+
+  // if some card is active this card isn't open then opacity 0.5
+  ${({ active, open }) =>
+    active && !open
+      ? `
+        opacity: 0.5;
+        box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
+        &:hover {
+          transform: unset;
+        }
+        `
+      : ``};
 `;

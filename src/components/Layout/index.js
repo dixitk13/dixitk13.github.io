@@ -4,14 +4,13 @@ import { LayoutContext } from "./LayoutContext";
 import { ThemeProvider } from "styled-components";
 
 class Container extends Component {
-  state = { y: 0, theme: "light" };
+  constructor(props) {
+    super(props);
+    this.state = { y: 0, theme: localStorage.getItem("theme") || "light" };
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-
-    this.setState({
-      theme: localStorage.getItem("theme") || this.state.theme
-    });
   }
 
   componentWillUnmount() {

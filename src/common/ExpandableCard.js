@@ -82,7 +82,6 @@ export const ExpanderClose = styled.div`
 
   &:hover:before,
   &:hover:after {
-    //opacity: 0.7;
     color: ${fontHover};
   }
 `;
@@ -125,7 +124,6 @@ export const Tag = styled.div`
 export const Card = styled.div`
   margin: 10px;
   width: calc((100% / ${numberOfCards}) - 20px);
-  //transition: all 0.1s ease-in-out;
   transition: ${commonTransition};
   border-radius: ${rhythm(0.5)};
   box-shadow: ${boxShadow};
@@ -190,7 +188,6 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: start;
 
-  //transition: all 0.1s ease-in-out;
   transition: ${commonTransition};
 
   background: ${background};
@@ -227,7 +224,6 @@ export const Title = styled.div`
   cursor: pointer;
   font-weight: 600;
   &:hover {
-    //opacity: 0.7;
     color: ${fontHover};
   }
 `;
@@ -241,8 +237,6 @@ export const OpenLink = styled.div`
   width: 30px;
   padding: 3px;
   &:hover {
-    //color: black;
-    //opacity: 0.7;
     color: ${fontHover};
     background: rgb(240, 240, 240);
     border-radius: 3px;

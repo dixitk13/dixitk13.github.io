@@ -9,7 +9,9 @@ class Container extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
 
-    this.setState({ theme: localStorage.getItem("theme") });
+    this.setState({
+      theme: localStorage.getItem("theme") || this.state.theme
+    });
   }
 
   componentWillUnmount() {

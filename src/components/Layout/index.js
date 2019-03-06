@@ -6,8 +6,16 @@ import { ThemeProvider } from "styled-components";
 class Container extends Component {
   constructor(props) {
     super(props);
-    this.state = { y: 0, theme: localStorage.getItem("theme") || "light" };
+    this.windowGlobal = typeof window !== "undefined" && window;
+    this.state = {
+      y: 0,
+      theme: this.windowGlobal
+        ? this.windowGlobal.localStorage.getItem("theme") || "light"
+        : "light"
+    };
   }
+
+  windowGlobal = null;
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -23,7 +31,7 @@ class Container extends Component {
 
   themeToggle = theme => {
     this.setState({ theme: theme });
-    localStorage.setItem("theme", theme);
+    this.windowGlobal.localStorage.setItem("theme", theme);
   };
 
   render() {

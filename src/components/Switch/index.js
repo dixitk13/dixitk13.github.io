@@ -4,7 +4,8 @@ import { LayoutContext, themesConstants } from "../Layout/LayoutContext";
 
 class Switch extends Component {
   state = {
-    selected: 0
+    selected: 0,
+    initialTheme: ""
   };
 
   handleClick = themeToggle => {

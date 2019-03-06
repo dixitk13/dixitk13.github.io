@@ -21,7 +21,7 @@ export const borderColor = theme("theme", {
 
 export const expandedCardContent = theme("theme", {
   light: "#ced4da",
-  dark: "rgba(21, 21, 21, 0.5)",
+  dark: "rgba(21, 21, 21, 1)",
   love: "#ffffff"
 });
 

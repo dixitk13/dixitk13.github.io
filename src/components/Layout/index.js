@@ -4,14 +4,21 @@ import { LayoutContext } from "./LayoutContext";
 import { ThemeProvider } from "styled-components";
 
 class Container extends Component {
-  state = { y: 0, theme: "light" };
+  constructor(props) {
+    super(props);
+    this.windowGlobal = typeof window !== "undefined" && window;
+    this.state = {
+      y: 0,
+      theme: this.windowGlobal
+        ? this.windowGlobal.localStorage.getItem("theme") || "light"
+        : "light"
+    };
+  }
+
+  windowGlobal = null;
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-
-    this.setState({
-      theme: localStorage.getItem("theme") || this.state.theme
-    });
   }
 
   componentWillUnmount() {
@@ -24,7 +31,7 @@ class Container extends Component {
 
   themeToggle = theme => {
     this.setState({ theme: theme });
-    localStorage.setItem("theme", theme);
+    this.windowGlobal.localStorage.setItem("theme", theme);
   };
 
   render() {

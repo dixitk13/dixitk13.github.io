@@ -5,7 +5,7 @@ import styled from "styled-components";
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
 import { device } from "../../utils/device";
-import { background, boxShadow, fontColor } from "../../styles";
+import { background, boxShadow, fontColor, fontHover } from "../../styles";
 import Logos from "./Logos";
 import DownloadButtons from "./DownloadButtons";
 import RealFlex from "./RealFlex";
@@ -45,7 +45,8 @@ const Name = styled.h1`
   cursor: pointer;
 
   &:hover {
-    opacity: 0.66;
+    //opacity: 0.66;
+    color: ${fontHover};
   }
 `;
 

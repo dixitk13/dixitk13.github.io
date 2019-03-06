@@ -7,7 +7,7 @@ export const slideIn = keyframes`
   100% {
     transform: translateX(100%);
   }
-}`;
+`;
 
 export const polygons = keyframes`
   0% {

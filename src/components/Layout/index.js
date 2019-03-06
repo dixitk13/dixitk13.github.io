@@ -8,6 +8,8 @@ class Container extends Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+
+    this.setState({ theme: localStorage.getItem("theme") });
   }
 
   componentWillUnmount() {
@@ -20,6 +22,7 @@ class Container extends Component {
 
   themeToggle = theme => {
     this.setState({ theme: theme });
+    localStorage.setItem("theme", theme);
   };
 
   render() {

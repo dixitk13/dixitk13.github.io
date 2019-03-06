@@ -48,3 +48,5 @@ export const entireBackgroundImage = theme("theme", {
   dark: "",
   love: `url(${trianglify})`
 });
+
+export const commonTransition = `all 0.3s ease`;

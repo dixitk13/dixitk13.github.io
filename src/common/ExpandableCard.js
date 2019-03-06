@@ -7,7 +7,8 @@ import {
   borderColor,
   fontColor,
   boxShadow,
-  fontHover
+  fontHover,
+  commonTransition
 } from "../styles";
 
 // magic number
@@ -15,7 +16,7 @@ export const numberOfCards = 2;
 
 /* Expander Card Classes */
 export const Expander = styled.div`
-  transition: all 0.1s ease-in-out;
+  transition: ${commonTransition};
   width: 100%;
   position: relative;
   display: flex;
@@ -124,7 +125,8 @@ export const Tag = styled.div`
 export const Card = styled.div`
   margin: 10px;
   width: calc((100% / ${numberOfCards}) - 20px);
-  transition: all 0.1s ease-in-out;
+  //transition: all 0.1s ease-in-out;
+  transition: ${commonTransition};
   border-radius: ${rhythm(0.5)};
   box-shadow: ${boxShadow};
 
@@ -163,14 +165,16 @@ export const Card = styled.div`
   }
 
   // if some card is active this card isn't open then opacity 0.5
-  ${props =>
-    props.active && !props.open
+  ${({ active, open }) =>
+    active && !open
       ? `
         opacity: 0.5;
-        transform: scale(1);
         box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
+        &:hover {
+          transform: unset;
+        }
         `
-      : ""};
+      : ``};
 `;
 
 export const CardContainer = styled.div`
@@ -186,13 +190,15 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: start;
 
-  transition: all 0.1s ease-in-out;
+  //transition: all 0.1s ease-in-out;
+  transition: ${commonTransition};
 
   background: ${background};
 
   // just the triangle after the div
   &:after {
-    transition: all 0.1s ease-in-out;
+    //transition: all 0.1s ease-in-out;
+    transition: ${commonTransition};
     content: "";
     display: block;
     height: 0;
@@ -235,7 +241,7 @@ export const OpenLink = styled.div`
   width: 30px;
   padding: 3px;
   &:hover {
-    color: black;
+    //color: black;
     //opacity: 0.7;
     color: ${fontHover};
     background: rgb(240, 240, 240);

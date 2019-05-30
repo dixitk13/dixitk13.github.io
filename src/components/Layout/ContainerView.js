@@ -13,11 +13,11 @@ export const ContainerView = styled.div`
   justify-content: center;
   background-color: ${entireBackground};
   background: ${entireBackgroundImage};
-
+  height: 100%;
   color: ${fontColor};
   padding: ${rhythm(0.75)};
   @media ${device.desktop} {
-    height: 100%;
+    //height: 100%;
   }
   @media ${device.mobile} {
     flex-direction: column;

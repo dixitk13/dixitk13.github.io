@@ -19,7 +19,8 @@ const AboutMeFlex = styled.div`
 `;
 
 const AboutMeContainer = styled(AboutMeFlex)`
-  width: 20vw;
+  //width: 20vw;
+  width: 360px;
   padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.25)};
   background: ${background};

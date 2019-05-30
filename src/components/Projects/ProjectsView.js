@@ -30,10 +30,20 @@ export default ({ data, cardNumber, ...rest }) => {
 };
 
 const CardsContainer = styled.div`
+  @media ${device.desktopL} {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: start;
+    //width: 40vw;
+    width: 680px;
+    height: 100%;
+  }
   @media ${device.desktop} {
     display: flex;
     flex-flow: row wrap;
-    width: 40vw;
+    align-content: start;
+    //width: 40vw;
+    width: 680px;
     height: 100%;
   }
   @media ${device.mobile} {

@@ -198,6 +198,7 @@ export const Body = styled.div`
 /* Normal Card Classes */
 export const Card = styled.div`
   margin: 10px;
+
   width: calc((100% / ${numberOfCards}) - 20px);
   transition: ${commonTransition};
   border-radius: ${rhythm(0.5)};
@@ -205,6 +206,7 @@ export const Card = styled.div`
 
   background: ${background};
   color: ${fontColor};
+  max-height: 260px;
 
   @media ${device.desktop} {
     // top-cards shouldn't have any margin

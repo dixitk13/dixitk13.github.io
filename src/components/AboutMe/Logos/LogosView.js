@@ -54,7 +54,7 @@ export default () => {
       scale: "scale(0.85)"
     },
     {
-      href: "http://strava.com/athletes/19109068/badge",
+      href: "https://www.strava.com/athletes/19109068",
       imageName: "strava",
       alt: "Strava",
       transform: "scale(0.75)",

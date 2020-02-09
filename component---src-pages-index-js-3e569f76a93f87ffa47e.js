@@ -96,22 +96,22 @@
         p = (function(M) {
           function N(N) {
             var j;
-            return (
-              ((j = M.call(this, N) || this).getInitialTheme = function() {
-                var M = "undefined" != typeof window && window;
-                return (M && M.localStorage.getItem("theme")) || "light";
-              }),
-              (j.handleScroll = function() {
-                j.setState({ y: window.scrollY });
-              }),
+            ((j = M.call(this, N) || this).handleScroll = function() {
+              j.setState({ y: window.scrollY });
+            }),
               (j.themeToggle = function(M) {
                 j.setState({ theme: M }),
                   ("undefined" != typeof window && window).localStorage.setItem(
                     "theme",
                     M
                   );
+              });
+            var I = "undefined" != typeof window && window;
+            return (
+              (j.state = {
+                y: 0,
+                theme: (I && I.localStorage.getItem("theme")) || "light"
               }),
-              (j.state = { y: 0, theme: "light" }),
               j
             );
           }
@@ -119,8 +119,7 @@
           var j = N.prototype;
           return (
             (j.componentDidMount = function() {
-              window.addEventListener("scroll", this.handleScroll),
-                this.setState({ theme: this.getInitialTheme() });
+              window.addEventListener("scroll", this.handleScroll);
             }),
             (j.componentWillUnmount = function() {
               window.removeEventListener("scroll", this.handleScroll);
@@ -129,13 +128,16 @@
               var M = Object.assign({}, this.state, {
                 themeToggle: this.themeToggle
               });
-              return i.a.createElement(
-                m.Provider,
-                { value: M },
+              return (
+                console.log("this.state", this.state),
                 i.a.createElement(
-                  D.a,
-                  { theme: { theme: this.state.theme } },
-                  i.a.createElement(O, null, this.props.children)
+                  m.Provider,
+                  { value: M },
+                  i.a.createElement(
+                    D.a,
+                    { theme: { theme: this.state.theme } },
+                    i.a.createElement(O, null, this.props.children)
+                  )
                 )
               );
             }),
@@ -1618,4 +1620,4 @@
     }
   }
 ]);
-//# sourceMappingURL=component---src-pages-index-js-b57cd31331d172875043.js.map
+//# sourceMappingURL=component---src-pages-index-js-3e569f76a93f87ffa47e.js.map

@@ -29,11 +29,11 @@ const Link = styled.a`
   }
 `;
 
-const Href = ({ href, title, imgsrc, ...rest }) => {
+const Href = ({ href, title, imgsrc, alt, ...rest }) => {
   return (
-    <Link target="_blank" href={href}>
+    <Link alt={alt} aria-label={alt} target="_blank" href={href}>
       {imgsrc ? (
-        <MentionsLogo src={imgsrc} {...rest}>
+        <MentionsLogo src={imgsrc} alt={alt} {...rest}>
           {title}
         </MentionsLogo>
       ) : (

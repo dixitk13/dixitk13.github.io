@@ -22,6 +22,8 @@ import reflectionsIcon from "./reflections.png";
 import computerscienceIcon from "./computerscience.png";
 import hatIcon from "./hat.png";
 import apolloIcon from "./apollo.svg";
+import typescript from "./typescript.svg";
+import heroku from "./heroku.svg";
 
 export const FannedImages = {
   ...IconDict,
@@ -47,5 +49,7 @@ export const FannedImages = {
   reflections: reflectionsIcon,
   computerscience: computerscienceIcon,
   hat: hatIcon,
-  apollo: apolloIcon
+  apollo: apolloIcon,
+  heroku,
+  typescript
 };

@@ -76,15 +76,14 @@ const FannedCards = ({ images }) => {
   return (
     <FanCardContainer>
       <FanCard three={three}>
-        {images
-          .slice(0, showLength)
-          .map((image, i) => (
-            <Img
-              three={three}
-              key={`fanned-image-${i}`}
-              src={FannedImages[image]}
-            />
-          ))}
+        {images.slice(0, showLength).map((image, i) => (
+          <Img
+            alt="Technology Image"
+            three={three}
+            key={`fanned-image-${i}`}
+            src={FannedImages[image]}
+          />
+        ))}
       </FanCard>
     </FanCardContainer>
   );

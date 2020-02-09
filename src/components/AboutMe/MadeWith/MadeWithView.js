@@ -69,10 +69,16 @@ const MadeWithView = () => {
           <Link
             href={item.url}
             key={item.name}
+            alt="Image"
+            aria-label={`Technology Image ${item.name}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon src={IconDict[item.name]} background={item.background} />
+            <Icon
+              alt={item.name}
+              src={IconDict[item.name]}
+              background={item.background}
+            />
           </Link>
         ))}
       </Icons>

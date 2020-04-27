@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Dixit's Home`
+    title: `Dixit's Home`,
   },
   pathPrefix: "/dixitk13.github.io",
   plugins: [
@@ -9,16 +9,16 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/static/markdowns/`
-      }
+        path: `${__dirname}/static/markdowns/`,
+      },
     },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography.js`
-      }
+        pathToConfigModule: `src/utils/typography.js`,
+      },
     },
     `gatsby-plugin-styled-components`,
-    `gatsby-transformer-remark`
-  ]
+    `gatsby-transformer-remark`,
+  ],
 };

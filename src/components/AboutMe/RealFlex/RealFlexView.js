@@ -4,11 +4,11 @@ import { device } from "../../../utils/device";
 
 // Another set of Magic numbers
 const heightOfMyView = 830;
-const maxHeightPossible = 1850;
+const maxHeightPossible = 1750;
 
 const RealFlexDiv = styled.div`
   @media ${device.desktop} and (min-height: ${heightOfMyView}px) {
-    flex-basis: ${props => (props.height ? props.height : 0)}px;
+    flex-basis: ${(props) => (props.height ? props.height : 0)}px;
     transition: height 0.5s ease-all;
   }
 

@@ -5,17 +5,20 @@ import { device } from "../../utils/device";
 import {
   entireBackground,
   entireBackgroundImage,
-  fontColor
+  fontColor,
 } from "../../styles";
 
 export const ContainerView = styled.div`
+  margin: 0;
   display: flex;
   justify-content: center;
   background-color: ${entireBackground};
   background: ${entireBackgroundImage};
-
   color: ${fontColor};
   padding: ${rhythm(0.75)};
+  @media ${device.screen4k} {
+    height: 100vh;
+  }
   @media ${device.desktop} {
     height: 100%;
   }

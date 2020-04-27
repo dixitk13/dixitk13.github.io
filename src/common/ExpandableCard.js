@@ -8,20 +8,25 @@ import {
   fontColor,
   boxShadow,
   fontHover,
-  commonTransition
+  commonTransition,
 } from "../styles";
 
 // magic number
 export const numberOfCards = 2;
 
 /* Expander Card Classes */
-export const Expander = styled.div`
+export const Expander = styled.div.attrs(({ cardId, open }) => ({
+  id: `projectcard__expander-${cardId}`,
+  "aria-hidden": open ? "false" : "true",
+  tabIndex: open ? 0 : -1,
+  "aria-labelledby": `projectcard__title-${cardId}`,
+}))`
   transition: ${commonTransition};
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   border-radius: ${rhythm(0.25)};
 
@@ -33,7 +38,7 @@ export const Expander = styled.div`
   border: 1px solid ${borderColor};
   background: ${expandedCardContent};
 
-  ${props =>
+  ${(props) =>
     props.open
       ? `
         max-height: 1000px;
@@ -45,26 +50,37 @@ export const Expander = styled.div`
         z-index: 10;
         padding: ${rhythm(1)};       
         `
-      : ""};
+      : `display: none;`};
 
   @media ${device.mobile} {
-    width: ${props => (props.open ? "100%" : "")};
+    width: ${(props) => (props.open ? "100%" : "")};
   }
 `;
 
-export const ExpanderBody = styled.div`
-  font-size: ${rhythm(0.65)};
+export const ExpanderBody = styled.article.attrs({
+  tabIndex: 0,
+})`
+  font-size: ${rhythm(0.65)}; // <- ya right
   align-self: start;
 `;
 
-export const ExpanderClose = styled.div`
+export const ExpanderClose = styled.button`
   position: absolute;
   width: 20px;
   height: 20px;
   top: 20px;
   right: 20px;
   cursor: pointer;
+  background: none;
+  border: none;
+`;
 
+export const Cross = styled.div`
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: -2px;
+  right: 11px;
   &:before,
   &:after {
     content: "";
@@ -86,15 +102,25 @@ export const ExpanderClose = styled.div`
   }
 `;
 
-export const Footer = styled.div`
+export const Tags = styled.ul.attrs({
+  tabIndex: 0,
+})`
+  list-style: none;
   display: flex;
-  align-self: end;
   font-size: ${rhythm(0.5)};
   justify-content: center;
+  margin-left: 0.45rem;
+  width: 100%;
+
+  @media ${device.mobile} {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
 `;
 
-export const Tag = styled.div`
+export const Tag = styled.li.attrs({ tabIndex: 0 })`
   padding: 3px 6px;
+  display: inline;
   margin: ${rhythm(0.25)};
   border-radius: ${rhythm(0.25)};
   font-weight: ${rhythm(0.25)};
@@ -102,16 +128,19 @@ export const Tag = styled.div`
   background: ${background};
   border: 0.5px solid ${fontColor};
   line-height: 15px;
-  max-height: 25px;
+  max-height: 21px;
+  min-height: 21px;
   white-space: nowrap;
   @media ${device.desktop} {
-    &:nth-child(n + 7) {
+    &:nth-of-type(n + 7) {
       opacity: 0;
     }
   }
 
   @media ${device.mobile} {
-    &:nth-child(n + 5) {
+    display: flex;
+    flex-wrap: wrap;
+    &:nth-of-type(n + 5) {
       opacity: 0;
     }
   }
@@ -121,14 +150,12 @@ export const Tag = styled.div`
 `;
 
 // Specific Card container classes
-
-export const CardContainer = styled.div`
+export const CardContainer = styled.article`
   width: 100%;
   padding: ${rhythm(0.25)} ${rhythm(0.5)};
   border-radius: ${rhythm(0.25)};
   min-height: ${rhythm(4)};
   position: relative;
-  cursor: pointer;
 
   text-align: center;
   display: flex;
@@ -136,7 +163,6 @@ export const CardContainer = styled.div`
   justify-content: start;
 
   transition: ${commonTransition};
-
   background: ${background};
 
   // just the triangle after the div
@@ -151,21 +177,28 @@ export const CardContainer = styled.div`
     left: calc(50% - 15px);
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    opacity: ${props => (props.open ? "1" : "0")};
-    border-bottom: ${props => (props.open ? "15" : "0")}px solid ${borderColor};
+    opacity: ${(props) => (props.open ? "1" : "0")};
+    border-bottom: ${(props) => (props.open ? "15" : "0")}px solid
+      ${borderColor};
   }
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
+  tabIndex: 0,
+  id: `projectcard__title_${cardId}`,
+  "aria-expanded": open ? "true" : "false",
+  "aria-controls": `projectcard__expander-${cardId}`,
+}))`
   align-self: flex-start;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  min-height: 60px; // <- debatable CSS
-`;
+  min-height: 40px; // <- debatable CSS
+  border: none;
+  background: none;
 
-export const Title = styled.div`
   color: ${fontColor};
+  margin: 10px 0;
   font-size: ${rhythm(0.75)};
   cursor: pointer;
   font-weight: 600;
@@ -174,29 +207,32 @@ export const Title = styled.div`
   }
 `;
 
-export const OpenLink = styled.div`
+export const ViewMore = styled(Tag)`
   margin-left: auto;
-  font-size: ${rhythm(0.75)};
-  margin-top: -3px;
+  font-size: ${rhythm(0.5)};
+  background: none;
+  border: none;
   cursor: pointer;
-  height: 30px;
-  width: 30px;
-  padding: 3px;
+  margin-top: 4px;
   &:hover {
     color: ${fontHover};
-    background: rgb(240, 240, 240);
-    border-radius: 3px;
   }
 `;
 
-export const Body = styled.div`
+export const Body = styled.article.attrs({ tabIndex: 0 })`
   font-size: ${rhythm(0.5)};
   text-align: left;
   min-height: 85px;
 `;
 
 /* Normal Card Classes */
-export const Card = styled.div`
+export const Card = styled.li.attrs(({ active }) => ({
+  role: "listitem",
+  tabIndex: active ? -1 : 0,
+}))`
+  list-style: none;
+  border: none;
+  display: inline-block;
   margin: 10px;
   width: calc((100% / ${numberOfCards}) - 20px);
   transition: ${commonTransition};
@@ -224,10 +260,7 @@ export const Card = styled.div`
 
     // only on desktop
     &:hover {
-      transform: ${props => (props.open ? "" : "scale(0.95)")};
-      ${Title} {
-        color: ${fontHover};
-      }
+      transform: ${(props) => (props.open ? "" : "scale(0.95)")};
     }
   }
 

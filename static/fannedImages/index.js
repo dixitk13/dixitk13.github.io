@@ -24,6 +24,8 @@ import hatIcon from "./hat.png";
 import apolloIcon from "./apollo.svg";
 import typescript from "./typescript.svg";
 import heroku from "./heroku.svg";
+import redis from "./redis.svg";
+import node from "./node.svg";
 
 export const FannedImages = {
   ...IconDict,
@@ -51,5 +53,7 @@ export const FannedImages = {
   hat: hatIcon,
   apollo: apolloIcon,
   heroku,
-  typescript
+  typescript,
+  node,
+  redis
 };

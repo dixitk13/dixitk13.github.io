@@ -1,7 +1,7 @@
 ---
 title: "Markdown TO-DOs"
 date: "2018-12-02"
-link: "https://github.com/dixitk13/simple-graphql"
+link: "https://simple-graphql.herokuapp.com/"
 tags: 
   - apollo
   - graphql

@@ -6,14 +6,16 @@ import { ThemeProvider } from "styled-components";
 class Container extends Component {
   constructor(props) {
     super(props);
+    // NOTE: if you don't let it flicker(by using getInitialTheme), it wont work
     this.state = {
       y: 0,
-      theme: getInitialTheme(),
+      theme: "light",
     };
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+    this.setState({ theme: getInitialTheme() });
   }
 
   componentWillUnmount() {

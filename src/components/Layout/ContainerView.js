@@ -16,6 +16,7 @@ export const ContainerView = styled.div`
   background: ${entireBackgroundImage};
   color: ${fontColor};
   padding: ${rhythm(0.75)};
+  transition: all 0.3s ease-all;
   @media ${device.screen4k} {
     height: 100vh;
   }

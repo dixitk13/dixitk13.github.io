@@ -2,6 +2,7 @@
 title: "People List"
 date: "2020-01-01"
 link: "http://people-list.herokuapp.com/"
+type: "project"
 tags:
   - react
   - typescript

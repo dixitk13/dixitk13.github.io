@@ -2,6 +2,7 @@
 title: "Covid Visualization"
 date: "2020-04-01"
 link: "http://covid-visual.herokuapp.com/"
+type: "project"
 tags:
   - nodeJS
   - react

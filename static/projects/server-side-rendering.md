@@ -2,7 +2,8 @@
 title: "Server Side Rendering"
 date: "2018-06-17"
 link: "https://github.com/dixitk13/basic-react-server-side"
-tags: 
+type: "project"
+tags:
   - react
   - styled-components
   - cra

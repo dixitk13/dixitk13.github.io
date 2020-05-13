@@ -133,7 +133,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
   white-space: nowrap;
   @media ${device.desktop} {
     &:nth-of-type(n + 7) {
-      opacity: 0;
+      display: none;
     }
   }
 
@@ -141,7 +141,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
     display: flex;
     flex-wrap: wrap;
     &:nth-of-type(n + 5) {
-      opacity: 0;
+      display: none;
     }
   }
   &:first-child {

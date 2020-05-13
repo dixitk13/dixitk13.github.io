@@ -13,12 +13,20 @@ import MadeWith from "./MadeWith";
 
 import { polygons } from "../../common/animations";
 
-const AboutMeFlex = styled.div`
+const AboutMeFlex = styled.aside.attrs({
+  "aria-label": "About me",
+  tabIndex: "0",
+})`
   display: flex;
   flex-direction: column;
+  @media ${device.screen4k} {
+    max-width: 20vw;
+  }
 `;
 
-const AboutMeContainer = styled(AboutMeFlex)`
+const AboutMeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 20vw;
   padding: ${rhythm(0.25)};
   border-radius: ${rhythm(0.25)};
@@ -38,19 +46,26 @@ const AboutMeContainer = styled(AboutMeFlex)`
   }
 `;
 
-const Name = styled.h1`
+const Name = styled.button.attrs({
+  tabIndex: 0,
+})`
   color: ${fontColor};
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
   cursor: pointer;
-
+  font-weight: 500;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: "Alegreya Sans", sans-serif;
   &:hover {
-    //opacity: 0.66;
     color: ${fontHover};
   }
 `;
 
-const Image = styled.img`
+const Image = styled.img.attrs({
+  tabIndex: 0,
+})`
   flex: 1 5 30%;
   min-height: 0;
   max-height: 350px;
@@ -62,7 +77,9 @@ const Image = styled.img`
   animation: ${polygons} 60s infinite;
 `;
 
-const Quote = styled.blockquote`
+const Quote = styled.blockquote.attrs({
+  tabIndex: 0,
+})`
   margin-left: unset;
   color: ${fontColor};
   border-left-color: ${fontColor};
@@ -115,9 +132,13 @@ const AboutMeView = ({ on, toggleOn }) => {
           />
           <label htmlFor="toggle-heart">❤</label>
         </ToggleHeartContainer>
-        <Name onClick={toggleOn}>Dixit Keshavbhai Patel</Name>
+        <Name aria-label="Click to send Love" onClick={toggleOn}>
+          Dixit Keshavbhai Patel
+        </Name>
         <Image src={dixitk13} alt="Dixit" />
-        <Quote>just another software engineer</Quote>
+        <Quote aria-label="My Quote just another software engineer">
+          just another software engineer
+        </Quote>
         <Logos />
         <DownloadButtons toggleOn={toggleOn} />
         <MadeWith />

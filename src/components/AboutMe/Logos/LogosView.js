@@ -12,13 +12,13 @@ const Mentions = styled.div`
 `;
 
 const MentionsLogo = styled.img`
-  width: ${props => props.width || "48px"};
+  width: ${(props) => props.width || "48px"};
   height: 48px;
   margin-bottom: 0;
   transition: all 0.2s ease-in-out;
-  transform: ${props => props.scale};
+  transform: ${(props) => props.scale};
   &:hover {
-    transform: ${props => props.transform};
+    transform: ${(props) => props.transform};
   }
 `;
 
@@ -31,7 +31,13 @@ const Link = styled.a`
 
 const Href = ({ href, title, imgsrc, alt, ...rest }) => {
   return (
-    <Link alt={alt} aria-label={alt} target="_blank" href={href}>
+    <Link
+      alt={alt}
+      aria-label={alt}
+      rel="noopener noreferrer"
+      target="_blank"
+      href={href}
+    >
       {imgsrc ? (
         <MentionsLogo src={imgsrc} alt={alt} {...rest}>
           {title}
@@ -51,21 +57,21 @@ export default () => {
       alt: "Quora",
       width: "75px",
       transform: "scale(0.95)",
-      scale: "scale(0.85)"
+      scale: "scale(0.85)",
     },
     {
       href: "https://www.strava.com/athletes/19109068",
       imageName: "strava",
       alt: "Strava",
       transform: "scale(0.75)",
-      scale: "scale(0.65)"
+      scale: "scale(0.65)",
     },
     {
       href: "https://twitter.com/dixitk13",
       imageName: "twitter",
       alt: "Twitter",
       transform: "scale(0.75)",
-      scale: "scale(0.65)"
+      scale: "scale(0.65)",
     },
     {
       href: "https://github.com/dixitk13",
@@ -73,8 +79,8 @@ export default () => {
       alt: "Github",
       width: "65px",
       transform: "scale(0.75)",
-      scale: "scale(0.85)"
-    }
+      scale: "scale(0.85)",
+    },
   ];
 
   return (

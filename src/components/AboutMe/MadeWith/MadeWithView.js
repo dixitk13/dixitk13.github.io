@@ -10,11 +10,11 @@ const items = [
   {
     name: "styledcomponents",
     url: "https://styled-components.com",
-    background: "#e0a90eba"
+    background: "#e0a90eba",
   },
   { name: "webpack", url: "https://webpack.js.org/" },
   { name: "babel", url: "https://babeljs.io/" },
-  { name: "github", url: "https://www.github.com/" }
+  { name: "github", url: "https://www.github.com/" },
 ];
 
 const Footer = styled.div`
@@ -38,25 +38,34 @@ const Heart = styled.span`
   }
 `;
 
-const Icons = styled.div`
+const Icons = styled.ul.attrs({ role: "list" })`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 9px;
+`;
+const Icon = styled.li.attrs({
+  role: "listitem",
+})`
+  list-style: none;
+  margin-bottom: 3px;
 `;
 
 const Link = styled.a`
   padding: 10px;
 `;
 
-const Icon = styled.img`
+const IconImage = styled.img`
   width: 22px;
   height: 22px;
   margin-bottom: 0;
-  background: ${props => props.background || ""};
+  background: ${(props) => props.background || ""};
 `;
 
-const Title = styled.div`
+const Title = styled.button`
   text-align: center;
+  border: none;
+  background: none;
   color: ${fontColor};
 `;
 
@@ -65,21 +74,22 @@ const MadeWithView = () => {
     <Footer>
       <Title>Made with {<Heart />} using</Title>
       <Icons>
-        {items.map(item => (
-          <Link
-            href={item.url}
-            key={item.name}
-            alt="Image"
-            aria-label={`Technology Image ${item.name}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon
-              alt={item.name}
-              src={IconDict[item.name]}
-              background={item.background}
-            />
-          </Link>
+        {items.map((item) => (
+          <Icon key={item.name}>
+            <Link
+              href={item.url}
+              alt="Image"
+              aria-label={`Technology Image ${item.name}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IconImage
+                alt={item.name}
+                src={IconDict[item.name]}
+                background={item.background}
+              />
+            </Link>
+          </Icon>
         ))}
       </Icons>
     </Footer>

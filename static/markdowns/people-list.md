@@ -12,7 +12,7 @@ images:
   - heroku
 ---
 
-PeopleList using Typescript and React which is WIP.
+PeopleList using Typescript and React.
 
 - Build a custom Accordian for re-usability purposes.
 - Uses custom React hooks and Typescript for educational purposes.

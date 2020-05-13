@@ -2,14 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { FannedImages } from "../../static/fannedImages";
 
-const Img = styled.img`
+const Item = styled.li.attrs({
+  role: "listitem",
+  tabIndex: -1,
+})`
+  list-style: none;
+  margin-bottom: unset;
   position: absolute;
-  width: 50px;
-  height: 50px;
   text-align: center;
   transition: all 0.3s linear;
   border-radius: 6px;
-  ${props =>
+  ${(props) =>
     props.three
       ? `
       &:first-child {
@@ -32,39 +35,39 @@ const Img = styled.img`
   `};
 `;
 
-const FanCardContainer = styled.div`
+const FanCardContainer = styled.ul.attrs({
+  tabIndex: 0,
+})`
   height: 80px;
-`;
-
-const FanCard = styled.div`
-  height: 60px;
-  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   margin: 6px 0;
   &:hover,
   &:focus {
   
-  ${props =>
+  ${(props) =>
     props.three
       ? `
-      ${Img}:first-child {
+      ${Item}:first-child {
           transform: translateX(45px);
         }
-        ${Img}:last-child {
+        ${Item}:last-child {
           transform: translateX(-45px);
         }
       `
       : `
-        ${Img}:first-child {
+        ${Item}:first-child {
           transform: translateX(85px);
         }
-        ${Img}:nth-child(2) {
+        ${Item}:nth-child(2) {
           transform: translateX(40px);
         }
-        ${Img}:nth-last-child(2) {
+        ${Item}:nth-last-child(2) {
           transform: translateX(-40px);
         }
-        ${Img}:last-child {
+        ${Item}:last-child {
           transform: translateX(-85px);
         }
         `}
@@ -74,17 +77,17 @@ const FannedCards = ({ images }) => {
   const three = images.length <= 3 || images.length === 4;
   const showLength = three ? 3 : 5;
   return (
-    <FanCardContainer>
-      <FanCard three={three}>
-        {images.slice(0, showLength).map((image, i) => (
-          <Img
-            alt="Technology Image"
-            three={three}
-            key={`fanned-image-${i}`}
+    <FanCardContainer aria-label="Fanned Technology Card Preview" three={three}>
+      {images.slice(0, showLength).map((image, i) => (
+        <Item three={three} key={`fanned-image-${i}`}>
+          <img
+            alt={image}
+            width="50px"
+            height="50px"
             src={FannedImages[image]}
           />
-        ))}
-      </FanCard>
+        </Item>
+      ))}
     </FanCardContainer>
   );
 };

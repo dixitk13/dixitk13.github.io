@@ -1,69 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import { rhythm } from "../../../utils/typography";
 
 import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2019.pdf";
 import Switch from "../../Switch";
-import { fontColor } from "../../../styles";
-
-const DownloadLink = styled.a`
-  text-align: center;
-  &:hover {
-    box-shadow: none;
-  }
-`;
-
-const SimpleButton = styled.button`
-  text-decoration: none;
-  padding: 0;
-  height: 21px;
-  width: 90px;
-  cursor: pointer;
-  color: ${fontColor};
-  margin: ${rhythm(0.25)};
-  font-size: ${rhythm(0.5)};
-  text-align: center;
-  background: rgb(236, 237, 238, 0.7);
-  border: 1px solid #cdd4db;
-  border-radius: 3px;
-  outline: none;
-  &:active {
-    background: rgba(0, 0, 0, 0.1);
-  }
-`;
+import { SimpleButton } from "../../../common/SimpleButton";
 
 const DownloadButton = styled(SimpleButton)`
+  text-align: center;
+
   &:hover {
     background: rgb(226, 227, 228);
+    box-shadow: none;
     transition-delay: 0.2s;
+    color: transparent;
   }
   &:before {
     opacity: 0;
     position: absolute;
+    color: black;
     content: attr(data-hover);
-    transform: translate(-150%, 0);
+    transform: translate(0, 0);
     transition: 0.4s, opacity 0.6s;
   }
   &:hover:before {
     opacity: 1;
-    transform: translate(25%, 0);
+    transform: translate(-6px, 0);
     transition-delay: 0.2s;
-  }
-
-  span {
-    width: 100%;
-    transition: 0.6s;
-    transition-delay: 0.2s;
-    display: inline-block;
-    &:hover,
-    &:focus {
-      opacity: 0;
-      transform: scale(0.3);
-    }
   }
 `;
 
-const Buttons = styled.div`
+const ButtonGroup = styled.div.attrs({
+  role: "group",
+  "aria-label": "Resume and Theme Button",
+})`
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
@@ -71,23 +40,21 @@ const Buttons = styled.div`
 `;
 
 const DownloadButtonsView = ({ theme, toggleOn }) => (
-  <Buttons>
-    <DownloadLink download target="_blank" href={resume}>
-      <DownloadButton
-        type="button"
-        data-hover="Download"
-        data-active="Starting..."
-      >
-        <span>Resume</span>
-      </DownloadButton>
-    </DownloadLink>
+  <ButtonGroup>
+    <DownloadButton
+      type="button"
+      ariaLabel="Download Resume"
+      target="_blank"
+      data-hover="Download"
+      href={resume}
+      as="a"
+      rel="noopener noreferrer"
+    >
+      Resume
+    </DownloadButton>
 
-    <Switch toggleOn={toggleOn}>
-      <SimpleButton>
-        <span>{theme}</span>
-      </SimpleButton>
-    </Switch>
-  </Buttons>
+    <Switch toggleOn={toggleOn}>{theme}</Switch>
+  </ButtonGroup>
 );
 
 export default DownloadButtonsView;

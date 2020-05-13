@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import { SwitchView } from "./SwitchView";
-import { LayoutContext, themesConstants } from "../Layout/LayoutContext";
+import {
+  LayoutContext,
+  themesConstants,
+  getInitialThemeValue,
+} from "../Layout/LayoutContext";
 
 class Switch extends Component {
-  state = {
-    selected: 0
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: getInitialThemeValue(),
+    };
+  }
 
-  handleClick = themeToggle => {
+  handleClick = (themeToggle) => {
     this.setState(
-      prevState => ({
-        selected: (prevState.selected + 1) % 3
+      (prevState) => ({
+        selected: (prevState.selected + 1) % 3,
       }),
       () => themeToggle(themesConstants[this.state.selected])
     );

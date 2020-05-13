@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ContainerView } from "./ContainerView";
-import { LayoutContext } from "./LayoutContext";
+import { LayoutContext, getInitialTheme } from "./LayoutContext";
 import { ThemeProvider } from "styled-components";
 
 class Container extends Component {
@@ -8,22 +8,12 @@ class Container extends Component {
     super(props);
     this.state = {
       y: 0,
-      theme: "light"
+      theme: getInitialTheme(),
     };
   }
 
-  getInitialTheme = () => {
-    // windowGlobal because Gatsby ¯\_(ツ)_/¯
-    let windowGlobal = typeof window !== "undefined" && window;
-
-    return windowGlobal
-      ? windowGlobal.localStorage.getItem("theme") || "light"
-      : "light";
-  };
-
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-    this.setState({ theme: this.getInitialTheme() });
   }
 
   componentWillUnmount() {
@@ -34,7 +24,7 @@ class Container extends Component {
     this.setState({ y: window.scrollY });
   };
 
-  themeToggle = theme => {
+  themeToggle = (theme) => {
     this.setState({ theme: theme });
 
     let windowGlobal = typeof window !== "undefined" && window;
@@ -44,7 +34,7 @@ class Container extends Component {
   render() {
     const value = {
       ...this.state,
-      themeToggle: this.themeToggle
+      themeToggle: this.themeToggle,
     };
     return (
       <LayoutContext.Provider value={value}>

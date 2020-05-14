@@ -1,6 +1,10 @@
 module.exports = {
   siteMetadata: {
     title: `Dixit's Home`,
+    blog: `Dixit's Blog`,
+    url: "https://dixitk13.github.io",
+    image: "/static/img/dixitk13.jpg",
+    twitterUsername: "@dixitk13",
   },
   pathPrefix: "/dixitk13.github.io",
   plugins: [
@@ -9,7 +13,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/static/markdowns/`,
+        path: `${__dirname}/static/`,
       },
     },
     {

@@ -62,6 +62,7 @@ export const ExpanderBody = styled.article.attrs({
 })`
   font-size: ${rhythm(0.65)}; // <- ya right
   align-self: start;
+  margin-top: 20px; // duh
 `;
 
 export const ExpanderClose = styled.button`
@@ -109,7 +110,7 @@ export const Tags = styled.ul.attrs({
   display: flex;
   font-size: ${rhythm(0.5)};
   justify-content: center;
-  margin-left: 0.45rem;
+  margin: 10px 0 0 0.45rem;
   width: 100%;
 
   @media ${device.mobile} {
@@ -127,7 +128,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
   color: ${fontColor};
   background: ${background};
   border: 0.5px solid ${fontColor};
-  line-height: 15px;
+  line-height: 13px;
   max-height: 21px;
   min-height: 21px;
   white-space: nowrap;
@@ -182,7 +183,7 @@ export const CardContainer = styled.article`
       ${borderColor};
   }
 `;
-
+// TODO: some project titles are two liners even though there's space
 export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   tabIndex: 0,
   id: `projectcard__title_${cardId}`,
@@ -194,14 +195,12 @@ export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   justify-content: space-between;
   width: 100%;
   min-height: 40px; // <- debatable CSS
-  border: none;
-  background: none;
 
   color: ${fontColor};
   margin: 10px 0;
-  font-size: ${rhythm(0.75)};
+  font-size: ${rhythm(0.85)};
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 550;
   &:hover {
     color: ${fontHover};
   }
@@ -220,7 +219,7 @@ export const ViewMore = styled(Tag)`
 `;
 
 export const Body = styled.article.attrs({ tabIndex: 0 })`
-  font-size: ${rhythm(0.5)};
+  font-size: ${rhythm(0.65)};
   text-align: left;
   min-height: 85px;
 `;

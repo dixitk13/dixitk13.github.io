@@ -1,7 +1,8 @@
 import Typography from "typography";
-import deYoungTheme from "typography-theme-de-young";
+// TODO: remove import + installation
+// import deYoungTheme from "typography-theme-de-young";
 
-const typography = new Typography(deYoungTheme);
+const typography = new Typography();
 
 export default typography;
 export const rhythm = typography.rhythm;

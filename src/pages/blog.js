@@ -1,17 +1,17 @@
 import React from "react";
-import { graphql } from "gatsby";
 
-import { Layout, SiteHelmet } from "../components/Layout";
-import { HomeView } from "../components/Home";
+import { BlogPosts } from "../components/BlogPosts";
+import { SiteHelmet, Layout } from "../components/Layout";
 
-export default ({ data }) => {
+const blog = ({ data }) => {
   return (
     <Layout>
       <SiteHelmet siteMetadata={data.site.siteMetadata} />
-      <HomeView />
+      <BlogPosts />
     </Layout>
   );
 };
+
 export const query = graphql`
   query {
     site {
@@ -23,3 +23,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default blog;

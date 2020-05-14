@@ -1,5 +1,5 @@
 ---
-title: "Draft pull requests"
+title: "Typescript discriminator"
 date: "2020-04-10"
 type: "blog"
 ---

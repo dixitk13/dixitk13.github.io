@@ -12,6 +12,7 @@ import RealFlex from "./RealFlex";
 import MadeWith from "./MadeWith";
 
 import { polygons } from "../../common/animations";
+import { Blockquote } from "../../common";
 
 const AboutMeFlex = styled.aside.attrs({
   "aria-label": "About me",
@@ -54,10 +55,8 @@ const Name = styled.button.attrs({
   margin: 0 0 ${rhythm(0.5)} 0;
   cursor: pointer;
   font-weight: 500;
-  background: none;
-  border: none;
+
   padding: 0;
-  font-family: "Alegreya Sans", sans-serif;
   &:hover {
     color: ${fontHover};
   }
@@ -74,10 +73,11 @@ const Image = styled.img.attrs({
   margin-bottom: 1rem;
   background-size: cover;
   clip-path: polygon(0, 0);
-  animation: ${polygons} 60s infinite;
+  // TODO: uncomment before deployment
+  // animation: ${polygons} 60s infinite;
 `;
 
-const Quote = styled.blockquote.attrs({
+const Quote = styled(Blockquote).attrs({
   tabIndex: 0,
 })`
   margin-left: unset;

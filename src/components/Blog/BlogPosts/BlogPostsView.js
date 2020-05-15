@@ -1,41 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "gatsby";
 
-import { device } from "../../utils/device";
-import { rhythm } from "../../utils/typography";
-import { Blockquote, CircularImage } from "../../common";
-import { Dump } from "../Dump";
-import {
-  entireBackground,
-  entireBackgroundImage,
-  fontColor,
-  background,
-  boxShadow,
-  fontHover,
-} from "../../styles";
-import dixitk13 from "../../../static/img/dixitk13.jpg";
+import { Blockquote, CircularImage } from "../../../common";
 
-const BlogPostsViewContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  margin: 0 auto;
-  background-color: ${entireBackground};
-  background: ${entireBackgroundImage};
-  color: ${fontColor};
-
-  @media ${device.screen4k} {
-    padding: ${rhythm(0.75)} 30vw;
-  }
-  @media ${device.desktop} {
-    padding: ${rhythm(0.75)} 30vw;
-  }
-  @media ${device.mobile} {
-    padding: ${rhythm(0.75)} 5vw;
-  }
-`;
+import { fontColor, background, boxShadow, fontHover } from "../../../styles";
+import { BlogPostsViewContainer } from "../common";
+import dixitk13 from "../../../../static/img/dixitk13.jpg";
 
 const Blogs = styled.article``;
 const BlogAside = styled.aside`
@@ -94,7 +65,6 @@ export const BlogPostsView = ({ blogs }) => {
 
   return (
     <>
-      <Dump data={blogs} />
       <BlogPostsViewContainer>
         <CircularImage src={dixitk13} />
         <BlogTitle>Dixit Keshavbhai Patel's Blog</BlogTitle>
@@ -106,14 +76,16 @@ export const BlogPostsView = ({ blogs }) => {
             blogs.map(({ node }) => {
               const { frontmatter, excerpt, id } = node;
               return (
-                <SmallBlogItem>
+                <SmallBlogItem key={`small-blog-item-${id}`}>
                   <Header as="header">
                     <button>
-                      <a to={id}>{frontmatter?.title}</a>
+                      <Link to={`${frontmatter.path}`}>
+                        {frontmatter?.title}
+                      </Link>
                     </button>
                     <small>{frontmatter?.date}</small>
                   </Header>
-                  <p tabIndex={0}>{excerpt}</p>
+                  <p>{excerpt}</p>
                 </SmallBlogItem>
               );
             })}

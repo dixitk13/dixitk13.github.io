@@ -5,7 +5,7 @@ import { BlogPostsView } from "./BlogPostsView";
 
 // TODO: add how long to read via timeToRead
 const getAllBlogs = graphql`
-  query {
+  query getAllBlogs {
     blogs: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { type: { eq: "blog" } } }
@@ -15,6 +15,7 @@ const getAllBlogs = graphql`
           id
           html
           frontmatter {
+            path
             type
             date
             title

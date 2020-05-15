@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { rhythm } from "../utils/typography";
+
+import { rhythm } from "../utils";
 import { fontColor } from "../styles";
 
 export const SimpleButton = styled.button.attrs(({ ariaLabel }) => ({

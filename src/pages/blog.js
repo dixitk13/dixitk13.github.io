@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BlogPosts } from "../components/BlogPosts";
+import { BlogPosts } from "../components/Blog/BlogPosts";
 import { SiteHelmet, Layout } from "../components/Layout";
 
 const blog = ({ data }) => {
@@ -13,7 +13,7 @@ const blog = ({ data }) => {
 };
 
 export const query = graphql`
-  query {
+  query querySiteMetaDataBlog {
     site {
       siteMetadata {
         title

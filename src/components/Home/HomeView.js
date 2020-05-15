@@ -1,13 +1,11 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 
 import Projects from "../Projects";
 import AboutMe from "../AboutMe";
 // import Cubbles from "../components/Cubbles";
 
-import styled from "styled-components";
-
-import { rhythm } from "../../utils/typography";
-import { device } from "../../utils/device";
+import { rhythm, device } from "../../utils";
 import {
   entireBackground,
   entireBackgroundImage,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { rhythm } from "../utils/typography";
-import { device } from "../utils/device";
+
+import { device, rhythm } from "../utils";
 import {
   background,
   expandedCardContent,

@@ -1,24 +1,71 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { graphql } from "gatsby";
+import styled from "styled-components";
 
-import { BlogPostsViewContainer } from "../common/";
+import { BlogWrapper } from "../common";
+import { rhythm, device } from "../../../utils";
+import { fontColor } from "../../../styles";
 
 export default function BlogPostTemplate({ data }) {
   const { markdownRemark: post } = data;
-  const { frontmatter, html } = post;
+  const { frontmatter, html, timeToRead } = post;
   const { title, date } = frontmatter;
   return (
-    <BlogPostsViewContainer>
+    <BlogWrapper>
       <Helmet title={title} />
-      <article>
-        <h1>{title}</h1>
-        <small>{date}</small>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </article>
-    </BlogPostsViewContainer>
+      <BlogMainArticle>
+        <BlogHeader>
+          <BlogTitle>{title}</BlogTitle>
+          <small>
+            Last updated: {date} • {timeToRead} min read
+          </small>
+        </BlogHeader>
+        <BlogBody dangerouslySetInnerHTML={{ __html: html }} />
+      </BlogMainArticle>
+    </BlogWrapper>
   );
 }
+
+const BlogMainArticle = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+
+  width: 100%;
+`;
+
+const BlogHeader = styled.div`
+  padding: ${rhythm(1)} 0;
+  width: 100%;
+  text-align: center;
+  small {
+    opacity: 0.8;
+    font-size: ${rhythm(0.75)};
+  }
+`;
+
+const BlogTitle = styled.h1`
+  color: ${fontColor};
+  font-weight: 700;
+`;
+
+const BlogBody = styled.article`
+  font-size: ${rhythm(0.75)};
+  width: 100%;
+  code {
+    font-size: ${rhythm(0.75)};
+  }
+  pre {
+    background: #282c34;
+    border-radius: 6px;
+    color: #abb2bf;
+    overflow: auto;
+    padding: 14px 18px;
+    line-height: 1.6;
+  }
+`;
 
 export const query = graphql`
   query blogPostByPath($path: String!) {
@@ -27,8 +74,9 @@ export const query = graphql`
       frontmatter {
         title
         type
-        date
+        date(formatString: "MMM DD, YYYY")
       }
+      timeToRead
       html
     }
   }

@@ -1,14 +1,17 @@
 import React from "react";
+import { graphql } from "gatsby";
 
+// TODO: fix import for Blog folder
 import { BlogPosts } from "../components/Blog/BlogPosts";
-import { SiteHelmet, Layout } from "../components/Layout";
+import { SiteHelmet } from "../components/Layout";
+import { BlogWrapper } from "../components/Blog/common";
 
 const blog = ({ data }) => {
   return (
-    <Layout>
+    <BlogWrapper>
       <SiteHelmet siteMetadata={data.site.siteMetadata} />
       <BlogPosts />
-    </Layout>
+    </BlogWrapper>
   );
 };
 

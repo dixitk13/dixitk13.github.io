@@ -48,7 +48,7 @@ export const Expander = styled.div.attrs(({ cardId, open }) => ({
         margin-top: 30px;
         opacity: 1;
         z-index: 10;
-        padding: ${rhythm(1)};       
+        padding: ${rhythm(1)} ${rhythm(1)} ${rhythm(0.5)} ${rhythm(1)};
         `
       : `display: none;`};
 
@@ -110,7 +110,7 @@ export const Tags = styled.ul.attrs({
   display: flex;
   font-size: ${rhythm(0.5)};
   justify-content: center;
-  margin: 10px 0 0 0.45rem;
+  margin: 21px 0 0 0;
   width: 100%;
 
   @media ${device.mobile} {
@@ -259,7 +259,8 @@ export const Card = styled.li.attrs(({ active }) => ({
 
     // only on desktop
     &:hover {
-      transform: ${(props) => (props.open ? "" : "scale(0.95)")};
+      // transform: ${(props) => (props.open ? "" : "scale(0.99)")};
+      transform: ${(props) => (props.open ? "" : "translateY(-2px)")};
     }
   }
 

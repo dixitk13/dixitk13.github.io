@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby";
 import { BlogPostsView } from "./BlogPostsView";
 
 // TODO: add how long to read via timeToRead
-const getAllBlogs = graphql`
+export const getAllBlogs = graphql`
   query getAllBlogs {
     blogs: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
@@ -17,7 +17,7 @@ const getAllBlogs = graphql`
           frontmatter {
             path
             type
-            date
+            date(formatString: "MMM DD, YYYY")
             title
           }
           excerpt(truncate: true)
@@ -27,7 +27,6 @@ const getAllBlogs = graphql`
     }
   }
 `;
-
 export class BlogPosts extends Component {
   render() {
     return (

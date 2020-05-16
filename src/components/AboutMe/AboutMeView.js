@@ -52,7 +52,7 @@ const Name = styled.button.attrs({
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
 
   padding: 0;
   &:hover {
@@ -80,6 +80,7 @@ const Quote = styled(Blockquote).attrs({
 })`
   margin-left: unset;
   color: ${fontColor};
+  font-size: ${rhythm(0.65)};
   border-left-color: ${fontColor};
   margin-bottom: 1rem;
 `;

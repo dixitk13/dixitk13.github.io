@@ -1,1 +1,2 @@
-export * from "./BlogPostsViewContainer";
+export * from "./BlogWrapperView";
+export * from "./BlogWrapper";

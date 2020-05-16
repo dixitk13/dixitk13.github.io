@@ -33,8 +33,7 @@
     "react-typography": "^0.16.19",
     "styled-components": "^5.1.0",
     "styled-theming": "^2.2.0",
-    "typography": "^0.16.19",
-    "typography-theme-de-young": "^0.16.19"
+    "typography": "^0.16.19"
   },
   "repository": {
     "type": "git",

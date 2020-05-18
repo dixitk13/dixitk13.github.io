@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import styled from "styled-components";
 
 import { BlogWrapper } from "../common";
-import { rhythm, device } from "../../../utils";
+import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
 
 export default function BlogPostTemplate({ data }) {
@@ -17,9 +17,9 @@ export default function BlogPostTemplate({ data }) {
       <BlogMainArticle>
         <BlogHeader>
           <BlogTitle>{title}</BlogTitle>
-          <small>
+          <p>
             Last updated: {date} • {timeToRead} min read
-          </small>
+          </p>
         </BlogHeader>
         <BlogBody dangerouslySetInnerHTML={{ __html: html }} />
       </BlogMainArticle>
@@ -32,17 +32,29 @@ const BlogMainArticle = styled.main`
   flex-direction: column;
   align-items: center;
   margin: 0;
-
   width: 100%;
 `;
 
-const BlogHeader = styled.div`
-  padding: ${rhythm(1)} 0;
+const BlogHeader = styled.div.attrs({
+  tabIndex: 0,
+})`
+  padding: ${rhythm(1)} 0 0 0;
   width: 100%;
   text-align: center;
-  small {
+
+  p {
     opacity: 0.8;
     font-size: ${rhythm(0.75)};
+    &:after {
+      content: "";
+      margin: ${rhythm(1)} auto;
+      display: block;
+      width: 200px;
+      height: 2px;
+      border-radius: 50%;
+      background-color: ${fontColor};
+      opacity: 0.4;
+    }
   }
 `;
 
@@ -54,6 +66,9 @@ const BlogTitle = styled.h1`
 const BlogBody = styled.article`
   font-size: ${rhythm(0.75)};
   width: 100%;
+  a {
+    color: ${fontColor};
+  }
   code {
     font-size: ${rhythm(0.75)};
   }

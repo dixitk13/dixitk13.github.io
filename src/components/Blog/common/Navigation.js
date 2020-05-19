@@ -46,7 +46,6 @@ export const Nav = styled.nav`
 `;
 
 export const Navigation = ({ background }) => {
-  console.log(">>: Navigation -> background", background);
   return (
     <Nav background={background}>
       <ul>

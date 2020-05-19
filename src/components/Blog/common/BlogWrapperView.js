@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "gatsby";
 
 import { device, rhythm } from "../../../utils";
 import {
   entireBackground,
   entireBackgroundImage,
   fontColor,
-  fontHover,
 } from "../../../styles";
 import dixitk13 from "../../../../static/img/dixitk13.jpg";
 import { CircularImage } from "../../../common";
-import { Link } from "gatsby";
+import { Navigation } from "./Navigation";
 
 // TODO: Might be worth to invert this selector vs screen media
 export const BlogWrapperView = styled.div`
@@ -79,27 +79,6 @@ const FloatingThemeButton = styled.span`
   position: absolute;
 `;
 
-const Navigation = styled.nav`
-  ul {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-    list-style: none;
-  }
-  li {
-    padding: ${rhythm(1)};
-  }
-  a {
-    margin: 0;
-    font-size: 1.5rem;
-    color: ${fontColor};
-    text-decoration: none;
-    &:hover {
-      color: ${fontHover};
-    }
-  }
-`;
-
 export const BlogHeaderView = (props) => {
   return (
     <>
@@ -112,20 +91,7 @@ export const BlogHeaderView = (props) => {
           <span>Software Engineer</span>
         </BlogName>
       </BlogHeading>
-      <Navigation>
-        <ul>
-          <li>
-            <Link to="/" title="Home">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/blog" title="Articles">
-              Articles
-            </Link>
-          </li>
-        </ul>
-      </Navigation>
+      <Navigation />
       <FloatingThemeButton>{props && props.children}</FloatingThemeButton>
     </>
   );

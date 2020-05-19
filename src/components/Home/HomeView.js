@@ -19,7 +19,7 @@ export const HomeViewContainer = styled.div`
   background-color: ${entireBackground};
   background: ${entireBackgroundImage};
   color: ${fontColor};
-  padding: ${rhythm(0.75)};
+  padding: 0 ${rhythm(0.75)};
 
   @media ${device.screen4k} {
     height: 100vh;

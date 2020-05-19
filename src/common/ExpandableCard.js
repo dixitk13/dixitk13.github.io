@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { device, rhythm } from "../utils";
 import {
@@ -183,6 +183,7 @@ export const CardContainer = styled.article`
       ${borderColor};
   }
 `;
+
 // TODO: some project titles are two liners even though there's space
 export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   tabIndex: 0,
@@ -225,7 +226,7 @@ export const Body = styled.article.attrs({ tabIndex: 0 })`
 `;
 
 /* Normal Card Classes */
-export const Card = styled.li.attrs(({ active }) => ({
+export const Card = styled.li.attrs(({ active, open }) => ({
   role: "listitem",
   tabIndex: active ? -1 : 0,
 }))`
@@ -272,16 +273,15 @@ export const Card = styled.li.attrs(({ active }) => ({
       margin-top: 20px;
     }
   }
-
-  // if some card is active this card isn't open then opacity 0.5
   ${({ active, open }) =>
-    active && !open
-      ? `
-        opacity: 0.5;
-        box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
-        &:hover {
-          transform: unset;
-        }
-        `
-      : ``};
+    active &&
+    !open &&
+    css`
+      opacity: 0.5;
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 2px;
+      &:hover {
+        transform: unset;
+      }
+    `};
+  /** ^^ if some card is active this card isn't open then opacity 0.5 */
 `;

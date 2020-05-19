@@ -1,7 +1,7 @@
 ---
 title: "Simple Countdown Timer"
 date: "2019-04-24"
-path: "/typescript-discriminator"
+path: "/simple-count-downtimer"
 type: "blog"
 ---
 

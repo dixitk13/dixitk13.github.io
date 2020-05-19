@@ -1,10 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-// TODO: fix import for Blog folder
-import { BlogPosts } from "../components/Blog/BlogPosts";
+import { BlogPosts, BlogWrapper } from "../components/Blog";
 import { SiteHelmet } from "../components/Layout";
-import { BlogWrapper } from "../components/Blog/common";
 
 const blog = ({ data }) => {
   return (

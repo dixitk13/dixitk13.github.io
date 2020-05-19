@@ -2,18 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-// import { Blockquote } from "../../../common";
 import { BlogHeading } from "../common";
 import { device } from "../../../utils";
 import { fontColor, background, boxShadow, fontHover } from "../../../styles";
 
 const Blogs = styled.main``;
-// const BlogAside = styled.aside`
-//   margin: 0;
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-// `;
 
 const SmallBlogItem = styled.article`
   font-size: 30px;
@@ -27,6 +20,9 @@ const SmallBlogItem = styled.article`
 
   &:hover {
     transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateZ(-12px);
   }
   p {
     font-size: 18px;
@@ -66,9 +62,6 @@ export const BlogPostsView = ({ blogs }) => {
 
   return (
     <>
-      {/* <BlogAside>
-        <Blockquote>Just another Software Engineer</Blockquote>
-      </BlogAside> */}
       <Blogs>
         {blogs &&
           blogs.map(({ node }) => {

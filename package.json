@@ -14,8 +14,12 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
+    "@mdx-js/mdx": "^1.6.1",
+    "@mdx-js/react": "^1.6.1",
     "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.21.25",
+    "gatsby-plugin-catch-links": "^2.3.1",
+    "gatsby-plugin-mdx": "^1.2.7",
     "gatsby-plugin-react-helmet": "^3.3.1",
     "gatsby-plugin-styled-components": "^3.3.1",
     "gatsby-plugin-typography": "^2.5.1",
@@ -29,8 +33,7 @@
     "react-typography": "^0.16.19",
     "styled-components": "^5.1.0",
     "styled-theming": "^2.2.0",
-    "typography": "^0.16.19",
-    "typography-theme-de-young": "^0.16.19"
+    "typography": "^0.16.19"
   },
   "repository": {
     "type": "git",

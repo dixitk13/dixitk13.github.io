@@ -2,6 +2,7 @@
 title: "My Internship @ Genesys"
 date: "2015-04-04"
 link: "https://www.linkedin.com/company/genesys/"
+type: "project"
 tags:
   - logstash
   - linux

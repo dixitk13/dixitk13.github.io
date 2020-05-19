@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { rhythm } from "../../utils/typography";
+import { rhythm } from "../../utils";
 
 const Section = styled.section`
   display: flex;
@@ -11,17 +11,18 @@ const Section = styled.section`
 `;
 
 const Text = styled.span`
-  font-size: ${rhythm(1)};
+  font-size: ${rhythm(3)};
   font-weight: 500;
   display: block;
   border-bottom: 1px solid #eaeaea;
   text-align: center;
   padding-bottom: ${rhythm(1)};
-  width: 100px;
+  width: 200px;
+  color: #f61212;
 `;
 
 const SubText = styled.p`
-  font-size: ${rhythm(0.5)};
+  font-size: ${rhythm(2)};
   font-weight: 400;
   margin: 20px 0 0 0;
 `;

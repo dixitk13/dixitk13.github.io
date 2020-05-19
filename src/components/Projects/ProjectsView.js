@@ -5,7 +5,7 @@ import { device } from "../../utils/device";
 import ProjectCard from "./ProjectCard";
 
 export default ({ data, cardNumber, ...rest }) => {
-  const { edges } = data.allMarkdownRemark;
+  const { edges } = data.projects;
 
   return (
     <MainContainer>

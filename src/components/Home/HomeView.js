@@ -1,22 +1,26 @@
+import React, { Component } from "react";
 import styled from "styled-components";
 
-import { rhythm } from "../../utils/typography";
-import { device } from "../../utils/device";
+import Projects from "../Projects";
+import AboutMe from "../AboutMe";
+// import Cubbles from "../components/Cubbles";
+
+import { rhythm, device } from "../../utils";
 import {
   entireBackground,
   entireBackgroundImage,
   fontColor,
 } from "../../styles";
 
-export const ContainerView = styled.div`
+export const HomeViewContainer = styled.div`
   margin: 0;
   display: flex;
   justify-content: center;
   background-color: ${entireBackground};
   background: ${entireBackgroundImage};
   color: ${fontColor};
-  padding: ${rhythm(0.75)};
-  transition: all 0.3s ease-all;
+  padding: 0 ${rhythm(0.75)};
+
   @media ${device.screen4k} {
     height: 100vh;
   }
@@ -28,3 +32,14 @@ export const ContainerView = styled.div`
     overflow-x: hidden;
   }
 `;
+
+export class HomeView extends Component {
+  render() {
+    return (
+      <HomeViewContainer>
+        <AboutMe />
+        <Projects />
+      </HomeViewContainer>
+    );
+  }
+}

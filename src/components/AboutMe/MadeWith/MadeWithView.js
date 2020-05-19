@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { IconDict } from "../../../../static/svg";
+import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
-
 const items = [
   { name: "gatsby", url: "https://www.gatsbyjs.org/" },
   { name: "react", url: "https://reactjs.org/" },
@@ -67,6 +67,7 @@ const Title = styled.button`
   border: none;
   background: none;
   color: ${fontColor};
+  font-size: ${rhythm(0.65)};
 `;
 
 const MadeWithView = () => {

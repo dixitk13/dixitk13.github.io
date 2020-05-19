@@ -1,17 +1,16 @@
 import React from "react";
-import { rhythm } from "../../utils/typography";
 import styled from "styled-components";
 
 import dixitk13 from "../../../static/img/dixitk13.jpg";
 
-import { device } from "../../utils/device";
-import { background, boxShadow, fontColor, fontHover } from "../../styles";
-import Logos from "./Logos";
-import DownloadButtons from "./DownloadButtons";
 import RealFlex from "./RealFlex";
+import Logos from "./Logos";
 import MadeWith from "./MadeWith";
-
+import DownloadButtons from "./DownloadButtons";
+import { background, boxShadow, fontColor, fontHover } from "../../styles";
 import { polygons } from "../../common/animations";
+import { Blockquote } from "../../common";
+import { device, rhythm } from "../../utils";
 
 const AboutMeFlex = styled.aside.attrs({
   "aria-label": "About me",
@@ -53,11 +52,9 @@ const Name = styled.button.attrs({
   font-size: ${rhythm(1.5)};
   margin: 0 0 ${rhythm(0.5)} 0;
   cursor: pointer;
-  font-weight: 500;
-  background: none;
-  border: none;
+  font-weight: 600;
+
   padding: 0;
-  font-family: "Alegreya Sans", sans-serif;
   &:hover {
     color: ${fontHover};
   }
@@ -74,14 +71,16 @@ const Image = styled.img.attrs({
   margin-bottom: 1rem;
   background-size: cover;
   clip-path: polygon(0, 0);
-  animation: ${polygons} 60s infinite;
+  // TODO: uncomment before deployment
+  // animation: ${polygons} 60s infinite;
 `;
 
-const Quote = styled.blockquote.attrs({
+const Quote = styled(Blockquote).attrs({
   tabIndex: 0,
 })`
   margin-left: unset;
   color: ${fontColor};
+  font-size: ${rhythm(0.65)};
   border-left-color: ${fontColor};
   margin-bottom: 1rem;
 `;

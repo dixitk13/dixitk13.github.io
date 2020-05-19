@@ -9,7 +9,7 @@ const SwitchViewContainer = styled(SimpleButton).attrs({
 export const SwitchView = ({ selected, children, handleClick, toggleOn }) => {
   const handleClicks = () => {
     handleClick();
-    toggleOn();
+    toggleOn && toggleOn();
   };
   return (
     <SwitchViewContainer selected={selected} onClick={handleClicks}>

@@ -2,6 +2,7 @@
 title: "What I did @ Cisco"
 date: "2019-01-01"
 link: "https://cafy.io"
+type: "project"
 tags:
   - react
   - redux

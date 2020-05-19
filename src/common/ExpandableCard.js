@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { rhythm } from "../utils/typography";
-import { device } from "../utils/device";
+import styled, { css } from "styled-components";
+
+import { device, rhythm } from "../utils";
 import {
   background,
   expandedCardContent,
@@ -48,7 +48,7 @@ export const Expander = styled.div.attrs(({ cardId, open }) => ({
         margin-top: 30px;
         opacity: 1;
         z-index: 10;
-        padding: ${rhythm(1)};       
+        padding: ${rhythm(1)} ${rhythm(1)} ${rhythm(0.5)} ${rhythm(1)};
         `
       : `display: none;`};
 
@@ -62,6 +62,7 @@ export const ExpanderBody = styled.article.attrs({
 })`
   font-size: ${rhythm(0.65)}; // <- ya right
   align-self: start;
+  margin-top: 20px; // duh
 `;
 
 export const ExpanderClose = styled.button`
@@ -109,7 +110,7 @@ export const Tags = styled.ul.attrs({
   display: flex;
   font-size: ${rhythm(0.5)};
   justify-content: center;
-  margin-left: 0.45rem;
+  margin: 21px 0 0 0;
   width: 100%;
 
   @media ${device.mobile} {
@@ -127,7 +128,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
   color: ${fontColor};
   background: ${background};
   border: 0.5px solid ${fontColor};
-  line-height: 15px;
+  line-height: 13px;
   max-height: 21px;
   min-height: 21px;
   white-space: nowrap;
@@ -183,6 +184,7 @@ export const CardContainer = styled.article`
   }
 `;
 
+// TODO: some project titles are two liners even though there's space
 export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   tabIndex: 0,
   id: `projectcard__title_${cardId}`,
@@ -194,14 +196,12 @@ export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   justify-content: space-between;
   width: 100%;
   min-height: 40px; // <- debatable CSS
-  border: none;
-  background: none;
 
   color: ${fontColor};
   margin: 10px 0;
-  font-size: ${rhythm(0.75)};
+  font-size: ${rhythm(0.85)};
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 550;
   &:hover {
     color: ${fontHover};
   }
@@ -220,13 +220,13 @@ export const ViewMore = styled(Tag)`
 `;
 
 export const Body = styled.article.attrs({ tabIndex: 0 })`
-  font-size: ${rhythm(0.5)};
+  font-size: ${rhythm(0.65)};
   text-align: left;
   min-height: 85px;
 `;
 
 /* Normal Card Classes */
-export const Card = styled.li.attrs(({ active }) => ({
+export const Card = styled.li.attrs(({ active, open }) => ({
   role: "listitem",
   tabIndex: active ? -1 : 0,
 }))`
@@ -260,7 +260,8 @@ export const Card = styled.li.attrs(({ active }) => ({
 
     // only on desktop
     &:hover {
-      transform: ${(props) => (props.open ? "" : "scale(0.95)")};
+      // transform: ${(props) => (props.open ? "" : "scale(0.99)")};
+      transform: ${(props) => (props.open ? "" : "translateY(-2px)")};
     }
   }
 
@@ -272,16 +273,15 @@ export const Card = styled.li.attrs(({ active }) => ({
       margin-top: 20px;
     }
   }
-
-  // if some card is active this card isn't open then opacity 0.5
   ${({ active, open }) =>
-    active && !open
-      ? `
-        opacity: 0.5;
-        box-shadow: rgba(0,0,0,0.08) 0px 2px 2px;
-        &:hover {
-          transform: unset;
-        }
-        `
-      : ``};
+    active &&
+    !open &&
+    css`
+      opacity: 0.5;
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 2px;
+      &:hover {
+        transform: unset;
+      }
+    `};
+  /** ^^ if some card is active this card isn't open then opacity 0.5 */
 `;

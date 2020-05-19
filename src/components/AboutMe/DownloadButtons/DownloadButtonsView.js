@@ -5,6 +5,7 @@ import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2019.pdf";
 import Switch from "../../Switch";
 import { SimpleButton } from "../../../common/SimpleButton";
 
+// TODO: this download button looks a bit round in mobile
 const DownloadButton = styled(SimpleButton)`
   text-align: center;
 

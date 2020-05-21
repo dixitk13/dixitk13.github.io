@@ -15,7 +15,6 @@ export const themesConstants = {
   1: "dark",
   2: "love",
 };
-
 export const invertedThemeConstants = invert(themesConstants);
 export const getInitialTheme = () => {
   // windowGlobal because Gatsby ¯\_(ツ)_/¯

@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import ErrorPageView from "../components/Error/ErrorPageView";
 
-class ErrorPage extends Component {
-  render() {
-    return <ErrorPageView />;
-  }
-}
+const ErrorPage = () => {
+  return <ErrorPageView />;
+};
 
 export default ErrorPage;

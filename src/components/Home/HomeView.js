@@ -33,12 +33,11 @@ export const HomeViewContainer = styled.div`
   }
 `;
 
-const scrollToRef = (offsetTop) => window.scrollTo(0, offsetTop);
 export const HomeView = () => {
   const myRef = useRef(null);
+
   useEffect(() => {
-    console.log(">>: HomeView -> offsetTop", myRef.current?.offsetTop);
-    scrollToRef(myRef.current?.offsetTop);
+    setTimeout(() => window.scrollTo(0, myRef.current?.offsetTop), 100);
   }, []);
 
   return (

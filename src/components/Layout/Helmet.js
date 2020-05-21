@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+
 import favicon from "../../../static/favicon.ico";
 
 export const SiteHelmet = ({ siteMetadata }) => {

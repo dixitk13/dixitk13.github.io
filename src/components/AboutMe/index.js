@@ -3,20 +3,20 @@ import AboutMeView from "./AboutMeView";
 
 const AboutMe = () => {
   const [on, setOn] = useState(false);
-  let toggleHeart = undefined;
-
-  useEffect(() => {
-    //noop
-    return clearTimeout(toggleHeart);
-  }, [toggleHeart]);
+  let timeoutId = undefined;
 
   const toggleOn = () => {
     setOn(true);
 
-    toggleHeart = setTimeout(() => {
+    timeoutId = setTimeout(() => {
       setOn(false);
     }, 1000);
   };
+
+  useEffect(() => {
+    //noop
+    return () => clearTimeout(timeoutId);
+  }, [timeoutId]);
 
   return <AboutMeView on={on} toggleOn={toggleOn} />;
 };

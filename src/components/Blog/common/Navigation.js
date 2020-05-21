@@ -9,10 +9,11 @@ import {
 } from "../../../styles";
 import { Link } from "gatsby";
 import { rhythm, device } from "../../../utils";
+import { offset } from "../../../common";
 
 export const Nav = styled.nav`
   color: ${fontColor};
-  height: 50px;
+  height: ${offset}px;
   ${(props) =>
     props.background &&
     css`

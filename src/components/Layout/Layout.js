@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { LayoutContext, getInitialTheme } from "./LayoutContext";
 import { ThemeProvider } from "styled-components";
+
+import { LayoutContext, getInitialTheme } from "./LayoutContext";
+import { offset } from "../../common";
 
 export class Layout extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ export class Layout extends Component {
   }
 
   handleScroll = () => {
-    this.setState({ y: window.scrollY - 50 });
+    this.setState({ y: window.scrollY - offset });
   };
 
   themeToggle = (theme) => {

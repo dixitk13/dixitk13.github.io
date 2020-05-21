@@ -45,11 +45,12 @@ const DownloadButtonsView = ({ theme, toggleOn }) => (
     <DownloadButton
       type="button"
       ariaLabel="Download Resume"
-      target="_blank"
+      onClick={() => window.open(resume)}
       data-hover="Download"
-      href={resume}
-      as="a"
-      rel="noopener noreferrer"
+      // target="_blank"
+      // href={resume}
+      // as="a"
+      // rel="noopener noreferrer"
     >
       Resume
     </DownloadButton>

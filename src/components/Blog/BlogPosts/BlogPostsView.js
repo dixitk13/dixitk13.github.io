@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-import { BlogHeading } from "../common";
+import { BlogHeader } from "../common";
 import { device } from "../../../utils";
 import { fontColor, background, boxShadow, fontHover } from "../../../styles";
 
@@ -29,13 +29,14 @@ const SmallBlogItem = styled.article`
   }
 `;
 
-const PostHeading = styled(BlogHeading)`
+const PostHeading = styled(BlogHeader)`
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
 
   @media ${device.mobile} {
-    flex-direction: column;
+    min-height: unset;
+    flex-direction: row;
     align-items: flex-start;
   }
 

@@ -22,7 +22,7 @@ export class Layout extends Component {
   }
 
   handleScroll = () => {
-    this.setState({ y: window.scrollY });
+    this.setState({ y: window.scrollY - 50 });
   };
 
   themeToggle = (theme) => {

@@ -12,6 +12,7 @@ import { rhythm, device } from "../../../utils";
 
 export const Nav = styled.nav`
   color: ${fontColor};
+  height: 50px;
   ${(props) =>
     props.background &&
     css`
@@ -20,8 +21,8 @@ export const Nav = styled.nav`
     `};
 
   display: flex;
-
   justify-content: center;
+
   ul {
     display: flex;
     width: 200px;

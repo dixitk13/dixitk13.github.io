@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { CubblesView } from "./CubblesView";
 
-class Cubbles extends Component {
-  render() {
-    return <CubblesView />;
-  }
-}
+const Cubbles = () => {
+  return <CubblesView />;
+};
 
 export default Cubbles;

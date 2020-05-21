@@ -30,8 +30,7 @@ export const BlogWrapperView = styled.div`
       font-size: ${rhythm(1.5)};
     }
   }
-  // first direct header class
-  > header,
+
   main {
     width: 40vw;
     max-width: 40vw;
@@ -39,8 +38,7 @@ export const BlogWrapperView = styled.div`
       max-width: 100%;
       width: 100%;
     }
-  }
-  main {
+
     @media ${device.screen4k} {
       height: 100vh;
     }
@@ -49,12 +47,19 @@ export const BlogWrapperView = styled.div`
     }
   }
 `;
-export const BlogHeading = styled.header`
+export const BlogHeader = styled.header`
+  position: relative;
+  display: flex;
+  flex-direction: column;
   font-size: 1.8rem;
   margin: 20px 5px 5px 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* width: 40vw; */
+  max-width: 40vw;
+  width: 100%;
+  @media ${device.mobile} {
+    max-width: 100%;
+    min-height: 160px;
+  }
 `;
 
 const BlogName = styled.div`
@@ -73,6 +78,11 @@ const BlogName = styled.div`
   }
 `;
 
+const BlogHead = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const FloatingThemeButton = styled.span`
   top: 10px;
   right: 10px;
@@ -82,16 +92,18 @@ const FloatingThemeButton = styled.span`
 export const BlogHeaderView = (props) => {
   return (
     <>
-      <BlogHeading>
-        <CircularImage src={dixitk13} />
-        <BlogName>
-          <Link as="h1" to="/">
-            Dixit
-          </Link>
-          <span>Software Engineer</span>
-        </BlogName>
-      </BlogHeading>
-      <Navigation />
+      <BlogHeader>
+        <BlogHead>
+          <CircularImage src={dixitk13} />
+          <BlogName>
+            <Link as="h1" to="/">
+              Dixit
+            </Link>
+            <span>Software Engineer</span>
+          </BlogName>
+        </BlogHead>
+        <Navigation />
+      </BlogHeader>
       <FloatingThemeButton>{props && props.children}</FloatingThemeButton>
     </>
   );

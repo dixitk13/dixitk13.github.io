@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import Projects from "../Projects";
@@ -33,13 +33,17 @@ export const HomeViewContainer = styled.div`
   }
 `;
 
-export class HomeView extends Component {
-  render() {
-    return (
-      <HomeViewContainer>
-        <AboutMe />
-        <Projects />
-      </HomeViewContainer>
-    );
-  }
-}
+export const HomeView = () => {
+  const myRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => window.scrollTo(0, myRef.current?.offsetTop), 100);
+  }, []);
+
+  return (
+    <HomeViewContainer ref={myRef}>
+      <AboutMe />
+      <Projects />
+    </HomeViewContainer>
+  );
+};

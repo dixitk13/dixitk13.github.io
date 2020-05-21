@@ -9,9 +9,11 @@ import {
 } from "../../../styles";
 import { Link } from "gatsby";
 import { rhythm, device } from "../../../utils";
+import { offset } from "../../../common";
 
 export const Nav = styled.nav`
   color: ${fontColor};
+  height: ${offset}px;
   ${(props) =>
     props.background &&
     css`
@@ -20,8 +22,8 @@ export const Nav = styled.nav`
     `};
 
   display: flex;
-
   justify-content: center;
+
   ul {
     display: flex;
     width: 200px;
@@ -46,7 +48,6 @@ export const Nav = styled.nav`
 `;
 
 export const Navigation = ({ background }) => {
-  console.log(">>: Navigation -> background", background);
   return (
     <Nav background={background}>
       <ul>

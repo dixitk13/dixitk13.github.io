@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ProjectsView from "./ProjectsView";
 import { StaticQuery, graphql } from "gatsby";
 const getAllProjects = graphql`
@@ -25,30 +25,24 @@ const getAllProjects = graphql`
   }
 `;
 
-class Projects extends Component {
-  state = {
-    cardNumber: -1,
-  };
+const Projects = () => {
+  const [cardNumber, setCardNumber] = useState(-1);
 
-  toggleOpen = (newCardNumber) =>
-    this.setState(({ cardNumber }) => ({
-      cardNumber: cardNumber === newCardNumber ? -1 : newCardNumber,
-    }));
+  const toggleOpen = (newCardNumber) =>
+    setCardNumber(cardNumber === newCardNumber ? -1 : newCardNumber);
 
-  render() {
-    return (
-      <StaticQuery
-        query={getAllProjects}
-        render={(data) => (
-          <ProjectsView
-            cardNumber={this.state.cardNumber}
-            toggleOpen={this.toggleOpen}
-            data={data}
-          />
-        )}
-      />
-    );
-  }
-}
+  return (
+    <StaticQuery
+      query={getAllProjects}
+      render={(data) => (
+        <ProjectsView
+          cardNumber={cardNumber}
+          toggleOpen={toggleOpen}
+          data={data}
+        />
+      )}
+    />
+  );
+};
 
 export default Projects;

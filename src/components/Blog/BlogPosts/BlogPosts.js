@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 
 import { BlogPostsView } from "./BlogPostsView";
@@ -27,15 +27,13 @@ export const getAllBlogs = graphql`
     }
   }
 `;
-export class BlogPosts extends Component {
-  render() {
-    return (
-      <StaticQuery
-        query={getAllBlogs}
-        render={({ blogs }) => {
-          return <BlogPostsView blogs={blogs.edges} />;
-        }}
-      />
-    );
-  }
-}
+export const BlogPosts = () => {
+  return (
+    <StaticQuery
+      query={getAllBlogs}
+      render={({ blogs }) => {
+        return <BlogPostsView blogs={blogs.edges} />;
+      }}
+    />
+  );
+};

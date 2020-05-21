@@ -1,24 +1,24 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import AboutMeView from "./AboutMeView";
 
-export default class AboutMe extends Component {
-  state = {
-    on: false
-  };
+const AboutMe = () => {
+  const [on, setOn] = useState(false);
+  let timeoutId = undefined;
 
-  toggleOn = () => {
-    this.setState(({ on }) => ({ on: !on }));
+  const toggleOn = () => {
+    setOn(true);
 
-    this.toggleHeart = setTimeout(() => {
-      this.setState(({ on }) => ({ on: !on }));
+    timeoutId = setTimeout(() => {
+      setOn(false);
     }, 1000);
   };
 
-  componentWillUnmount() {
-    clearTimeout(this.toggleHeart);
-  }
+  useEffect(() => {
+    //noop
+    return () => clearTimeout(timeoutId);
+  }, [timeoutId]);
 
-  render() {
-    return <AboutMeView on={this.state.on} toggleOn={this.toggleOn} />;
-  }
-}
+  return <AboutMeView on={on} toggleOn={toggleOn} />;
+};
+
+export default AboutMe;

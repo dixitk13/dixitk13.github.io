@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import MadeWithView from "./MadeWithView";
 
-class MadeWith extends Component {
-  render() {
-    return <MadeWithView />;
-  }
-}
+const MadeWith = () => {
+  return <MadeWithView />;
+};
 
 export default MadeWith;

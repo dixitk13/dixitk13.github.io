@@ -10,7 +10,7 @@ const Blogs = styled.main``;
 
 const SmallBlogItem = styled.article`
   font-size: 30px;
-  margin: 20px auto;
+  /* margin: 20px auto; */
   padding: 20px;
   border-radius: 3px;
   /* background: ${background}; */

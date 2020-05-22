@@ -7,7 +7,7 @@ export const CircularImage = styled.img.attrs({
   border-radius: 50%;
   height: 80px;
   width: 80px;
-  margin: 10px;
+  margin: 10px 30px 10px 20px;
   align-self: center;
   margin-bottom: 1rem;
   background-size: cover;

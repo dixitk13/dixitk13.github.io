@@ -10,11 +10,11 @@ const Blogs = styled.main``;
 
 const SmallBlogItem = styled.article`
   font-size: 30px;
-  margin: 20px auto;
+  /* margin: 20px auto; */
   padding: 20px;
   border-radius: 3px;
-  background: ${background};
-  box-shadow: ${boxShadow};
+  /* background: ${background}; */
+  /* box-shadow: ${boxShadow}; */
   transition: all 0.3s ease;
   cursor: pointer;
 
@@ -30,32 +30,40 @@ const SmallBlogItem = styled.article`
 `;
 
 const PostHeading = styled(BlogHeader)`
-  margin: 20px 0;
+  margin: 20px 0 10px 0;
   display: flex;
   justify-content: space-between;
-
-  @media ${device.mobile} {
-    min-height: unset;
-    flex-direction: row;
-    align-items: flex-start;
-  }
 
   a {
     margin: 0;
     padding: 0;
-    font-weight: 550;
-    font-size: 1.4rem;
+    font-weight: 900;
+    font-size: 40px;
     color: ${fontColor};
     text-decoration: none;
+    font-family: "Futura PT", -apple-system, sans-serif;
     &:hover {
       color: ${fontHover};
       cursor: pointer;
-      filter: brightness(1.2);
+      /* filter: brightness(1.2); */
     }
+  }
+  p {
+    margin: 0;
   }
 
   small {
     font-size: 18px;
+  }
+
+  @media ${device.mobile} {
+    min-height: unset;
+    /* flex-direction: row; */
+    /* align-items: flex-start; */
+    a {
+      font-weight: 900;
+      font-size: 27px;
+    }
   }
 `;
 export const BlogPostsView = ({ blogs }) => {

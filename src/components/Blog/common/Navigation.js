@@ -23,6 +23,7 @@ export const Nav = styled.nav`
 
   display: flex;
   justify-content: center;
+  padding-left: 20px;
 
   ul {
     display: flex;

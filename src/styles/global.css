@@ -7,3 +7,45 @@ button {
   border: none;
   background: none;
 }
+/**
+ * overriding gatsby-highlight and the pre classes
+ */
+.gatsby-highlight {
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Overriding the pre classes
+ * 1. remove text-shadow
+ * 2. remove border
+ */
+.gatsby-highlight pre[class*="language-"],
+pre code[class*="language-"] {
+  border: unset;
+  text-shadow: unset;
+  box-shadow: unset;
+}
+
+pre[class*="language-"],
+:not(pre) > code[class*="language-"] {
+  background: #292c34 !important;
+  border: 0.1px solid #c0c0be !important;
+  box-shadow: unset !important;
+  border-radius: 3px !important;
+  text-shadow: unset !important;
+}
+
+/* Prompt for all users */
+.command-line-prompt > span[data-user]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] $";
+}
+
+/* Prompt for root */
+.command-line-prompt > span[data-user="root"]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] #";
+}
+
+.command-line-prompt > span[data-prompt]:before {
+  content: attr(data-prompt);
+}

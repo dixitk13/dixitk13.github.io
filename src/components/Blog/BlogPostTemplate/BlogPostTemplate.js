@@ -60,12 +60,20 @@ const BlogHeader = styled.div.attrs({
 
 const BlogTitle = styled.h1`
   color: ${fontColor};
-  font-weight: 700;
+  font-weight: 900;
+  font-size: 40px;
+  font-family: "Futura PT", -apple-system, sans-serif;
 `;
 
 const BlogBody = styled.article`
   font-size: ${rhythm(0.75)};
   width: 100%;
+  p {
+    /* display: flex; */
+    img {
+      margin: 0 auto;
+    }
+  }
   a {
     color: ${fontColor};
   }

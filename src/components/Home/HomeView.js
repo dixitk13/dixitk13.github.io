@@ -37,7 +37,7 @@ export const HomeView = () => {
   const myRef = useRef(null);
 
   useEffect(() => {
-    setTimeout(() => window.scrollTo(0, myRef.current?.offsetTop), 100);
+    setTimeout(() => window.scrollTo(0, myRef.current?.offsetTop), 1000);
   }, []);
 
   return (

@@ -7,10 +7,10 @@ type: "blog"
 
 Very often we have use-cases where we would like to use a single type `Union Type` but still be sure about the properties inside them.
 
-```{javascript}
+```tsx
 interface Employee {
   name: string;
-	salary: number;
+  salary: number;
 }
 
 interface HumanResource {
@@ -25,7 +25,7 @@ But under the hood Typescript union's are more of "common" properties inside the
 
 So when you try and use it like:
 
-```{javascript}
+```tsx
 let helloPerson = (person: Employee | HumanResource): void => {
    console.log(person.<only has properties common to Employee & HumanResource aka name>);
 }
@@ -37,7 +37,7 @@ This is where discriminators come in power-play. Bear with my variable nomenclat
 
 Lets define an enum to contain both the use-cases of Person's we have, calling it `PersonType` and then define a type combining `HumanResource` and `Employee`.
 
-```{javascript}
+```tsx
 enum PersonType { "EMPLOYEE" , "HR" }
 
 interface Employee {

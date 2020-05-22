@@ -1,5 +1,5 @@
 ---
-title: "Simple Countdown Timer"
+title: "Simple countdown timer"
 date: "2019-04-24"
 path: "/simple-count-downtimer"
 type: "blog"
@@ -60,3 +60,9 @@ const Timer = ({ minutes, classNames }) => {
 
 export default Timer
 ```
+
+![count-down-timer](/blog/simple-count-downtimer/count-down-timer.gif)
+
+And below's a codepen link:
+
+https://codepen.io/dixitk13/pen/WNQPKye

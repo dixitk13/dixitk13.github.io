@@ -51,6 +51,7 @@ export const BlogHeader = styled.header`
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   font-size: 1.8rem;
   margin: 20px 5px 5px 5px;
   /* width: 40vw; */

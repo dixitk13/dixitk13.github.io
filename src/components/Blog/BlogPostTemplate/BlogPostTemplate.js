@@ -65,7 +65,9 @@ const BlogTitle = styled.h1`
   font-family: "Futura PT", -apple-system, sans-serif;
 `;
 
-const BlogBody = styled.article`
+const BlogBody = styled.article.attrs({
+  tabIndex: 0,
+})`
   font-size: ${rhythm(0.75)};
   width: 100%;
   p {

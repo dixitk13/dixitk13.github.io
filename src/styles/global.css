@@ -7,6 +7,8 @@ button {
   border: none;
   background: none;
 }
+
+/********* Custom Override Prism Styles *******/
 /**
  * overriding gatsby-highlight and the pre classes
  */
@@ -34,6 +36,12 @@ pre[class*="language-"],
   box-shadow: unset !important;
   border-radius: 3px !important;
   text-shadow: unset !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #f92672 !important; /* monokoi color */
 }
 
 /* Prompt for all users */

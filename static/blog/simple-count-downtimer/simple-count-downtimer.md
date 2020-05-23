@@ -12,7 +12,7 @@ the code just uses a state called “minutes” which gets initialized with the 
 
 The component accepts minutes till which it must stay alive, converts that into seconds, runs the countdown and then clears the internal logic.
 
-```javascript
+```jsx
 <Timer classNames="time-text" minutes={Number(10)} />
 ```
 

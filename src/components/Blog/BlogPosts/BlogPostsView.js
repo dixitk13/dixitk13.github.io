@@ -10,7 +10,6 @@ const Blogs = styled.main``;
 
 const SmallBlogItem = styled.article`
   font-size: 30px;
-  /* margin: 20px auto; */
   padding: 20px;
   border-radius: 3px;
   /* background: ${background}; */
@@ -45,7 +44,6 @@ const PostHeading = styled(BlogHeader)`
     &:hover {
       color: ${fontHover};
       cursor: pointer;
-      /* filter: brightness(1.2); */
     }
   }
   p {
@@ -58,8 +56,6 @@ const PostHeading = styled(BlogHeader)`
 
   @media ${device.mobile} {
     min-height: unset;
-    /* flex-direction: row; */
-    /* align-items: flex-start; */
     a {
       font-weight: 900;
       font-size: 27px;

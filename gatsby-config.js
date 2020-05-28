@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Dixit's Home`,
-    blog: `Dixit's Blog`,
+    title: `Dixit Keshavbhai Patel`,
+    titleTemplate: "%s · just another software Engineer",
     url: "https://dixitk13.github.io",
+    description: "Dixit's Home",
     image: "/static/img/dixitk13.jpg",
     twitterUsername: "@dixitk13",
   },

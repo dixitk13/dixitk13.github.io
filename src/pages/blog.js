@@ -1,28 +1,15 @@
 import React from "react";
-import { graphql } from "gatsby";
 
 import { BlogPosts, BlogWrapper } from "../components/Blog";
-import { SiteHelmet } from "../components/Layout";
+import { SEO } from "../components/SEO";
 
-const blog = ({ data }) => {
+const blog = () => {
   return (
     <BlogWrapper>
-      <SiteHelmet siteMetadata={data.site.siteMetadata} />
+      <SEO />
       <BlogPosts />
     </BlogWrapper>
   );
 };
-
-export const query = graphql`
-  query querySiteMetaDataBlog {
-    site {
-      siteMetadata {
-        title
-        image
-        twitterUsername
-      }
-    }
-  }
-`;
 
 export default blog;

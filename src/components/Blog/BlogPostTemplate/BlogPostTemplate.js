@@ -1,19 +1,24 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 
 import { BlogWrapper } from "../common";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
+import { SEO } from "../../SEO";
 
 export default function BlogPostTemplate({ data }) {
   const { markdownRemark: post } = data;
-  const { frontmatter, html, timeToRead } = post;
+  const { frontmatter, excerpt, html, timeToRead } = post;
   const { title, date } = frontmatter;
   return (
     <BlogWrapper>
-      <Helmet title={title} />
+      <SEO
+        title={frontmatter.title}
+        description={excerpt || "nothin’"}
+        // pathname={fields.slug}
+        article
+      />
       <BlogMainArticle>
         <BlogHeader>
           <BlogTitle>{title}</BlogTitle>
@@ -101,6 +106,7 @@ export const query = graphql`
         type
         date(formatString: "MMM DD, YYYY")
       }
+      excerpt(truncate: true)
       timeToRead
       html
     }

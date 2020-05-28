@@ -3,6 +3,7 @@ title: "One liner chats?"
 date: "2019-01-10"
 path: "/one-liner-chats"
 type: "blog"
+tags: ["communication", "slack", "chat"]
 ---
 
 The entire world is hooked on messaging and being connected digitally.

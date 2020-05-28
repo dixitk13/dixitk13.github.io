@@ -10,6 +10,16 @@ module.exports = {
   pathPrefix: "/dixitk13.github.io",
   plugins: [
     `gatsby-plugin-react-helmet`,
+    // {
+    //   resolve: `gatsby-plugin-slug-field`,
+    //   options: {
+    //     source: ["id"],
+    //     fieldName: "slug",
+    //     urlSlugOptions: {
+    //       separator: "_",
+    //     },
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

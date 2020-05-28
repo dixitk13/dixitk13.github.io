@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useLocation } from "@reach/router";
 
 import {
   fontColor,
@@ -49,19 +50,28 @@ export const Nav = styled.nav`
 `;
 
 export const Navigation = ({ background }) => {
+  const { pathname } = useLocation();
+
+  const items = [
+    { title: "Home", to: "/" },
+    { title: "Blog", to: "/blog" },
+    { title: "Tags", to: "/tags" },
+  ];
   return (
     <Nav background={background}>
       <ul>
-        <li>
-          <Link to="/" title="Home">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/blog" title="Articles">
-            Articles
-          </Link>
-        </li>
+        {items.map((item) => (
+          <li key={item.to}>
+            <Link
+              to={item.to}
+              title={item.title}
+              partiallyActive={item.to === pathname}
+              activeStyle={{ color: "gray" }}
+            >
+              {item.title}
+            </Link>
+          </li>
+        ))}
       </ul>
     </Nav>
   );

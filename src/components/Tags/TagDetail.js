@@ -1,45 +1,52 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
-
-import { BlogWrapper } from "../Blog";
 import styled from "styled-components";
+import { graphql } from "gatsby";
 
-const TagDetailContainer = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+import { BlogWrapper, BlogItem, NavLink, BlogMain } from "../Blog";
+import { TagListItem } from "../Tags";
+import { rhythm } from "../../utils";
+import { Emojis } from "../../../static/svg/emojis";
+
+const TagDetailMainContainer = styled(BlogMain)`
+  justify-content: flex-start;
   align-items: center;
-  height: 100%;
+  margin: ${rhythm(2)} 0 0 0;
 `;
 
-const TagsSection = styled.div``;
+const AllTagsLink = styled(NavLink)`
+  margin-top: auto;
+  span {
+    margin-left: 6px;
+  }
+`;
 
 export default function TagDetail({ pageContext, data }) {
   const { tag } = pageContext;
   const { edges, totalCount } = data.allMarkdownRemark;
 
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`;
-
   return (
     <BlogWrapper>
-      <TagDetailContainer>
-        <TagsSection>
-          <h3>{tagHeader}</h3>
-          <ul>
-            {edges.map(({ node }) => {
-              const { title, path } = node.frontmatter;
-              return (
-                <li key={path}>
-                  <Link to={path}>{title}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </TagsSection>
-        <Link to="/tags">All tags</Link>
-      </TagDetailContainer>
+      <TagDetailMainContainer>
+        <TagListItem minimal count={totalCount} tagValue={tag} />
+        {edges.map(({ node }, index) => {
+          const { frontmatter, excerpt } = node;
+          const { title, path, date, id } = frontmatter;
+          return (
+            <BlogItem
+              key={`tag-blog-item-${index}`}
+              id={id}
+              path={path}
+              date={date}
+              excerpt={excerpt}
+              title={title}
+            />
+          );
+        })}
+        <AllTagsLink to="/tags">
+          {Emojis["back"]}
+          <span>All tags</span>
+        </AllTagsLink>
+      </TagDetailMainContainer>
     </BlogWrapper>
   );
 }
@@ -54,12 +61,15 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
+          id
           frontmatter {
             title
             tags
             link
             path
+            date(formatString: "MMM DD, YYYY")
           }
+          excerpt(truncate: true)
         }
       }
     }

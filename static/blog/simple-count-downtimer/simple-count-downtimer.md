@@ -3,7 +3,7 @@ title: "Simple countdown timer"
 date: "2019-04-24"
 path: "/simple-count-downtimer"
 type: "blog"
-tags: ["react", "jsx", "javascript"]
+tags: ["react", "javascript"]
 ---
 
 I was recently trying to make a simple countdown timer which counts from a specific time-interval and “finishes” itself.

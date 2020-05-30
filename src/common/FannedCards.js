@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { FannedImages } from "../../static/fannedImages";
+import styled, { css } from "styled-components";
+import { Icons } from "../../static/svg";
 
 const Item = styled.li.attrs({
   role: "listitem",
@@ -46,31 +46,31 @@ const FanCardContainer = styled.ul.attrs({
   margin: 6px 0;
   &:hover,
   &:focus {
-  
-  ${(props) =>
-    props.three
-      ? `
-      ${Item}:first-child {
-          transform: translateX(45px);
-        }
-        ${Item}:last-child {
-          transform: translateX(-45px);
-        }
-      `
-      : `
-        ${Item}:first-child {
-          transform: translateX(85px);
-        }
-        ${Item}:nth-child(2) {
-          transform: translateX(40px);
-        }
-        ${Item}:nth-last-child(2) {
-          transform: translateX(-40px);
-        }
-        ${Item}:last-child {
-          transform: translateX(-85px);
-        }
-        `}
+    ${({ three }) =>
+      three
+        ? css`
+            ${Item}:first-child {
+              transform: translateX(45px);
+            }
+            ${Item}:last-child {
+              transform: translateX(-45px);
+            }
+          `
+        : css`
+            ${Item}:first-child {
+              transform: translateX(95px);
+            }
+            ${Item}:nth-child (2) {
+              transform: translateX(40px);
+            }
+            ${Item}:nth-last-child (2) {
+              transform: translateX(-40px);
+            }
+            ${Item}:last-child {
+              transform: translateX(-95px);
+            }
+          `}
+  }
 `;
 
 const FannedCards = ({ images }) => {
@@ -80,12 +80,7 @@ const FannedCards = ({ images }) => {
     <FanCardContainer aria-label="Fanned Technology Card Preview" three={three}>
       {images.slice(0, showLength).map((image, i) => (
         <Item three={three} key={`fanned-image-${i}`}>
-          <img
-            alt={image}
-            width="50px"
-            height="50px"
-            src={FannedImages[image]}
-          />
+          <img alt={image} width="50px" height="50px" src={Icons[image]} />
         </Item>
       ))}
     </FanCardContainer>

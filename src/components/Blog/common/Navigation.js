@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { useLocation } from "@reach/router";
+// import { useLocation } from "@reach/router";
 
 import {
   fontColor,
@@ -8,7 +8,7 @@ import {
   entireBackground,
   entireBackgroundImage,
 } from "../../../styles";
-import { Link } from "gatsby";
+import { Link as GatsbyLink } from "gatsby";
 import { rhythm, device } from "../../../utils";
 import { offset } from "../../../common";
 
@@ -25,54 +25,80 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: center;
   padding-left: 20px;
+`;
 
-  ul {
-    display: flex;
-    width: 200px;
-    margin: 0;
-    list-style: none;
-    @media ${device.mobile} {
-      width: unset;
-    }
+const NavUnorderedList = styled.ul`
+  display: flex;
+  width: 200px;
+  margin: 0;
+  list-style: none;
+  @media ${device.mobile} {
+    width: unset;
   }
+
   li {
     padding: ${rhythm(0.5)} ${rhythm(1)} 0 0;
+    font-size: 21px;
   }
-  a {
+  .active-nav-link {
     margin: 0;
-    font-size: 1.5rem;
-    color: ${fontColor};
+    color: gray;
     text-decoration: none;
-    &:hover {
-      color: ${fontHover};
-    }
+    text-decoration: none !important;
+  }
+`;
+
+export const NavLink = styled(GatsbyLink)`
+  margin: 0;
+  color: ${fontColor};
+  font-size: 21px;
+  text-decoration: none;
+
+  &:hover {
+    color: ${fontHover};
   }
 `;
 
 export const Navigation = ({ background }) => {
-  const { pathname } = useLocation();
-
   const items = [
     { title: "Home", to: "/" },
     { title: "Blog", to: "/blog" },
     { title: "Tags", to: "/tags" },
   ];
+  const activeClassNames = { className: "active-nav-link" };
+
+  const active = (pathname, link) => {
+    // base condition
+    if (link === pathname) return activeClassNames;
+
+    // condition for tag paths true
+    if (pathname.includes("/tags") && link === "/tags") return activeClassNames;
+
+    // condition to make all blog paths true
+    if (
+      !pathname.includes("/tags") &&
+      !items.map((x) => x.to).includes(pathname) &&
+      link === "/blog"
+    )
+      return activeClassNames;
+
+    return {};
+  };
   return (
     <Nav background={background}>
-      <ul>
-        {items.map((item) => (
-          <li key={item.to}>
-            <Link
+      <NavUnorderedList>
+        {items.map((item, index) => (
+          <li key={`nav-link-${item.to}-${index}`}>
+            <NavLink
               to={item.to}
               title={item.title}
-              partiallyActive={item.to === pathname}
-              activeStyle={{ color: "gray" }}
+              getProps={({ location }) => active(location.pathname, item.to)}
             >
               {item.title}
-            </Link>
+            </NavLink>
           </li>
         ))}
-      </ul>
+      </NavUnorderedList>
     </Nav>
   );
 };

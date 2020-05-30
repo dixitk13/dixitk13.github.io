@@ -2,21 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-import { BlogHeader } from "../common";
+import { BlogHeader, BlogMain } from "../common";
 import { device } from "../../../utils";
-import { fontColor, background, boxShadow, fontHover } from "../../../styles";
+import { fontColor, fontHover } from "../../../styles";
 
-const Blogs = styled.main``;
+// const Blogs = styled.main``;
 
-const SmallBlogItem = styled.article`
+const BlogItemArticle = styled.article`
   font-size: 30px;
   padding: 20px;
   border-radius: 3px;
-  /* background: ${background}; */
-  /* box-shadow: ${boxShadow}; */
   transition: all 0.3s ease;
   cursor: pointer;
-
+  width: 100%;
   &:hover {
     transform: translateY(-2px);
   }
@@ -66,22 +64,33 @@ export const BlogPostsView = ({ blogs }) => {
   if (!blogs) return null;
 
   return (
-    <>
-      <Blogs>
-        {blogs &&
-          blogs.map(({ node }) => {
-            const { frontmatter, excerpt, id } = node;
-            return (
-              <SmallBlogItem key={`small-blog-item-${id}`}>
-                <PostHeading as="header">
-                  <Link to={`${frontmatter.path}`}>{frontmatter?.title}</Link>
-                  <p>{frontmatter?.date}</p>
-                </PostHeading>
-                <p>{excerpt}</p>
-              </SmallBlogItem>
-            );
-          })}
-      </Blogs>
-    </>
+    <BlogMain>
+      {blogs &&
+        blogs.map(({ node }, index) => {
+          const { frontmatter, excerpt, id } = node;
+          return (
+            <BlogItem
+              id={id}
+              key={`blog-item-${index}`}
+              date={frontmatter.date}
+              excerpt={excerpt}
+              title={frontmatter.title}
+              path={frontmatter.path}
+            />
+          );
+        })}
+    </BlogMain>
+  );
+};
+
+export const BlogItem = ({ id, path, title, date, excerpt }) => {
+  return (
+    <BlogItemArticle key={`small-blog-item-${id}`}>
+      <PostHeading as="header">
+        <Link to={`${path}`}>{title}</Link>
+        <p>{date}</p>
+      </PostHeading>
+      <p>{excerpt}</p>
+    </BlogItemArticle>
   );
 };

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://dixitk13.github.io/sitemap.xml
+Host: https://dixitk13.github.io

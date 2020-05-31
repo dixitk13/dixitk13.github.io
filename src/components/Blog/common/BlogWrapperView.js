@@ -11,6 +11,7 @@ import {
 import dixitk13 from "../../../../static/img/dixitk13.jpg";
 import { CircularImage } from "../../../common";
 import { Navigation } from "./Navigation";
+import { FloatingScrollToTop } from "./FloatingScrollToTop";
 
 // TODO: Might be worth to invert this selector vs screen media
 export const BlogWrapperView = styled.div`
@@ -47,14 +48,15 @@ export const BlogWrapperView = styled.div`
     }
   }
 `;
-export const BlogHeader = styled.header`
+export const BlogHeader = styled.header.attrs({
+  id: "web-header",
+})`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-size: 1.8rem;
   margin: 20px 5px 5px 5px;
-  /* width: 40vw; */
   max-width: 40vw;
   width: 100%;
   @media ${device.mobile} {
@@ -106,6 +108,7 @@ export const BlogHeaderView = (props) => {
         <Navigation />
       </BlogHeader>
       <FloatingThemeButton>{props && props.children}</FloatingThemeButton>
+      <FloatingScrollToTop />
     </>
   );
 };

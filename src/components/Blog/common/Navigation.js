@@ -12,7 +12,9 @@ import { Link as GatsbyLink } from "gatsby";
 import { rhythm, device } from "../../../utils";
 import { offset } from "../../../common";
 
-export const Nav = styled.nav`
+export const Nav = styled.nav.attrs({
+  id: "web-nav",
+})`
   color: ${fontColor};
   height: ${offset}px;
   ${(props) =>

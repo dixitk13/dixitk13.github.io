@@ -11,12 +11,14 @@ const FloatingButton = styled.button`
   right: 20px;
   width: 50px;
   border-radius: 50%;
-  background: radial-gradient(white, lightblue);
+  background: radial-gradient(#dae0ec, #cfd7e6);
   color: ${fontColor};
   transition: all 0.3s ease;
   font-size: 24px;
   z-index: 10;
+  opacity: 0.3;
   &:hover {
+    opacity: 1;
     cursor: pointer;
     transform: translateY(-3px);
   }

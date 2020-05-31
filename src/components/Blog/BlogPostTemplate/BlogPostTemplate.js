@@ -1,20 +1,25 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 
-import { BlogWrapper } from "../common";
+import { BlogWrapper, BlogMain } from "../common";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
+import { SEO } from "../../SEO";
 
 export default function BlogPostTemplate({ data }) {
   const { markdownRemark: post } = data;
-  const { frontmatter, html, timeToRead } = post;
+  const { frontmatter, excerpt, html, timeToRead } = post;
   const { title, date } = frontmatter;
   return (
     <BlogWrapper>
-      <Helmet title={title} />
-      <BlogMainArticle>
+      <SEO
+        title={frontmatter.title}
+        description={excerpt || "nothin’"}
+        // pathname={fields.slug}
+        article
+      />
+      <BlogMain>
         <BlogHeader>
           <BlogTitle>{title}</BlogTitle>
           <p>
@@ -22,18 +27,10 @@ export default function BlogPostTemplate({ data }) {
           </p>
         </BlogHeader>
         <BlogBody dangerouslySetInnerHTML={{ __html: html }} />
-      </BlogMainArticle>
+      </BlogMain>
     </BlogWrapper>
   );
 }
-
-const BlogMainArticle = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  width: 100%;
-`;
 
 const BlogHeader = styled.div.attrs({
   tabIndex: 0,
@@ -101,6 +98,7 @@ export const query = graphql`
         type
         date(formatString: "MMM DD, YYYY")
       }
+      excerpt(truncate: true)
       timeToRead
       html
     }

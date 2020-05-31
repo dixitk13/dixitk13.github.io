@@ -28,7 +28,7 @@ export const Expander = styled.div.attrs(({ cardId, open }) => ({
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: ${rhythm(0.25)};
+  border-radius: 3px; /*${rhythm(0.25)};*/
 
   max-height: 0;
   min-height: 0;
@@ -123,7 +123,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
   padding: 3px 6px;
   display: inline;
   margin: ${rhythm(0.25)};
-  border-radius: ${rhythm(0.25)};
+  border-radius: 3px; /*${rhythm(0.25)};*/
   font-weight: ${rhythm(0.25)};
   color: ${fontColor};
   background: ${background};
@@ -154,7 +154,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
 export const CardContainer = styled.article`
   width: 100%;
   padding: ${rhythm(0.25)} ${rhythm(0.5)};
-  border-radius: ${rhythm(0.25)};
+  border-radius: 3px; /*${rhythm(0.25)};*/
   min-height: ${rhythm(4)};
   position: relative;
 
@@ -236,7 +236,7 @@ export const Card = styled.li.attrs(({ active, open }) => ({
   margin: 10px;
   width: calc((100% / ${numberOfCards}) - 20px);
   transition: ${commonTransition};
-  border-radius: ${rhythm(0.5)};
+  border-radius: 3px; /*${rhythm(0.5)};*/
   box-shadow: ${boxShadow};
 
   background: ${background};

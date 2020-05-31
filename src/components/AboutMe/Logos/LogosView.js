@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IconDict } from "../../../../static/svg";
+import { Icons } from "../../../../static/svg";
 
 const Mentions = styled.div`
   display: flex;
@@ -89,7 +89,7 @@ export default () => {
         <Href
           key={`mentions-${i}`}
           {...mention}
-          imgsrc={IconDict[mention.imageName]}
+          imgsrc={Icons[mention.imageName]}
         />
       ))}
     </Mentions>

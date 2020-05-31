@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IconDict } from "../../../../static/svg";
+import { Icons } from "../../../../static/svg";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
 
@@ -39,7 +39,7 @@ const Heart = styled.span`
   }
 `;
 
-const Icons = styled.ul.attrs({ role: "list" })`
+const IconList = styled.ul.attrs({ role: "list" })`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -75,7 +75,7 @@ const MadeWithView = () => {
   return (
     <Footer>
       <Title>Made with {<Heart />} using</Title>
-      <Icons>
+      <IconList>
         {items.map((item) => (
           <Icon key={item.name}>
             <Link
@@ -87,13 +87,13 @@ const MadeWithView = () => {
             >
               <IconImage
                 alt={item.name}
-                src={IconDict[item.name]}
+                src={Icons[item.name]}
                 background={item.background}
               />
             </Link>
           </Icon>
         ))}
-      </Icons>
+      </IconList>
     </Footer>
   );
 };

@@ -3,7 +3,6 @@ import { StaticQuery, graphql } from "gatsby";
 
 import { BlogPostsView } from "./BlogPostsView";
 
-// TODO: add how long to read via timeToRead
 export const getAllBlogs = graphql`
   query getAllBlogs {
     blogs: allMarkdownRemark(

@@ -3,6 +3,7 @@ title: "Draft pull requests"
 date: "2020-05-10"
 path: "/draft-pull-requests"
 type: "blog"
+tags: ["process", "github"]
 ---
 
 I believe in making small pull requests and they can be either of features, bug fixes, changes/updates and improvements.

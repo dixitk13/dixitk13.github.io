@@ -19,6 +19,7 @@ export const SEO = ({ title, description, image, article }) => {
     defaultImage,
     twitterUsername,
     titleTemplate,
+    blogTitleTemplate,
   } = site.siteMetadata;
 
   const seo = {
@@ -32,7 +33,7 @@ export const SEO = ({ title, description, image, article }) => {
     <>
       <Helmet
         title={seo.title}
-        titleTemplate={titleTemplate}
+        titleTemplate={article ? blogTitleTemplate : titleTemplate}
         htmlAttributes={{
           lang: "en",
         }}
@@ -46,6 +47,10 @@ export const SEO = ({ title, description, image, article }) => {
       >
         <meta name="description" content={seo.description} />
         <meta name="image" content={seo.image} />
+        <meta
+          name="google-site-verification"
+          content="bB0Dzxm_gZibO1Ks7dMt4GQywVR3wl3oZVxZjis1710"
+        />
       </Helmet>
       <Twitter seo={seo} twitterUsername={twitterUsername} />
       <OpenGraph seo={seo} article={article} />
@@ -72,6 +77,7 @@ export const query = graphql`
     site {
       siteMetadata {
         titleTemplate
+        blogTitleTemplate
         twitterUsername
         defaultImage: image
         defaultTitle: title

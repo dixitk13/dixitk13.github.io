@@ -2,13 +2,17 @@ module.exports = {
   siteMetadata: {
     title: `Dixit Keshavbhai Patel`,
     titleTemplate: "%s · just another software Engineer",
+    blogTitleTemplate: "%s · By Dixit Keshavbhai Patel",
     url: "https://dixitk13.github.io",
+    siteUrl: "https://dixitk13.github.io",
     description: "Dixit's Home",
     image: "/static/img/dixitk13.jpg",
     twitterUsername: "@dixitk13",
   },
   pathPrefix: "/dixitk13.github.io",
   plugins: [
+    `gatsby-plugin-sitemap`, //  TODO: maybe customize this later
+    "gatsby-plugin-robots-txt",
     `gatsby-plugin-react-helmet`,
     // {
     //   resolve: `gatsby-plugin-slug-field`,

@@ -3,6 +3,7 @@ title: "Typescript discriminator"
 date: "2020-04-10"
 path: "/typescript-discriminator"
 type: "blog"
+tags: ["react", "typescript"]
 ---
 
 Very often we have use-cases where we would like to use a single type `Union Type` but still be sure about the properties inside them.

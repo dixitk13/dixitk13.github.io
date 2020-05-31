@@ -1,4 +1,4 @@
-import { IconDict } from "../svg";
+import { Icons } from "../svg";
 import ciscoIcon from "./cisco.svg";
 import blueprintjsIcon from "./blueprintjs.svg";
 import javascriptIcon from "./javascript.svg";
@@ -27,8 +27,8 @@ import heroku from "./heroku.svg";
 import redis from "./redis.svg";
 import node from "./node.svg";
 
-export const FannedImages = {
-  ...IconDict,
+export const Icons = {
+  ...Icons,
   cisco: ciscoIcon,
   blueprintjs: blueprintjsIcon,
   javascript: javascriptIcon,
@@ -55,5 +55,5 @@ export const FannedImages = {
   heroku,
   typescript,
   node,
-  redis
+  redis,
 };

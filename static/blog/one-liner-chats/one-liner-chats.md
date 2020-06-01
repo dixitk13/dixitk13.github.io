@@ -15,7 +15,7 @@ Do you get irritated by 5 notifications grouped under the same application by a 
 
 ## Scenario 1
 
-```
+```default
 [10:15 AM] John Parker: Hi Dixit
 [10:15 AM] John Parker: About that PR
 [10:16 AM] John Parker: Did you get a chance to look at it

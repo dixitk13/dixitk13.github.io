@@ -26,7 +26,8 @@ export const Nav = styled.nav.attrs({
 
   display: flex;
   justify-content: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
+  padding: 0 20px;
 `;
 
 const NavUnorderedList = styled.ul`
@@ -39,7 +40,7 @@ const NavUnorderedList = styled.ul`
   }
 
   li {
-    padding: ${rhythm(0.5)} ${rhythm(1)} 0 0;
+    padding: ${rhythm(0.5)} ${rhythm(0.75)} 0 0;
     font-size: 21px;
   }
   .active-nav-link {
@@ -66,6 +67,7 @@ export const Navigation = ({ background }) => {
     { title: "Home", to: "/" },
     { title: "Blog", to: "/blog" },
     { title: "Tags", to: "/tags" },
+    { title: "About", to: "/about" },
   ];
   const activeClassNames = { className: "active-nav-link" };
 

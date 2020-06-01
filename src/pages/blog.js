@@ -3,7 +3,7 @@ import React from "react";
 import { BlogPosts, BlogWrapper } from "../components/Blog";
 import { SEO } from "../components/SEO";
 
-const blog = () => {
+const Blog = () => {
   return (
     <BlogWrapper>
       <SEO />
@@ -12,4 +12,4 @@ const blog = () => {
   );
 };
 
-export default blog;
+export default Blog;

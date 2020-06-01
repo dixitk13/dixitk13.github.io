@@ -1,13 +1,28 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Icons } from "../../../../static/svg";
+import { device } from "../../../utils";
 
 const Mentions = styled.div`
   display: flex;
-  height: 48px;
-  margin-bottom: 1rem;
-  flex-direction: row;
   justify-content: space-around;
+  flex-direction: row;
+
+  /**
+   * enableLayout will enable row for mobile, col for desktop 
+   * else, its always row
+   */
+  ${({ enableLayout }) =>
+    enableLayout &&
+    css`
+      flex-direction: column;
+      @media ${device.mobile} {
+        flex-direction: row;
+      }
+    `}
+
+  min-height: 48px;
+  margin-bottom: 1rem;
   flex: 0 1 auto;
 `;
 
@@ -49,7 +64,7 @@ const Href = ({ href, title, imgsrc, alt, ...rest }) => {
   );
 };
 
-export default () => {
+export default ({ enableLayout }) => {
   const mentions = [
     {
       href: "https://www.quora.com/profile/Dixit-Patel-4",
@@ -77,14 +92,14 @@ export default () => {
       href: "https://github.com/dixitk13",
       imageName: "github",
       alt: "Github",
-      width: "65px",
+      width: "48px",
       transform: "scale(0.75)",
       scale: "scale(0.85)",
     },
   ];
 
   return (
-    <Mentions>
+    <Mentions enableLayout={enableLayout}>
       {mentions.map((mention, i) => (
         <Href
           key={`mentions-${i}`}

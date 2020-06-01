@@ -5,7 +5,8 @@ module.exports = {
     blogTitleTemplate: "%s · By Dixit Keshavbhai Patel",
     url: "https://dixitk13.github.io",
     siteUrl: "https://dixitk13.github.io",
-    description: "Dixit's Home",
+    description:
+      "Dixit's Home Page. A software engineer, just living life by writing software.",
     image: "/static/img/dixitk13.jpg",
     twitterUsername: "@dixitk13",
   },

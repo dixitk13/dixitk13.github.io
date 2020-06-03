@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-// import { useLocation } from "@reach/router";
+import { flattenDeep } from "lodash";
 
 import {
   fontColor,
@@ -73,18 +73,21 @@ export const Navigation = ({ background }) => {
 
   const active = (pathname, link) => {
     // base condition
-    if (link === pathname) return activeClassNames;
+    if (link === pathname || `${link}/` === pathname) return activeClassNames;
 
     // condition for tag paths true
-    if (pathname.includes("/tags") && link === "/tags") return activeClassNames;
+    if (pathname.includes("/tags") && link === "/tags") {
+      return activeClassNames;
+    }
 
     // condition to make all blog paths true
     if (
       !pathname.includes("/tags") &&
-      !items.map((x) => x.to).includes(pathname) &&
+      !flattenDeep(items.map((x) => [x.to, `${x.to}/`])).includes(pathname) &&
       link === "/blog"
-    )
+    ) {
       return activeClassNames;
+    }
 
     return {};
   };

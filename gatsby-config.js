@@ -33,11 +33,22 @@ module.exports = {
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map((edge) => {
+                let html = edge.node.html;
+                const siteUrl = site.siteMetadata.siteUrl;
+                const url = siteUrl + edge.node.frontmatter.path;
+                const postText = `<div style="margin-top=60px;">Click Here to read on my website <a href="${url}">clicking here</a></div>`;
+                html = html
+                  .replace(/href="\//g, `href="${siteUrl}/`)
+                  .replace(/src="\//g, `src="${siteUrl}/`)
+                  .replace(/"\/static\//g, `"${siteUrl}/static/`)
+                  .replace(/,\s*\/static\//g, `,${siteUrl}/static/`);
+
                 return Object.assign({}, edge.node.frontmatter, {
+                  url,
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
                   guid: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
+                  custom_elements: [{ "content:encoded": html + postText }],
                 });
               });
             },
@@ -62,12 +73,25 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "Your Site's RSS Feed",
+            title: "Dixit's Blog Feed",
           },
         ],
       },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Dixit Keshavbhai Patel`,
+        short_name: `dixitk13`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+        icon: `static/favicon.ico`,
+        theme_color_in_head: false,
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-slug-field`,
     //   options: {

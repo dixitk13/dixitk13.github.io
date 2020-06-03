@@ -27,6 +27,7 @@ const AboutMeContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 20vw;
+  min-width: 275px;
   padding: ${rhythm(0.25)};
   border-radius: 3px;
   background: ${background};

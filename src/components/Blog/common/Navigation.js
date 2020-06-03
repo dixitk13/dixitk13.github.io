@@ -26,16 +26,16 @@ export const Nav = styled.nav.attrs({
 
   display: flex;
   justify-content: center;
-  /* padding-left: 20px; */
   padding: 0 20px;
 `;
 
 const NavUnorderedList = styled.ul`
   display: flex;
-  width: 200px;
+  min-width: 200px;
+
   margin: 0;
   list-style: none;
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     width: unset;
   }
 

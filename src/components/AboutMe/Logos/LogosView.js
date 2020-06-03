@@ -1,7 +1,10 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import styled, { css } from "styled-components";
+
 import { Icons } from "../../../../static/svg";
 import { device } from "../../../utils";
+import { fontColor, fontHover } from "../../../styles";
 
 const Mentions = styled.div`
   display: flex;
@@ -30,25 +33,38 @@ const MentionsLogo = styled.img`
   width: ${(props) => props.width || "48px"};
   height: 48px;
   margin-bottom: 0;
-  transition: all 0.2s ease-in-out;
-  transform: ${(props) => props.scale};
-  &:hover {
-    transform: ${(props) => props.transform};
-  }
 `;
 
 const Link = styled.a`
+  text-decoration: none;
+  transform: ${(props) => props.scale};
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: ${(props) => props.transform};
+  }
   &:hover,
   &:active {
     box-shadow: 0 0 0 0;
   }
 `;
 
-const Href = ({ href, title, imgsrc, alt, ...rest }) => {
+const TitleLogo = styled.span`
+  color: ${fontColor};
+  font-weight: 500;
+  font-size: 16px;
+  &:hover {
+    color: ${fontHover};
+  }
+`;
+
+const Href = ({ href, title, imgsrc, scale, transform, alt, ...rest }) => {
   return (
     <Link
       alt={alt}
       aria-label={alt}
+      transform={transform}
+      scale={scale}
       rel="noopener noreferrer"
       target="_blank"
       href={href}
@@ -58,14 +74,14 @@ const Href = ({ href, title, imgsrc, alt, ...rest }) => {
           {title}
         </MentionsLogo>
       ) : (
-        title
+        <TitleLogo>{title}</TitleLogo>
       )}
     </Link>
   );
 };
 
-export default ({ enableLayout }) => {
-  const mentions = [
+const LogosView = ({ extraMentions = [], enableLayout }) => {
+  let mentions = [
     {
       href: "https://www.quora.com/profile/Dixit-Patel-4",
       imageName: "quora",
@@ -97,6 +113,7 @@ export default ({ enableLayout }) => {
       scale: "scale(0.85)",
     },
   ];
+  if (extraMentions) mentions = [...mentions, ...extraMentions];
 
   return (
     <Mentions enableLayout={enableLayout}>
@@ -110,3 +127,20 @@ export default ({ enableLayout }) => {
     </Mentions>
   );
 };
+
+LogosView.propTypes = {
+  extraMentions: PropTypes.arrayOf(
+    PropTypes.shape({
+      href: PropTypes.string.isRequired,
+      imageName: PropTypes.string,
+      title: PropTypes.string,
+      iconText: PropTypes.string,
+      alt: PropTypes.string.isRequired,
+      transform: PropTypes.string.isRequired,
+      scale: PropTypes.string.isRequired,
+    })
+  ),
+  enableLayout: PropTypes.bool,
+};
+
+export default LogosView;

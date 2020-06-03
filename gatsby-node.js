@@ -1,5 +1,22 @@
 const path = require("path");
 const { kebabCase } = require("lodash");
+const { createFilePath } = require(`gatsby-source-filesystem`);
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
+  if (
+    node.internal.type === "MarkdownRemark" &&
+    node.frontmatter.type === "blog"
+  ) {
+    const slug = createFilePath({ node, getNode });
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
+  }
+};
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 

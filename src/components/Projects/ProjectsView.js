@@ -37,14 +37,14 @@ const ProjectCardsContainer = styled.ul.attrs({
   "aria-label": "Projects",
 })`
   margin: 0;
+
   @media ${device.desktop} {
+    width: 40vw;
     display: flex;
     flex-flow: row wrap;
-    width: 40vw;
     height: 100%;
   }
   @media ${device.mobile} {
-    width: 90vw;
     display: flex;
     padding: 0;
     flex-direction: column;

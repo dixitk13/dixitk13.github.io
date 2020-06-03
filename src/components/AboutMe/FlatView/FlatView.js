@@ -15,6 +15,7 @@ const FlatViewMain = styled.main`
 const DetailSection = styled.section`
   columns: 2;
   flex: 2 1 60%;
+  // TODO: columns 2 overflows to 3 when small height?
   h1 {
     column-span: all;
   }
@@ -27,6 +28,17 @@ const AsideDetails = styled.aside`
     align-items: center;
   }
 `;
+
+const extraMentions = [
+  {
+    href: "/rss.xml",
+    title: "RSS",
+    alt: "RSS",
+    width: "48px",
+    transform: "scale(0.75)",
+    scale: "scale(0.85)",
+  },
+];
 
 export const FlatView = () => {
   return (
@@ -46,7 +58,7 @@ export const FlatView = () => {
         </p>
       </DetailSection>
       <AsideDetails>
-        <Logos enableLayout />
+        <Logos enableLayout extraMentions={extraMentions} />
       </AsideDetails>
     </FlatViewMain>
   );

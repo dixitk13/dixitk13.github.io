@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import dixitk13 from "../../../static/img/dixitk13.jpg";
+import dixitk13 from "../../../../static/img/dixitk13.jpg";
 
-import RealFlex from "./RealFlex";
-import Logos from "./Logos";
-import MadeWith from "./MadeWith";
-import DownloadButtons from "./DownloadButtons";
-import { background, boxShadow, fontColor, fontHover } from "../../styles";
-import { polygons } from "../../common/animations";
-import { Blockquote } from "../../common";
-import { device, rhythm } from "../../utils";
+import RealFlex from "../RealFlex";
+import Logos from "../Logos";
+import MadeWith from "../MadeWith";
+import DownloadButtons from "../DownloadButtons";
+import { background, boxShadow, fontColor, fontHover } from "../../../styles";
+import { polygons } from "../../../common/animations";
+import { Blockquote } from "../../../common";
+import { device, rhythm } from "../../../utils";
 
 const AboutMeFlex = styled.aside.attrs({
   "aria-label": "About me",
@@ -27,6 +27,7 @@ const AboutMeContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 20vw;
+  min-width: 275px;
   padding: ${rhythm(0.25)};
   border-radius: 3px;
   background: ${background};
@@ -117,7 +118,7 @@ const ToggleHeartContainer = styled.span`
   }
 `;
 
-const AboutMeView = ({ on, toggleOn }) => {
+export const AboutMeCardView = ({ on, toggleOn }) => {
   return (
     <AboutMeFlex>
       <RealFlex />
@@ -145,5 +146,3 @@ const AboutMeView = ({ on, toggleOn }) => {
     </AboutMeFlex>
   );
 };
-
-export default AboutMeView;

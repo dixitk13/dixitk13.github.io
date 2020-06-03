@@ -11,16 +11,27 @@ import { Emojis } from "../../../static/svg/emojis";
 import { background, fontColor } from "../../styles";
 
 const boxDim = "150px";
-const mobileBoxDim = "150px";
+const mobileBoxDim = "130px";
 
 const TagsUnorderedList = styled.ul`
-  margin: ${rhythm(2)} 0 0 0;
+  margin: ${rhythm(2)} 20px 0 20px;
   list-style: none;
   display: grid;
   grid-gap: ${rhythm(0.5)};
+
+  // TODO: something wrong w/ breakpoints here
   grid-template-columns: repeat(4, ${boxDim});
+
   @media ${device.mobile} {
-    grid-template-columns: repeat(2, ${mobileBoxDim});
+    margin: ${rhythm(2)} 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @media ${device.tablet} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 `;
 
@@ -57,6 +68,12 @@ const StyledListItem = styled.li`
   @media ${device.mobile} {
     height: ${mobileBoxDim};
     width: ${mobileBoxDim};
+    margin: 3px;
+  }
+  @media ${device.tablet} {
+    height: ${mobileBoxDim};
+    width: ${mobileBoxDim};
+    margin: 10px;
   }
 
   a {
@@ -81,7 +98,12 @@ const StyledListItem = styled.li`
   }
 `;
 
-const TagsListContainer = styled(BlogMain)``;
+const TagsListContainer = styled(BlogMain)`
+  align-items: flex-start;
+  @media ${device.mobile} {
+    align-items: center;
+  }
+`;
 
 const NumCount = styled.span`
   position: absolute;

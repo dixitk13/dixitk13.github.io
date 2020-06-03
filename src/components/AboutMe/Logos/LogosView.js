@@ -1,13 +1,31 @@
 import React from "react";
-import styled from "styled-components";
+import { PropTypes } from "prop-types";
+import styled, { css } from "styled-components";
+
 import { Icons } from "../../../../static/svg";
+import { device } from "../../../utils";
+import { fontColor, fontHover } from "../../../styles";
 
 const Mentions = styled.div`
   display: flex;
-  height: 48px;
-  margin-bottom: 1rem;
-  flex-direction: row;
   justify-content: space-around;
+  flex-direction: row;
+
+  /**
+   * enableLayout will enable row for mobile, col for desktop 
+   * else, its always row
+   */
+  ${({ enableLayout }) =>
+    enableLayout &&
+    css`
+      flex-direction: column;
+      @media ${device.mobile} {
+        flex-direction: row;
+      }
+    `}
+
+  min-height: 48px;
+  margin-bottom: 1rem;
   flex: 0 1 auto;
 `;
 
@@ -15,25 +33,38 @@ const MentionsLogo = styled.img`
   width: ${(props) => props.width || "48px"};
   height: 48px;
   margin-bottom: 0;
-  transition: all 0.2s ease-in-out;
-  transform: ${(props) => props.scale};
-  &:hover {
-    transform: ${(props) => props.transform};
-  }
 `;
 
 const Link = styled.a`
+  text-decoration: none;
+  transform: ${(props) => props.scale};
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: ${(props) => props.transform};
+  }
   &:hover,
   &:active {
     box-shadow: 0 0 0 0;
   }
 `;
 
-const Href = ({ href, title, imgsrc, alt, ...rest }) => {
+const TitleLogo = styled.span`
+  color: ${fontColor};
+  font-weight: 500;
+  font-size: 16px;
+  &:hover {
+    color: ${fontHover};
+  }
+`;
+
+const Href = ({ href, title, imgsrc, scale, transform, alt, ...rest }) => {
   return (
     <Link
       alt={alt}
       aria-label={alt}
+      transform={transform}
+      scale={scale}
       rel="noopener noreferrer"
       target="_blank"
       href={href}
@@ -43,14 +74,14 @@ const Href = ({ href, title, imgsrc, alt, ...rest }) => {
           {title}
         </MentionsLogo>
       ) : (
-        title
+        <TitleLogo>{title}</TitleLogo>
       )}
     </Link>
   );
 };
 
-export default () => {
-  const mentions = [
+const LogosView = ({ extraMentions = [], enableLayout }) => {
+  let mentions = [
     {
       href: "https://www.quora.com/profile/Dixit-Patel-4",
       imageName: "quora",
@@ -77,14 +108,15 @@ export default () => {
       href: "https://github.com/dixitk13",
       imageName: "github",
       alt: "Github",
-      width: "65px",
+      width: "48px",
       transform: "scale(0.75)",
       scale: "scale(0.85)",
     },
   ];
+  if (extraMentions) mentions = [...mentions, ...extraMentions];
 
   return (
-    <Mentions>
+    <Mentions enableLayout={enableLayout}>
       {mentions.map((mention, i) => (
         <Href
           key={`mentions-${i}`}
@@ -95,3 +127,20 @@ export default () => {
     </Mentions>
   );
 };
+
+LogosView.propTypes = {
+  extraMentions: PropTypes.arrayOf(
+    PropTypes.shape({
+      href: PropTypes.string.isRequired,
+      imageName: PropTypes.string,
+      title: PropTypes.string,
+      iconText: PropTypes.string,
+      alt: PropTypes.string.isRequired,
+      transform: PropTypes.string.isRequired,
+      scale: PropTypes.string.isRequired,
+    })
+  ),
+  enableLayout: PropTypes.bool,
+};
+
+export default LogosView;

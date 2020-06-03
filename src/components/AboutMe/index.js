@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AboutMeView from "./AboutMeView";
+import { AboutMeCardView } from "./CardView";
+import { FlatView } from "./FlatView";
 
-const AboutMe = () => {
+const AboutMe = ({ flat }) => {
   const [on, setOn] = useState(false);
   let timeoutId = undefined;
 
@@ -18,7 +19,8 @@ const AboutMe = () => {
     return () => clearTimeout(timeoutId);
   }, [timeoutId]);
 
-  return <AboutMeView on={on} toggleOn={toggleOn} />;
+  if (flat) return <FlatView />;
+  return <AboutMeCardView on={on} toggleOn={toggleOn} />;
 };
 
 export default AboutMe;

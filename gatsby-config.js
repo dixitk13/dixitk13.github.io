@@ -5,7 +5,8 @@ module.exports = {
     blogTitleTemplate: "%s · By Dixit Keshavbhai Patel",
     url: "https://dixitk13.github.io",
     siteUrl: "https://dixitk13.github.io",
-    description: "Dixit's Home",
+    description:
+      "Dixit's Home Page. A software engineer, just living life by writing software.",
     image: "/static/img/dixitk13.jpg",
     twitterUsername: "@dixitk13",
   },
@@ -13,6 +14,59 @@ module.exports = {
   plugins: [
     `gatsby-plugin-sitemap`, //  TODO: maybe customize this later
     "gatsby-plugin-robots-txt",
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map((edge) => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
+                  guid: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
+                });
+              });
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                  filter: { frontmatter: { type: { eq: "blog" } } }
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      frontmatter {
+                        title
+                        path
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Your Site's RSS Feed",
+          },
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     // {
     //   resolve: `gatsby-plugin-slug-field`,

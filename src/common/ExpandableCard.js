@@ -233,16 +233,17 @@ export const Card = styled.li.attrs(({ active, open }) => ({
   list-style: none;
   border: none;
   display: inline-block;
-  margin: 10px;
+  margin: 0 10px 20px 10px;
   width: calc((100% / ${numberOfCards}) - 20px);
   transition: ${commonTransition};
-  border-radius: 3px; 
+  border-radius: 3px;
   box-shadow: ${boxShadow};
 
   background: ${background};
   color: ${fontColor};
 
   @media ${device.desktop} {
+    min-width: 300px;
     // top-cards shouldn't have any margin
     &:nth-child(-n + ${numberOfCards}) {
       margin-top: 0;
@@ -260,7 +261,6 @@ export const Card = styled.li.attrs(({ active, open }) => ({
 
     // only on desktop
     &:hover {
-      // transform: ${(props) => (props.open ? "" : "scale(0.99)")};
       transform: ${(props) => (props.open ? "" : "translateY(-2px)")};
     }
   }

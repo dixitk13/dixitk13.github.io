@@ -35,11 +35,14 @@ export const BlogWrapperView = styled.div`
   main {
     width: 40vw;
     max-width: 40vw;
+    @media ${device.tablet} {
+      width: 50vw;
+      max-width: 50vw;
+    }
     @media ${device.mobile} {
       max-width: 100%;
       width: 100%;
     }
-
     @media ${device.screen4k} {
       height: 100vh;
     }
@@ -57,8 +60,12 @@ export const BlogHeader = styled.header.attrs({
   align-items: flex-start;
   font-size: 1.8rem;
   margin: 20px 5px 5px 5px;
-  max-width: 40vw;
   width: 100%;
+  max-width: 40vw;
+
+  @media ${device.tablet} {
+    max-width: 50vw;
+  }
   @media ${device.mobile} {
     max-width: 100%;
     min-height: 160px;
@@ -86,6 +93,7 @@ const BlogHead = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const FloatingThemeButton = styled.span`
   top: 10px;
   right: 10px;

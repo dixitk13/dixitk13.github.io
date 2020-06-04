@@ -38,13 +38,19 @@ const ProjectCardsContainer = styled.ul.attrs({
 })`
   margin: 0;
 
-  @media ${device.desktop} {
-    width: 40vw;
+  @media ${device.smallLaptop} {
+    width: 60vw;
     display: flex;
     flex-flow: row wrap;
     height: 100%;
   }
-  @media ${device.mobile} {
+  @media ${device.desktop} {
+    width: 45vw;
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+  }
+  @media ${device.mobile}, ${device.tablet} {
     display: flex;
     padding: 0;
     flex-direction: column;

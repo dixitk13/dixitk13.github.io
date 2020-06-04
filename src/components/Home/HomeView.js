@@ -27,7 +27,7 @@ export const HomeViewContainer = styled.div`
   @media ${device.desktop} {
     height: 100%;
   }
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     flex-direction: column;
     overflow-x: hidden;
   }

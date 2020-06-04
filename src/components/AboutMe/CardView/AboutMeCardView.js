@@ -34,11 +34,14 @@ const AboutMeContainer = styled.div`
   box-shadow: ${boxShadow};
   z-index: 2;
 
+  @media ${device.screen4k} {
+    width: 10vw;
+  }
   @media ${device.desktop} {
     margin: 0 10px ${rhythm(0.25)} 10px;
   }
 
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     height: unset;
     margin-right: unset;
     width: 100%;
@@ -72,8 +75,7 @@ const Image = styled.img.attrs({
   margin-bottom: 1rem;
   background-size: cover;
   clip-path: polygon(0, 0);
-  // TODO: uncomment before deployment
-  // animation: ${polygons} 60s infinite;
+  animation: ${polygons} 60s infinite;
 `;
 
 const Quote = styled(Blockquote).attrs({

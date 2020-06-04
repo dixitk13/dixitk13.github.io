@@ -19,9 +19,15 @@ const TagsUnorderedList = styled.ul`
   display: grid;
   grid-gap: ${rhythm(0.5)};
 
-  // TODO: something wrong w/ breakpoints here
-  grid-template-columns: repeat(4, ${boxDim});
-
+  @media ${device.smallLaptop} {
+    grid-template-columns: repeat(2, ${boxDim});
+  }
+  @media ${device.desktop} {
+    grid-template-columns: repeat(3, ${boxDim});
+  }
+  @media ${device.screen4k} {
+    grid-template-columns: repeat(4, ${boxDim});
+  }
   @media ${device.mobile} {
     margin: ${rhythm(2)} 0 0 0;
     display: flex;
@@ -65,15 +71,10 @@ const StyledListItem = styled.li`
   &:active {
     transform: translateZ(-12px);
   }
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     height: ${mobileBoxDim};
     width: ${mobileBoxDim};
-    margin: 3px;
-  }
-  @media ${device.tablet} {
-    height: ${mobileBoxDim};
-    width: ${mobileBoxDim};
-    margin: 10px;
+    margin: 6px;
   }
 
   a {

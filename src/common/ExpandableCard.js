@@ -52,7 +52,7 @@ export const Expander = styled.div.attrs(({ cardId, open }) => ({
         `
       : `display: none;`};
 
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     width: ${(props) => (props.open ? "100%" : "")};
   }
 `;
@@ -113,7 +113,7 @@ export const Tags = styled.ul.attrs({
   margin: 21px 0 0 0;
   width: 100%;
 
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     flex-wrap: wrap;
     justify-content: flex-start;
   }
@@ -138,7 +138,7 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
     }
   }
 
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     display: flex;
     flex-wrap: wrap;
     &:nth-of-type(n + 5) {
@@ -226,7 +226,7 @@ export const Body = styled.article.attrs({ tabIndex: 0 })`
 `;
 
 /* Normal Card Classes */
-export const Card = styled.li.attrs(({ active, open }) => ({
+export const Card = styled.li.attrs(({ active }) => ({
   role: "listitem",
   tabIndex: active ? -1 : 0,
 }))`
@@ -241,9 +241,10 @@ export const Card = styled.li.attrs(({ active, open }) => ({
 
   background: ${background};
   color: ${fontColor};
-
-  @media ${device.desktop} {
-    min-width: 300px;
+  /* TODO: 4k f*s up? */
+  @media ${device.desktop}, ${device.smallLaptop}, ${device.screen4k} {
+    max-width: 300px;
+    min-width: 200px;
     // top-cards shouldn't have any margin
     &:nth-child(-n + ${numberOfCards}) {
       margin-top: 0;
@@ -265,7 +266,7 @@ export const Card = styled.li.attrs(({ active, open }) => ({
     }
   }
 
-  @media ${device.mobile} {
+  @media ${device.mobile}, ${device.tablet} {
     width: 100%;
     margin: 10px 0;
     min-height: ${rhythm(4)};

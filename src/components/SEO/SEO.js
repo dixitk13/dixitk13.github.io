@@ -43,7 +43,21 @@ export const SEO = ({ title, description, image, article }) => {
             content: "gatsbyjs, reactjs, graphql, dixitk13",
           },
         ]}
-        link={[{ rel: "shortcut icon", type: "image/png", href: `${favicon}` }]}
+        link={[
+          {
+            rel: "icon",
+            type: "image/png",
+            sizes: "16x16",
+            href: `${favicon}`,
+          },
+          {
+            rel: "icon",
+            type: "image/png",
+            sizes: "32x32",
+            href: `${favicon}`,
+          },
+          { rel: "shortcut icon", type: "image/png", href: `${favicon}` },
+        ]}
       >
         <meta name="description" content={seo.description} />
         <meta name="image" content={seo.image} />

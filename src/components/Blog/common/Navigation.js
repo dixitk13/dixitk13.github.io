@@ -17,6 +17,7 @@ export const Nav = styled.nav.attrs({
 })`
   color: ${fontColor};
   height: ${offset}px;
+
   ${(props) =>
     props.background &&
     css`
@@ -27,6 +28,11 @@ export const Nav = styled.nav.attrs({
   display: flex;
   justify-content: center;
   padding: 0 20px;
+  /** 
+    * there's some space left b/w main content and nav, can't 
+    * background the parent since it belongs to gatsby 
+    */
+  margin-bottom: -1px;
 `;
 
 const NavUnorderedList = styled.ul`

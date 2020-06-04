@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 
 import { fontColor } from "../../../styles";
 import { Emojis } from "../../../../static/svg/emojis";
+import { getPercentScrolled } from "../../Layout";
 
 const FloatingButton = styled.button`
   height: 50px;
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   width: 50px;
@@ -17,6 +18,11 @@ const FloatingButton = styled.button`
   font-size: 24px;
   z-index: 10;
   opacity: 0.3;
+  ${({ enable }) =>
+    enable &&
+    css`
+      opacity: 0.7;
+    `}
   &:hover {
     opacity: 1;
     cursor: pointer;
@@ -34,13 +40,23 @@ const EmojiImage = styled.div.attrs({
 `;
 
 export const FloatingScrollToTop = () => {
+  const [enable, setEnable] = useState(false);
+  // gatsby wants to add in useEffect a document check
+
+  /*eslint-disable */
+  useEffect(() => {
+    if (document) setEnable(getPercentScrolled() > 20);
+  });
+  /*eslint-enable */
+
   const onClick = () => {
-    document
-      .getElementById("web-header")
-      .scrollIntoView({ behavior: "smooth" });
+    document.getElementById("web-header").scrollIntoView({
+      behavior: "smooth",
+    });
   };
+
   return (
-    <FloatingButton onClick={onClick}>
+    <FloatingButton enable={enable} onClick={onClick}>
       <EmojiImage>{Emojis["top"]}</EmojiImage>
     </FloatingButton>
   );

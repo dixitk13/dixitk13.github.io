@@ -24,7 +24,9 @@ export class Layout extends Component {
   }
 
   handleScroll = () => {
-    this.setState({ y: window.scrollY - offset });
+    this.setState({
+      y: window.scrollY - offset,
+    });
   };
 
   themeToggle = (theme) => {

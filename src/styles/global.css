@@ -3,6 +3,18 @@ html {
     "Helvetica Neue", Arial, sans-serif;
   scroll-behavior: smooth;
 }
+
+html,
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+}
+
 button {
   border: none;
   background: none;

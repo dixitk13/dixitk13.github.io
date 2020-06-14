@@ -6,28 +6,21 @@ import AboutMe from "../AboutMe";
 // import Cubbles from "../components/Cubbles";
 
 import { rhythm, device } from "../../utils";
-import {
-  entireBackground,
-  entireBackgroundImage,
-  fontColor,
-} from "../../styles";
+import { fontColor } from "../../styles";
 
 export const HomeViewContainer = styled.div`
   margin: 0;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
-  background-color: ${entireBackground};
-  background: ${entireBackgroundImage};
   color: ${fontColor};
-  padding: 0 ${rhythm(0.75)};
+  padding: 4px ${rhythm(0.75)} 0 ${rhythm(0.75)};
 
-  @media ${device.screen4k} {
-    height: 100vh;
-  }
-  @media ${device.desktop} {
-    height: 100%;
+  @media ${device.desktop}, ${device.screen4k} {
+    overflow: scroll;
   }
   @media ${device.mobile}, ${device.tablet} {
+    /* height: unset; */
     flex-direction: column;
     overflow-x: hidden;
   }
@@ -37,7 +30,7 @@ export const HomeView = () => {
   const myRef = useRef(null);
 
   useEffect(() => {
-    setTimeout(() => window.scrollTo(0, myRef.current?.offsetTop), 1000);
+    setTimeout(() => window.scrollTo(0, myRef.current?.offsetTop - 4), 1000);
   }, []);
 
   return (

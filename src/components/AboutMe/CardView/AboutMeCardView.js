@@ -21,6 +21,10 @@ const AboutMeFlex = styled.aside.attrs({
   @media ${device.screen4k} {
     max-width: 20vw;
   }
+  @media ${device.mobile}, ${device.tablet} {
+    width: 100%;
+    align-items: center;
+  }
 `;
 
 const AboutMeContainer = styled.div`

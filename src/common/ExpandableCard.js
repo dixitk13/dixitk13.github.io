@@ -13,6 +13,16 @@ import {
 
 // magic number
 export const numberOfCards = 2;
+export const expanderMargin = "43px";
+
+export const cardMinHeight = "270px";
+export const cardMaxHeight = "270px";
+
+export const cardArticleMaxHeight = "280px";
+export const cardArticleMaxWidth = "300px";
+
+export const expanderMinHeight = "200px";
+export const expanderMaxHeight = "1000px";
 
 /* Expander Card Classes */
 export const Expander = styled.div.attrs(({ cardId, open }) => ({
@@ -30,24 +40,25 @@ export const Expander = styled.div.attrs(({ cardId, open }) => ({
   align-items: center;
   border-radius: 3px;
 
+  margin-top: 0;
+  overflow: hidden;
+
   max-height: 0;
   min-height: 0;
-  overflow: hidden;
-  margin-top: 0;
   opacity: 0;
   border: 1px solid ${borderColor};
   background: ${expandedCardContent};
 
-  ${(props) =>
-    props.open
+  ${({ open }) =>
+    open
       ? `
-        max-height: 1000px;
-        min-height: 200px;
+        max-height: ${expanderMaxHeight};
+        min-height: ${expanderMinHeight};
         width: calc(200% + 20px);
         overflow: visible;
-        margin-top: 30px;
+        margin-top: ${expanderMargin};
         opacity: 1;
-        z-index: 10;
+        z-index: 2;    
         padding: ${rhythm(1)} ${rhythm(1)} ${rhythm(0.5)} ${rhythm(1)};
         `
       : `display: none;`};
@@ -132,13 +143,13 @@ export const Tag = styled.li.attrs({ tabIndex: 0 })`
   max-height: 21px;
   min-height: 21px;
   white-space: nowrap;
-  @media ${device.desktop} {
+  @media ${device.desktop}, ${device.screen4k} {
     &:nth-of-type(n + 7) {
       display: none;
     }
   }
 
-  @media ${device.mobile}, ${device.tablet} {
+  @media ${device.mobile}, ${device.tablet}, ${device.smallLaptop} {
     display: flex;
     flex-wrap: wrap;
     &:nth-of-type(n + 5) {
@@ -157,7 +168,6 @@ export const CardContainer = styled.article`
   border-radius: 3px;
   min-height: ${rhythm(4)};
   position: relative;
-
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -166,16 +176,19 @@ export const CardContainer = styled.article`
   transition: ${commonTransition};
   background: ${background};
 
+  max-height: ${cardArticleMaxHeight};
+  min-height: 200px;
+
   // just the triangle after the div
   &:after {
-    transition: ${commonTransition};
     content: "";
     display: block;
     height: 0;
     width: 0;
     position: absolute;
-    bottom: -30px;
+    bottom: -${expanderMargin};
     left: calc(50% - 15px);
+    z-index: 1;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     opacity: ${(props) => (props.open ? "1" : "0")};
@@ -184,7 +197,6 @@ export const CardContainer = styled.article`
   }
 `;
 
-// TODO: some project titles are two liners even though there's space
 export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   tabIndex: 0,
   id: `projectcard__title_${cardId}`,
@@ -198,7 +210,7 @@ export const HeaderContainer = styled.button.attrs(({ cardId, open }) => ({
   min-height: 40px; // <- debatable CSS
 
   color: ${fontColor};
-  margin: 10px 0;
+  /* margin: 10px 0; */
   font-size: ${rhythm(0.85)};
   cursor: pointer;
   font-weight: 550;
@@ -223,6 +235,8 @@ export const Body = styled.article.attrs({ tabIndex: 0 })`
   font-size: ${rhythm(0.65)};
   text-align: left;
   min-height: 85px;
+  overflow: hidden;
+  white-space: break-spaces;
 `;
 
 /* Normal Card Classes */
@@ -238,29 +252,56 @@ export const Card = styled.li.attrs(({ active }) => ({
   transition: ${commonTransition};
   border-radius: 3px;
   box-shadow: ${boxShadow};
-
   background: ${background};
   color: ${fontColor};
-  /* TODO: 4k f*s up? */
+
+  // fixing card height
+  min-height: ${cardMinHeight};
+  max-height: ${cardMaxHeight};
+
+  ${({ active, open }) =>
+    active &&
+    open &&
+    css`
+      max-height: ${expanderMaxHeight};
+    `}
+      
+  /** if some card is active this card isn't open then opacity 0.5 */
+  ${({ active, open }) =>
+    !open &&
+    active &&
+    css`
+      opacity: 0.5;
+      z-index: 0;
+      /* FIXME: my height changes w/ responsiveness */
+      max-height: calc(${cardArticleMaxHeight} - ${rhythm(0.25)});
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 2px;
+      &:hover {
+        transform: unset;
+      }
+    `}
+
   @media ${device.desktop}, ${device.smallLaptop}, ${device.screen4k} {
-    max-width: 300px;
+    /* FIXME: 4k fix, under observation */
+    max-width: ${cardArticleMaxWidth};
     min-width: 200px;
-    // top-cards shouldn't have any margin
+
+    /* top-cards shouldn't have any margin */
     &:nth-child(-n + ${numberOfCards}) {
       margin-top: 0;
     }
 
-    // odd cards have no left margin for the expander
+    /* odd cards have no left margin for the expander */
     &:nth-of-type(odd) ${Expander} {
       margin-left: 0;
     }
 
-    // even cards have a special margin for the expanded for obvious CSS reasons
+    /* even cards have a special margin for the expanded for obvious CSS reasons */
     &:nth-of-type(even) ${Expander} {
       margin-left: calc(-100% - 20px);
     }
 
-    // only on desktop
+    /* only on desktop */
     &:hover {
       transform: ${(props) => (props.open ? "" : "translateY(-2px)")};
     }
@@ -274,15 +315,4 @@ export const Card = styled.li.attrs(({ active }) => ({
       margin-top: 20px;
     }
   }
-  ${({ active, open }) =>
-    active &&
-    !open &&
-    css`
-      opacity: 0.5;
-      box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 2px;
-      &:hover {
-        transform: unset;
-      }
-    `};
-  /** ^^ if some card is active this card isn't open then opacity 0.5 */
 `;

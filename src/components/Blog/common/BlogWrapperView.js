@@ -15,16 +15,19 @@ import { FloatingScrollToTop } from "./FloatingScrollToTop";
 
 // TODO: Might be worth to invert this selector vs screen media
 export const BlogWrapperView = styled.div`
-  height: 100vh;
+  min-height: 100%;
+  overflow: scroll;
+
   display: flex;
   flex-direction: column;
-  overflow: scroll;
-  margin: 0 auto;
   align-items: center;
+
+  margin: 0 auto;
   background-color: ${entireBackground};
   background: ${entireBackgroundImage};
   color: ${fontColor};
   padding: ${rhythm(0.75)};
+
   h1 {
     font-size: ${rhythm(2.5)};
     @media ${device.mobile} {
@@ -35,6 +38,8 @@ export const BlogWrapperView = styled.div`
   main {
     width: 40vw;
     max-width: 40vw;
+    height: 100%;
+    flex: 1;
     @media ${device.tablet} {
       width: 50vw;
       max-width: 50vw;
@@ -44,17 +49,13 @@ export const BlogWrapperView = styled.div`
       width: 100%;
     }
     @media ${device.screen4k} {
-      height: 100vh;
-    }
-    @media ${device.desktop} {
-      height: 100%;
+      width: 20vw;
     }
   }
 `;
 export const BlogHeader = styled.header.attrs({
   id: "web-header",
 })`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -62,7 +63,9 @@ export const BlogHeader = styled.header.attrs({
   margin: 20px 5px 5px 5px;
   width: 100%;
   max-width: 40vw;
-
+  @media ${device.screen4k} {
+    max-width: 20vw;
+  }
   @media ${device.tablet} {
     max-width: 50vw;
   }
@@ -100,7 +103,7 @@ const FloatingThemeButton = styled.span`
   position: absolute;
 `;
 
-export const BlogHeaderView = (props) => {
+export const BlogHeaderView = ({ children }) => {
   return (
     <>
       <BlogHeader>
@@ -115,7 +118,7 @@ export const BlogHeaderView = (props) => {
         </BlogHead>
         <Navigation />
       </BlogHeader>
-      <FloatingThemeButton>{props && props.children}</FloatingThemeButton>
+      <FloatingThemeButton>{children}</FloatingThemeButton>
       <FloatingScrollToTop />
     </>
   );

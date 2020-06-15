@@ -12,7 +12,7 @@ export default ({ data, cardNumber, ...rest }) => {
       <ProjectCardsContainer>
         {edges.map((edge, i) => {
           const { node } = edge;
-          const { excerpt, frontmatter, html } = node;
+          const { excerpt, frontmatter, body } = node;
           return (
             <ProjectCard
               key={`project-card-${i}`}
@@ -20,8 +20,8 @@ export default ({ data, cardNumber, ...rest }) => {
               index={i}
               open={cardNumber === i}
               active={cardNumber !== -1}
-              html={html}
-              body={excerpt}
+              body={body}
+              excerpt={excerpt}
               {...frontmatter}
               {...rest}
             />

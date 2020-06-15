@@ -3,14 +3,14 @@ import ProjectsView from "./ProjectsView";
 import { StaticQuery, graphql } from "gatsby";
 const getAllProjects = graphql`
   query {
-    projects: allMarkdownRemark(
+    projects: allMdx(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { type: { eq: "project" } } }
     ) {
       edges {
         node {
           id
-          html
+          body
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")

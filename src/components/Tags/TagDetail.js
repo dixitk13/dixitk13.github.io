@@ -22,7 +22,7 @@ const AllTagsLink = styled(NavLink)`
 
 export default function TagDetail({ pageContext, data }) {
   const { tag } = pageContext;
-  const { edges, totalCount } = data.allMarkdownRemark;
+  const { edges, totalCount } = data.allMdx;
 
   return (
     <BlogWrapper>
@@ -53,7 +53,7 @@ export default function TagDetail({ pageContext, data }) {
 
 export const pageQuery = graphql`
   query($tag: String) {
-    allMarkdownRemark(
+    allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] }, type: { eq: "blog" } } }

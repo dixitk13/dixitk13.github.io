@@ -36,6 +36,7 @@ button {
  */
 .gatsby-highlight pre[class*="language-"],
 pre code[class*="language-"] {
+  /* font-size: 14px; */
   border: unset;
   text-shadow: unset;
   box-shadow: unset;

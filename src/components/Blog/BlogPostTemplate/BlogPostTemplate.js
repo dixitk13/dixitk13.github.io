@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import { BlogWrapper, BlogMain } from "../common";
+import { mdxComponents } from "../";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
 import { SEO } from "../../SEO";
@@ -11,7 +12,6 @@ import { SEO } from "../../SEO";
 export default function BlogPostTemplate({ data }) {
   const { mdx: post } = data;
   const { frontmatter, excerpt, body, timeToRead } = post;
-  console.log(">>: BlogPostTemplate -> post", post);
   const { title, date } = frontmatter;
   return (
     <BlogWrapper>
@@ -28,7 +28,7 @@ export default function BlogPostTemplate({ data }) {
             Last updated: {date} • {timeToRead} min read
           </p>
         </BlogHeader>
-        <MDXRenderer>{body}</MDXRenderer>
+        <MDXRenderer components={mdxComponents}>{body}</MDXRenderer>
       </BlogMain>
     </BlogWrapper>
   );

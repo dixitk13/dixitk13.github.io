@@ -15,10 +15,11 @@ export const HomeViewContainer = styled.div`
   justify-content: center;
   color: ${fontColor};
   padding: 4px ${rhythm(0.75)} 0 ${rhythm(0.75)};
+  overflow: hidden;
 
-  @media ${device.desktop}, ${device.screen4k} {
+  /* @media ${device.desktop}, ${device.screen4k} {
     overflow: scroll;
-  }
+  } */
   @media ${device.mobile}, ${device.tablet} {
     /* height: unset; */
     flex-direction: column;

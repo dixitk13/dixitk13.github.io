@@ -134,6 +134,13 @@ module.exports = {
           //     wrapperStyle: `margin-bottom: 30px;`,
           //   },
           // },
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: null,
+              rel: "nofollow noopener noreferrer external",
+            },
+          },
           `gatsby-remark-prismjs`,
         ],
       },

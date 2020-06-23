@@ -73,7 +73,7 @@ const FanCardContainer = styled.ul.attrs({
   }
 `;
 
-const FannedCards = ({ images }) => {
+export const FannedCards = ({ images }) => {
   const three = images.length <= 3 || images.length === 4;
   const showLength = three ? 3 : 5;
   return (
@@ -87,4 +87,3 @@ const FannedCards = ({ images }) => {
   );
 };
 
-export default FannedCards;

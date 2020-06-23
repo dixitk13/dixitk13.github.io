@@ -32,7 +32,7 @@ Do you get irritated by 5 notifications grouped under the same application by a 
 [10:30 AM] Dixit Patel: Right, on it.
 ```
 
-## I do! There, I said it! 🙈
+> I do! There, I said it! 🙈
 
 Most of people in this world might have used one or another form of chat/messaging
 like iMessage, Jabber, Slack, Teams, etc. Today, at most workplaces messaging is an essential part of communication for most people working w/ each other.
@@ -80,7 +80,7 @@ Now one would ask, what does this benefit me with?
 
 Well, I'll say why maintain commit history with 52th word mark and wrap the rest of the commit message at 72th word mark?
 
-## [📜 HISTORY 📜](#history)
+## 📜 HISTORY 📜
 
 Its's a powerful thing. Commit history is a very important thing!
 It helps understand the how the code has been developing and what churn has

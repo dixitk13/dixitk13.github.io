@@ -1,10 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
+import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import { BlogWrapper, BlogMain } from "../common";
-import { mdxComponents } from "../";
+import { mdxComponents } from "../../../common";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
 import { SEO } from "../../SEO";
@@ -28,7 +29,11 @@ export default function BlogPostTemplate({ data }) {
             Last updated: {date} • {timeToRead} min read
           </p>
         </BlogHeader>
-        <MDXRenderer components={mdxComponents}>{body}</MDXRenderer>
+        <MDXProvider components={mdxComponents}>
+          <MDXRenderer>
+            {body}
+          </MDXRenderer>
+        </MDXProvider>
       </BlogMain>
     </BlogWrapper>
   );

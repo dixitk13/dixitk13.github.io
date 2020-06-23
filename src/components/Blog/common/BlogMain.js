@@ -6,5 +6,6 @@ export const BlogMain = styled.main`
   align-items: flex-start;
   margin: 0;
   width: 100%;
+  font-size: 17px;
   /* align-items: center; */
 `;

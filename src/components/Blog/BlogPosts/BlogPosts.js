@@ -5,14 +5,14 @@ import { BlogPostsView } from "./BlogPostsView";
 
 export const getAllBlogs = graphql`
   query getAllBlogs {
-    blogs: allMarkdownRemark(
+    blogs: allMdx(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { type: { eq: "blog" } } }
     ) {
       edges {
         node {
           id
-          html
+          body
           frontmatter {
             path
             type

@@ -7,7 +7,7 @@ import { TagList } from "../components/Tags";
 
 const TagsPage = ({
   data: {
-    allMarkdownRemark: { group },
+    allMdx: { group },
     site: {
       siteMetadata: { title },
     },
@@ -28,10 +28,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
-      limit: 2000
-      filter: { frontmatter: { type: { eq: "blog" } } }
-    ) {
+    allMdx(limit: 2000, filter: { frontmatter: { type: { eq: "blog" } } }) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

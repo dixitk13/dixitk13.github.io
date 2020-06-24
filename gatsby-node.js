@@ -4,10 +4,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  if (
-    node.internal.type === "MarkdownRemark" &&
-    node.frontmatter.type === "blog"
-  ) {
+  if (node.internal.type === "Mdx" && node.frontmatter.type === "blog") {
     const slug = createFilePath({ node, getNode });
     createNodeField({
       node,
@@ -27,7 +24,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     {
-      allMarkdownRemark(
+      allMdx(
         filter: { frontmatter: { type: { eq: "blog" } } }
         sort: { order: DESC, fields: [frontmatter___date] }
         limit: 1000
@@ -40,7 +37,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-      tagsGroup: allMarkdownRemark(limit: 2000) {
+      tagsGroup: allMdx(limit: 2000) {
         group(field: frontmatter___tags) {
           fieldValue
         }
@@ -53,14 +50,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
   // extract blog items
-  const blogPages = result.data.allMarkdownRemark.edges;
+  const blogPages = result.data.allMdx.edges;
 
   // make blog pages
   blogPages.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
       component: blogPostTemplate,
-      context: {}, // additional data can be passed via context
+      context: {
+        pathSlug: node.frontmatter.path,
+      }, // additional data can be passed via context
     });
   });
 

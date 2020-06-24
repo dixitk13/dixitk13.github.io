@@ -1,10 +1,13 @@
 import React from "react";
+import { MDXProvider } from "@mdx-js/react";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+
 import {
   Card,
   CardContainer,
   HeaderContainer,
   ViewMore,
-  Body,
+  Excerpt,
   Cross,
   Tags,
   Tag,
@@ -12,8 +15,8 @@ import {
   ExpanderBody,
   ExpanderClose,
 } from "../../../common/ExpandableCard";
+import { FannedCards, mdxComponents } from "../../../common";
 
-import FannedCards from "../../../common/FannedCards";
 
 export default ({
   id,
@@ -21,8 +24,8 @@ export default ({
   link,
   tags,
   body,
+  excerpt,
   images,
-  html,
   toggleOpen,
   open,
   active,
@@ -49,13 +52,17 @@ export default ({
         >
           {title}
         </HeaderContainer>
-
         <FannedCards images={images} />
-
-        <Body ariaLabel="Project Overview">{body}</Body>
+        <Excerpt ariaLabel="Project Overview">{excerpt}</Excerpt>
       </CardContainer>
       <Expander cardId={id} open={open}>
-        <ExpanderBody open={open} dangerouslySetInnerHTML={{ __html: html }} />
+        <ExpanderBody open={open}>
+          <MDXProvider components={mdxComponents}>
+            <MDXRenderer>
+              {body}
+            </MDXRenderer>
+        </MDXProvider>
+        </ExpanderBody>
         <Tags open={open}>
           {tags.map((tag, i) => (
             <Tag key={`card-tag-${i}-${tag}`}>{tag}</Tag>

@@ -231,7 +231,7 @@ export const ViewMore = styled(Tag)`
   }
 `;
 
-export const Body = styled.article.attrs({ tabIndex: 0 })`
+export const Excerpt = styled.article.attrs({ tabIndex: 0 })`
   font-size: ${rhythm(0.65)};
   text-align: left;
   min-height: 85px;

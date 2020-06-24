@@ -1,15 +1,18 @@
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
+import { MDXProvider } from "@mdx-js/react";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import { BlogWrapper, BlogMain } from "../common";
+import { mdxComponents } from "../../../common";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
 import { SEO } from "../../SEO";
 
 export default function BlogPostTemplate({ data }) {
-  const { markdownRemark: post } = data;
-  const { frontmatter, excerpt, html, timeToRead } = post;
+  const { mdx: post } = data;
+  const { frontmatter, excerpt, body, timeToRead } = post;
   const { title, date } = frontmatter;
   return (
     <BlogWrapper>
@@ -26,7 +29,11 @@ export default function BlogPostTemplate({ data }) {
             Last updated: {date} • {timeToRead} min read
           </p>
         </BlogHeader>
-        <BlogBody dangerouslySetInnerHTML={{ __html: html }} />
+        <MDXProvider components={mdxComponents}>
+          <MDXRenderer>
+            {body}
+          </MDXRenderer>
+        </MDXProvider>
       </BlogMain>
     </BlogWrapper>
   );
@@ -62,36 +69,36 @@ const BlogTitle = styled.h1`
   font-family: "Futura PT", -apple-system, sans-serif;
 `;
 
-const BlogBody = styled.article.attrs({
-  tabIndex: 0,
-})`
-  font-size: ${rhythm(0.75)};
-  width: 100%;
-  p {
-    /* display: flex; */
-    img {
-      margin: 0 auto;
-    }
-  }
-  a {
-    color: ${fontColor};
-  }
-  code {
-    font-size: ${rhythm(0.75)};
-  }
-  pre {
-    background: #282c34;
-    border-radius: 6px;
-    color: #abb2bf;
-    overflow: auto;
-    padding: 14px 18px;
-    line-height: 1.6;
-  }
-`;
+// const BlogBody = styled.article.attrs({
+//   tabIndex: 0,
+// })`
+//   font-size: ${rhythm(0.75)};
+//   width: 100%;
+//   p {
+//     /* display: flex; */
+//     img {
+//       margin: 0 auto;
+//     }
+//   }
+//   a {
+//     color: ${fontColor};
+//   }
+//   code {
+//     font-size: ${rhythm(0.75)};
+//   }
+//   pre {
+//     background: #282c34;
+//     border-radius: 6px;
+//     color: #abb2bf;
+//     overflow: auto;
+//     padding: 14px 18px;
+//     line-height: 1.6;
+//   }
+// `;
 
 export const query = graphql`
   query blogPostByPath($path: String!) {
-    markdownRemark(frontmatter: { type: { eq: "blog" }, path: { eq: $path } }) {
+    mdx(frontmatter: { type: { eq: "blog" }, path: { eq: $path } }) {
       id
       frontmatter {
         title
@@ -100,7 +107,7 @@ export const query = graphql`
       }
       excerpt(truncate: true)
       timeToRead
-      html
+      body
     }
   }
 `;

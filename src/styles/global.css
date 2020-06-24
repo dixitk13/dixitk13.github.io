@@ -20,6 +20,13 @@ button {
   background: none;
 }
 
+.auto-link-header-class {
+  margin-right: 9px;
+}
+
+.auto-link-header-class:hover svg {
+  fill: rgb(39, 110, 241);  
+}
 /********* Custom Override Prism Styles *******/
 /**
  * overriding gatsby-highlight and the pre classes
@@ -27,6 +34,7 @@ button {
 .gatsby-highlight {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 /**
@@ -36,7 +44,9 @@ button {
  */
 .gatsby-highlight pre[class*="language-"],
 pre code[class*="language-"] {
+  /* font-size: 14px; */
   border: unset;
+  width: 100%;
   text-shadow: unset;
   box-shadow: unset;
 }

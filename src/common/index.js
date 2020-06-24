@@ -5,3 +5,4 @@ export * from "./ExpandableCard";
 export * from "./FannedCards";
 export * from "./SimpleButton";
 export * from "./constants";
+export * from "./MDX";

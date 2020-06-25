@@ -136,7 +136,7 @@ module.exports = {
               maintainCase: true,
               removeAccents: true,
               isIconAfterHeader: false,
-              elements: [`h1`, `h2`, `h3`, `h4`],
+              elements: [`h2`],
             },
           },
           `gatsby-remark-smartypants`,
@@ -188,7 +188,7 @@ module.exports = {
               classPrefix: 'language-',
               inlineCodeMarker: null,
               aliases: {},
-              showLineNumbers: false,
+              showLineNumbers: true,
               noInlineHighlight: false,
               prompt: {
                 user: 'root',

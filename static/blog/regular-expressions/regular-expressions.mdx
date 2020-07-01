@@ -1,0 +1,457 @@
+---
+title: "Regular Expressions"
+date: "2020-02-20"
+path: "/regular-expressions"
+type: "blog"
+tags: ["regex", "javascript"]
+---
+
+Everyone has used regular expressions sometime of life to check validation 
+of strings or you know capture a particular group of text you might be 
+looking for. 
+
+Today I'll go over some basics, just for refreshers, incase folks are new 
+to regular expressions and some advanced stuff which I personally found useful.
+
+Skip directly to [Advanced Section](#Advanced-Stuff) ➡️
+
+
+## Basics 
+
+A regular expression consists of a pattern and a set of flags. 
+You could do it in following ways:
+- Use the contructor pattern 
+  e.g.: `new RegExp("pattern")` or `new RegExp("pattern", "i")`
+- Use the short hand by providing your pattern between `/`. 
+  In this specific scenario javascript considers any text between 
+  `/` as regular expressions but has some shortcomings which we'll discuss later on.
+  e.g.: `/pattern/` or `/MYPATTER/i`
+
+### Flags
+Regular expressions have a few flags which are useful for creating powerful expressions viz.
+
+| Flags    | Description  | 
+|----------|---------------------------------------------------|
+| `i`      | Ignore case, says it all |
+| `g`      | Global search across the entire string(not just first occurrence) and return all occurrences |
+| `m`      | Multiline mode  |
+| `y`      | Sticky positions match |
+
+There's more flags TBH, but the above are the most common ones I've come across.
+
+#### Flag examples using match 
+Starting with simpler examples. For the below examples, we'll have a constant
+paragraph like below and we'll match against regex.
+
+```javascript
+const paragraph = 'The quick brown fox jumps over the lazy dog.';
+<insert regex from below> 
+const found = paragraph.match(regex);
+console.log(found);
+```
+
+Lets search for the word, "the" and we'll do like so: 
+
+```javascript
+const regex = /the/;
+
+> ["the"]
+
+console.log(found.index);
+> 31
+```
+Oh nice, I can find the index for the match as well, huh! 
+
+🤔 Oh but wait, how can I ignore case and match the first "The"?
+
+```javascript
+const regex = /the/i;
+
+> ["The"]
+```
+Looks like the above matched only the first "the" by ignoring case. 
+
+😶 Nah, that's not what I was looking for. 
+What happens if I do a global search using a `g` flag?
+
+```javascript
+const regex = /the/g;
+
+> ["the"]
+```
+Looks like it globally searched for the second the? 
+
+😒 What happens if I do both `i` and `g` together?
+
+```javascript
+const regex = /the/ig;
+
+> ["The", "the"]
+```
+🤨 I see that's what it is? Ignore case and global search together huh.
+
+
+### Functions 
+There's three functions in string operations where regexes are super helpful viz.
+- `match(/str1/)`: Finds a "match" for a string pattern.
+- `replace(/str1/, "str2")`: Finds a match and replace it with another string as the 2nd argument. 
+- `test(/str1/)`: returns true/false for checking against a string pattern match.
+
+These will be the most common used functions.
+
+Regular expressions also have a _Shorthand_ character classes, _Anchors_ 
+and _Quantifiers_ which all help in simplifying the targetted expressions.
+
+We'll see _Quantifiers_, _Anchors_ and _Shorthand_ character examples together.
+
+### Quantifiers  
+A quantifier quantifies, like how many times does a particular "expression" occur.
+
+| Quantifier  | Description  | 
+|-------------|---------------------------------------------------|
+| `+`         | Plus indicates one-or-more  |
+| `*`         | Star says zero-or-more, basically optional as well - the greedy boy! | 
+| `?`         | Question mark indicates, one-or-zero matches |
+| \|         |  A logical OR ofcourse  | 
+
+### Anchors
+Regular expressions also have anchor elements viz. 
+
+| Anchors  | Description  | 
+|----------|--------------|
+| `^`      | starts with  |
+| `$`      | ends with |
+
+### Shorthand Character classes
+Character classes are usually captured by surrounding them with square braces. 
+
+If you specify `^` inside the capture braces `[^xyz]` they'd stand for negation. Yes, negation! 
+So lets look at the character classes now:
+
+Words and digits: 
+
+| Pattern  | Description  | 
+|----------|---------------------------------------------------|
+| `[A-Z]`  | captures any captial alphabet between A to Z.     | 
+| `[a-z]`  | captures any small letter alphabet between a to z  |
+| `[0-9]`  | any digit between 0 to 9. Short hand is `[\d]` |
+| `[\w]`   | captures any word, in totality it stands for `[a-zA-Z0-9]` |
+| `[\W]`   | captures anything that's not a word, in totality it stands for `[^a-zA-Z0-9]` |
+| `[\D]`   | Short hand for not a digit. |
+
+White-space stuff:
+
+| Pattern | Description  | 
+|---------|---------------------------------------------------|
+| `[\s]`  | captures any whitespace character.  |
+| `[\S]`  | captures any non-whitespace character. |
+|  `.`    | any character of-course | 
+
+Negation stuff: 
+
+| Pattern    | Description  | 
+|------------|---------------------------------------------------|
+| `[^abc]`   | would stand for not a, b, or c |
+| `[^apple]` | would stand for not the word apple but everything apart from that word. |
+
+#### Examples 
+
+Let's start with words and digits: 
+
+Here's lets say you just wanna match against finding the new bootstrap version?
+Or maybe you changed your mind are are looking for versions of frameworks 
+i.e. words followed by numbers. Below are some examples illustrating the same: 
+```javascript
+const str0 = "New Bootstrap5 is out. Older Boostrap4 isn't any good";
+console.log(str0.match(/(Bootstrap\d)/)); // "Bootstrap5"
+console.log(str0.match(/(\w+\d)/)); // "Bootstrap5"
+console.log(str0.match(/(\w+\d)/g)); // ["Bootstrap5", "Bootstrap4"]
+```
+
+Here goes the clique US telphone number regex: 
+```javascript
+const str0 = 
+"This is my nicely formatter number +1(123)-456-7890." +
+"Also this can be it w/o the extension 123-456-7890."+
+"Rightly, I can put braces & hypens wherever (123) 456-7890" +
+"Oh yeah, lets not forget w/o hypens: 123 456 7890" + 
+"Or the way with periods in between like:123.456.7890" + 
+"Gotta match'em all!";
+
+str0.match(/((\+\d{1,2})?(\(?\d{3}\)?.?\d{3}.?\d{4}))/g);
+// ["+1(123)-456-7890", "123-456-7890", "(123) 456-7890", "123 456 7890", "123.456.7890"]
+```
+
+Let's break it down one by one. 
+- `(\+\d{1,2})?`: Indicates the symbols `(` & `+` followed by a digit quantifying as occuring max twice.
+And the entire thing is optional since its followed by a `?` indicating 0,1 occurrences. 
+- `\(?\d{3}\)?`: Indicates the first and last round braces as being optional by using `\(?`.
+The first `\` is the escape character used to implicitly say look for a round brace `(`. 
+The `\d{3}` ofcourse says look for 3 digits.
+- `.?`: Here we're looking for an optional delimiter, like a space or `-` or `.`.
+- `\d{3}`: Looking for the second set of 3 digits 
+- `.?`: Another optional delimiter
+- `\d{4}`: The last set of 4 digits to be captured. 
+
+The entire expression is surrounded by round braces to allow capturing the expression. 
+
+And Voila! We have a regex capturing a phone-number, but its not free of bugs I'd assume. 
+
+
+Let's try anchors. In the below example, raining ends with would match in L02 but 
+in L03 it won't match rain as ending. We know ofcourse why. 
+
+
+```javascript
+const str1 = "it was raining";
+console.log(/raining$/.test(str1)); // true
+console.log(/rain$/.test(str1)); // false
+
+console.log(/^it/.test(str1)); // true
+console.log(/^was/.test(str1)); // false
+```
+
+Hope those examples made sense.
+
+## Advanced Stuff
+Lets start with Word Boundary and then go towards specific examples which I recently have written.
+
+### Word Boundary 
+- `[\b]`: the `b` here stands for word-boundary. 
+Which matches three things viz. A start of the sentence, end of sentence - since they "boundaries". 
+And it matches end/start of a word - meaning:
+1. "a place where the word can begin like with space" 
+2. "a place where the word ends, like exclamation or another space"
+Let's see with examples shall we. 
+
+```javascript
+console.log("GO! Bananas, Monkey?".match(/\bMonkey\b/)); // Monkey 
+console.log("GO! Bananas, Monkey?".match(/\bMonke\b/)); // null 
+console.log("GO! Bananas, Monkey?".match(/\bGO\b/)); // Go 
+console.log("GO! Bananas, Monkey?".match(/\bBanana\b/)); // null 
+```
+
+As you see in:
+- example 1: `Monkey` is matched, since its ending as "word boundary"
+- example 3: `GO` is matched, since its starting as "word boundary"
+- example 2/4: `Monke` & `Banana` both are NOT matched, since its not ending/starting with a boundary
+
+Let's take another example. Try capturing time from the below items, where time is a xx:yy two digit numbers:
+
+```javascript
+const timestr1 = "I drink coffee at 09:00 AM and try to finish by 11:00 AM." +
+"Sometimes I even do an afternoon tea around 16:00."+ 
+"But tea at18:00isn't tea, is it? Nor is 123:456PM" // ??
+```
+
+So, looks like we are capturing two digits numbers which can be
+captured by `\d` and quantifying them as `{2}` occurrences like `\d{2}`. 
+And seperate them with a `:`. Cool. How about avoid the 18:00 🤔
+
+The word boundary 😮 that will do it! Putting it all together, it looks like so:
+
+```javascript
+timestr1.match(/\b\d{2}:\d{2}\b/g)); 
+// => ["09:00", "11:00", "16:00"]
+```
+
+Wow 😮 Or not yet?
+
+
+### The `new RegExp`
+In basics, we talked about how there's yet another syntax for creating a regex. 
+
+This new method comes with its own pros and cons, lets do cons first: 
+We need to escape _Escape Characters_ like `\ ^ * ( ) .` and more such stuff.
+
+But this new expression, also allows variable substitution. 
+We'll first see how to escape characters and then try variable substitution.
+
+If we want to re-write the time-regex, it'll need to escapse those `\` characters:
+
+```javascript
+const r = new RegExp("\\b\\d{2}:\\d{2}\\b", "g");
+console.log(timestr1.match(r));
+// => ["09:00", "11:00", "16:00"]
+```
+Not pretty I know! The second argument for the RegExp constructor is the flags we allow in. 
+In the above example, its the globals flag to find all the time hours. 
+
+Let's say we wanted to capture post fix for a set of distributed system 
+names. Really contrived example below, but stay with me. 
+
+We have lots of different systems. Each system has a unique ID
+which suffixed by a UUID, which is either a number/UUID.
+
+e.g.: `variable_1`, `distributedVariable_uu1_22d_334_d`, etc.
+
+Let's try and extract that UUID: 
+We know we're looking for a system name followed by the ID, let's make a postfix catcher?
+
+```typescript
+const t1: string = "controller_1";
+const t2: string = "controller_uu1-4dd-3ee-41";
+const t3: string = "controller_8";
+const t4: string = "shard_1";
+const t5: string = "shard_uu1-4dd-3ee-41";
+const t6: string = "shard";
+const t7: string = "shard_";
+
+const getUUID = (s: string, prefix: string): string => {
+  const match = s.match(new RegExp(`${prefix}_([a-zA-Z0-9\-]+)$`));
+  return match && match[1];
+}
+
+console.log(getUUID(t1, "controller")); // => 1
+console.log(getUUID(t2, "controller")); // => uu1-4dd-3ee-41
+console.log(getUUID(t4, "shard")); // 1
+console.log(getUUID(t5, "shard")); //=> uu1-4dd-3ee-41
+console.log(getUUID(t6, "shard")); //=> null
+console.log(getUUID(t7, "shard")); //=> null
+```
+
+Found it useful? Still got more examples, hang tight! 
+
+Let's say you got to parse filtering expression in log-query languages. 
+What's that you'd ask? Well a super high level w/o going into the depths could be: 
+
+> Every log-query languages being offered in logging solutions across the cloud providers have a way to expression their query and a filtering expression.
+
+Let's see with an example. Here we are searching "logs" and would like to capture the filter expressions into variables of 
+
+| Name         | Description  | 
+|--------------|---------------------------------------------------|
+| `FIELD_NAME` | field name or the column/key of the log |
+| `OP`         | operator viz. `=`, `=>`, `<=`, `>`, etc | 
+| `VALUE`      | the value of the operator |
+
+Example 1: 
+```bash
+search logs 
+WHERE resource.type = "my-instance" 
+AND type = ERROR 
+```
+
+Example 2:
+```bash
+search logs2
+WHERE resource.type != "API"
+AND api.response.code = 400
+```
+
+This is what we'll be extracting out of the two examples. 
+I've called `1.1` and `1.2` for second value of expression filters. 
+
+| Name         |   Example 1.1   |Example 1.2| Example 2.1 | Example 2.2 |
+|--------------|-----------------|-----------|-------------|-------------|
+| `FIELD_NAME` | `resource.type` | `type`    | `resource.type`|  `api.response.code`|
+| `OP`         | `=`             |  `=`      | `!=` | `!=` |
+| `VALUE`      | `"my-instance"` | `"ERROR"` | `API`| `400` |
+
+How do we go about this. Let's start with operators since we know they'll be constants. 
+```javascript
+const OPERATORS = "=|>=|<=|!=|>|<";
+```
+
+Next what do we allow for values? Everything? Lets use the greedy capturing mechanism?
+Something like `.*` should work fine, looks, like quotes are optional. 
+
+Surely we'll factor that in.
+
+How about anything except whitespace? like `[^\\s]+`
+
+How can we capture the fieldName? Looks like it can constain periods or other special stuff - lets try 
+`[a-zA-Z\.\_]+`? 🤔 How does it matter what the fieldName is? 
+
+Can I just say anything except operators? like `[^${OPERATORS}]`
+
+So our final regex should capture specific groups like __fieldName__, __op__ & __value__ .
+To capture those we'll use the round braces `()`. 
+
+And it looks like so: 
+
+```javascript
+new RegExp(`([^${OPERATORS}]+)(${OPERATORS})([^\\s]+)`)
+```
+
+- `([^${OPERATORS}]+)`: captures anything except operators
+- `([${OPERATORS}])`: captures a single operator
+- `([^\\s]+)`: captures everything except whitespace.
+
+Boom! 💥
+
+For the sake of the example, we'll consider nothing comes after the filters 
+and **WHERE** is the keyword specifying the start of it.
+
+Let's put all that together and try it:
+
+```javascript
+const q1: string = `search logs2 WHERE resource.type != "API" AND api.response.code = 400`;
+const q2: string = `search logs WHERE resource.type = "my-instance" AND type = ERROR `;
+const q3: string = `search logs WHERE resource__type = "my-instance" AND type = ERROR `;
+
+const WHERE: string = "WHERE";
+const AND: string = "AND";
+const OPERATORS = "=|>=|<=|!=|>|<";
+
+interface Filter {
+  fieldName: string;
+  op: string;
+  value: string;
+}
+
+const regex = new RegExp(`([^${OPERATORS}]+)(${OPERATORS})([^\\s]+)`)
+const parseFilter = (q: string): Filter[] => {
+  const filters = q.split(WHERE);
+  if (!filters || filters.length < 2) return [];
+
+  const filterStr = filters[1];
+
+  return filterStr.split(AND).reduce((prev, curr) => {
+    const strippedCurrent = curr.replace(/ /g, "");
+    const [match, fieldName, op, value] = strippedCurrent.match(regex)
+    if (!match) return prev;
+
+    const filter: Filter = {
+      fieldName, op, value
+    };
+
+    return [...prev, filter];
+  }, []);
+}
+
+console.log(parseFilter(q1)); 
+/**
+ * => [ 
+ *  { fieldName: 'resource.type', op: '!=', value: '"API"' }, 
+ *  { fieldName: 'api.response.code', op: '=', value: '400' } 
+ * ] 
+ *  */ 
+console.log(parseFilter(q2)); 
+/**
+ * [ 
+ *  { fieldName: 'resource.type', op: '=', value: '"my-instance"' }, 
+ *  { fieldName: 'type', op: '=', value: 'ERROR' } 
+ * ] 
+ */
+console.log(parseFilter(q3)); // => 
+/**
+ * [ 
+ *  { fieldName: 'resource__type', op: '=', value: '"my-instance"' },
+ *  { fieldName: 'type', op: '=', value: 'ERROR' } 
+ * ] 
+ */
+```
+
+I might add more advanced specific examples as I come across, but hopefully you found that useful. 
+
+
+## Future Stuff
+I did a lot of multiline regex when I was an intern to play with logstash 
+and capturing the right amount of data from logs, but honestly I don't remember 
+those examples, except them being really cool 😎
+
+Also, I haven't played much with substitution and look-around regex stuff,
+but if I do - I'll update this post :) 
+
+Until next time ☮️

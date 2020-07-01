@@ -12,6 +12,8 @@ import { SEO } from "../../SEO";
 
 export default function BlogPostTemplate({ data }) {
   const { mdx: post } = data;
+  if (!post) return null;
+  
   const { frontmatter, excerpt, body, timeToRead } = post;
   const { title, date } = frontmatter;
   return (

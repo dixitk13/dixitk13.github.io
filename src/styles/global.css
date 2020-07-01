@@ -44,8 +44,6 @@ button {
  */
 .gatsby-highlight pre[class*="language-"],
 pre code[class*="language-"] {
-  /* font-size: 14px; */
-  border: unset;
   width: 100%;
   text-shadow: unset;
   box-shadow: unset;
@@ -54,10 +52,12 @@ pre code[class*="language-"] {
 pre[class*="language-"],
 :not(pre) > code[class*="language-"] {
   background: #292c34 !important;
-  border: 0.1px solid #c0c0be !important;
-  box-shadow: unset !important;
-  border-radius: 3px !important;
+  box-shadow: unset;
   text-shadow: unset !important;
+}
+
+:not(pre) > code[class*="language-"] {
+  border-radius: 3px !important;
 }
 
 .token.atrule,

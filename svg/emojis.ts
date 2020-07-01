@@ -3,6 +3,12 @@ const communication = "📱";
 const process = "⚙️";
 const back = "🔙";
 const top = "🔝";
+const regex = "*️⃣";
+
+const topArrow = "⬆️";
+const rightArrow = "➡️";
+const bottomArrow = "⬇️";
+const leftArrow = "⬅️";
 
 export const Emojis = {
   top,
@@ -10,4 +16,5 @@ export const Emojis = {
   chat,
   communication,
   process,
+  regex,
 };

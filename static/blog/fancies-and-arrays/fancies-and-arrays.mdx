@@ -1,0 +1,615 @@
+---
+title: "Fancies and Arrays"
+date: "2020-06-10"
+path: "/fancies-and-arrays"
+type: "blog"
+tags: ["javascript", "typescript"]
+---
+
+In this article we'll go thro some array functions and then on-to some
+stuff which I consider fancy stuff.
+Jump to [fancy stuff](#Fancies)
+
+## Arrays
+
+Let's try going through some useful array functions:
+
+> filter
+
+The simplest array function - `filter`. It will filter the elements of the array if
+condition is true - and will return a filtered array.
+
+Let's try the simplest of functions i.e. to find elements which are even using
+an inline function and a function which sits outside like `isEven` defined below.
+
+```typescript
+const arr: number[] = [1, 2, 3, 4];
+
+console.log(arr.filter(x => x % 2)); // [1, 3]
+
+const isEven = (x: number): boolean => x % 2 === 0;
+console.log(arr.filter(isEven)); // [2, 4]
+```
+
+The callback function provided by `filter` has an optional parameter which lets
+you access the position, so - lets try another function which tells us
+elements which are at even positions.
+
+```typescript
+const arr2: number[] = [5, 6, 7, 9];
+console.log(arr2.filter((_, index) => isEven(index))); // [5, 7]
+
+const isEvenIndex = <T>(_: T, index: number): boolean => index % 2 === 0;
+console.log(arr2.filter(isEvenIndex)); // [5, 7]
+
+// similarly w/ objects
+interface KV {
+  k: string;
+  v: number;
+}
+const arr3: KV[] = [
+  { k: "x", v: 1 },
+  { k: "y", v: 4 },
+  { k: "z", v: 9 },
+  { k: "a", v: 3 },
+];
+
+console.log(arr3.filter(x => x.v % 2 === 0)); // [{k: "y", v: 4}]
+```
+
+> findIndex
+
+`findIndex` returns the index of the first element in the array where the
+callback function provided returns true.
+Else, it returns -1, meaning no such element was found.
+
+```javascript
+const arr1 = [2, 4, 6, 7];
+const isPerfectSquareRoot = x => x > 0 && Math.sqrt(x) % 1 === 0;
+const isPerfectCubeRoot = x => x > 0 && Math.cbrt(x) % 1 === 0;
+
+console.log(isPerfectSquareRoot(4)); // true
+console.log(isPerfectCubeRoot(7)); // false
+console.log(isPerfectCubeRoot(8)); // true
+
+console.log(arr1.findIndex(isPerfectSquareRoot)); // 1 - which is 4
+console.log(arr1.findIndex(isPerfectCubeRoot)); // -1 - meaning not present
+
+const nine: KV = { k: "z", v: 9 };
+const arr3: KV[] = [{ k: "x", v: 1 }, { k: "y", v: 4 }, nine, { k: "a", v: 3 }];
+
+console.log(arr3.filter(x => x.v % 2 === 0));
+console.log(arr3.findIndex(x => x.v === 9)); // 2
+console.log(arr3.findIndex(x => x.v === 2)); // -1
+
+// also not to forget some object equality stuff
+console.log(arr3.findIndex(x => x === { k: "z", v: 9 })); // -1
+console.log(arr3.findIndex(x => x === nine)); // 2
+```
+
+> some
+
+`some` is used as an indicator to test and find out if a certain condition
+exists inside the array. It also breaks out as soon as the condition is met
+instead of travesing the entire array.
+
+Refer `includes` to find out how its different than `some`.
+
+```javascript
+const arr1 = [2, 4, 6, 7];
+console.log(arr1.some(x => x % 2 !== 0)); // true
+console.log([2, 4, 6].some(x => x % 2 !== 0)); // false
+```
+
+> includes
+
+`includes` finds out if a particular element exists inside the array.
+
+It's **different** than `some` in the sense that it won't allow for custom
+functions which check the presence of an element.
+
+`includes` is also similar to `indexOf` and behaves like a short-hand.
+
+```typescript
+const strs: string[] = [
+  "The",
+  "quick",
+  "brown",
+  "fox",
+  "jumps",
+  "over",
+  "the",
+  "lazy",
+  "fox",
+];
+
+console.log(strs.includes("fox")); // true
+console.log(strs.includes("nox")); // false
+
+const myIncludes = <T>(arr: T[], ele: T): boolean => {
+  return arr.indexOf(ele) !== -1;
+};
+
+console.log(myIncludes(strs, "fox")); // true
+console.log(myIncludes(strs, "nox")); // false
+```
+
+> concat
+
+A simple `concat` function which will concat two arrays and return
+a new array w/o changing the original array.
+
+Important thing to note is `concat` will not flatten nested arrays.
+
+```javascript
+const a1 = ["a", "b", "c"];
+const a2 = ["d", "e", "b"];
+const a3 = ["x", "a", "y"];
+
+console.log(a1.concat(a2)); // ['a', 'b', 'c', 'd', 'e', 'b']
+
+console.log(a1.concat(a2, a3)); // ['a', 'b', 'c', 'd', 'e', 'b', 'x', 'a', 'y']
+
+console.log(a1); // ['a', 'b', 'c']
+
+const x1 = ["a", "b"];
+const x2 = ["x", ["y", "z"]];
+
+console.log(x1.concat(x2)); // ['a', 'b', 'x', ['y', 'z']]
+```
+
+> forEach
+
+`forEach` function is used to iterate over each element of the array as the name
+specifies, but it won't return anything and is void.
+
+```javascript
+[7, 5, 6, 9].forEach((x, index) =>
+  console.log(`index: ${index}, value: ${x} => `)
+);
+
+// prints
+// index: 0, value: 7 => index:1, value: 5 => index: 2, value: 6 => index: 3, value: 9 =>
+```
+
+It also skips calling itself for empty elements.
+
+```javascript
+[, , ,].forEach((x, index) =>
+  console.log(`[index: ${index}: value: ${x}] => `)
+);
+// nothing prints!
+```
+
+Another point to note about the `forEach` callback is that the callback
+functions can't be async and won't wait for async operations to finish.
+
+```javascript
+const fileDates = readFiles();
+
+// doens't work and won't wait for generateForDate to finish
+fileDates.forEach(async date => await generateForDate(date));
+
+// works, below is the right way
+for (const date of fileDates) {
+  await generateForDate(date);
+}
+```
+
+> every
+
+`every` will make sure "every" element in the array will satisfy the callback condition.
+If yes - it returns a boolean value.
+Else a falsy value to indicate the presence of an element where the callback
+function doesn't get satisfied.
+
+And yes it'll also take into consideration sparse arrays.
+
+```javascript
+console.log([1, 2, 4, ,].every(x => x % 2 === 0)); // false
+console.log([2, 4, ,].every(x => x % 2 === 0)); // true
+```
+
+> find
+
+`find` is very similar to `some` - it looks for the presence of the element
+and breaks out as soon as it finds the truthy element and allows a function
+for checking the presence of the element.
+
+But instead of returning true/false it'll return the actual element!
+If not found, it'll return undefined.
+
+`find` also will look for the first element - so be sure to have that
+conditional logic in mind when using the function.
+
+```typescript
+console.log(strs.find(x => x === "nox")); // undefined
+console.log(strs.find(x => x === "fox")); // fox (first fox not the second fox)
+
+console.log(strs.find(x => x && x.startsWith("fo"))); // fox (first fox not the second fox)
+```
+
+> reverse
+
+`reverse` will reverse an array in-place.
+**in-place** that's right - so it'll modify the original array.
+
+```typescript
+const arr: number[] = [1, 5, 3];
+console.log(arr); // [1, 5, 3]
+
+const rev: number[] = arr.reverse();
+
+console.log(rev); // [3, 5, 1]
+console.log(arr); // [3, 5, 1]
+console.log(rev === arr); // true
+```
+
+> map
+
+`map` is a very powerful function which like `forEach` loops over every element in
+the array and returns a new `mapped` element for every element as returned via the callback function.
+
+It doesn't touch the original array.
+If nothing is returned from the map callback, it'll be an undefined element inside
+the returned array.
+
+```typescript
+const arr: number[] = [1, 5, 3];
+console.log(arr.map(x => x * 2)); // [2, 10, 6]
+console.log(arr.map(x => ({ x: x * 2 }))); // [ { x: 2 }, { x: 10 }, { x: 6 } ]
+console.log(arr.map((x, index) => ({ x: x * 2, idx: index })));
+// [ { x: 2, idx: 0 }, { x: 10, idx: 1 }, { x: 6, idx: 2 } ]
+
+console.log(
+  arr.map(x => {
+    if (x % 2 === 0) return x;
+  })
+); // [undefined, undefined, undefined]
+```
+
+> flat
+
+`flat` will flatten the elements into a f-l-a-t structure and takes another
+argument to determine how deep the function should recursively flatten.
+
+```javascript
+// type DeepArray<T> = Array<T> | Array<DeepArray<T> | T>;
+
+const arr6 = ["a", "b", ["c", "d"]];
+console.log(arr6.flat(1)); // [ 'a', 'b', [ 'c', 'd' ] ]
+
+const arr7 = ["a", "b", ["c", "d", ["e", "f"]]];
+console.log(arr7.flat()); // [ 'a', 'b', 'c', 'd', [ 'e', 'f' ] ]
+
+const arr4 = ["a", "b", ["c", "d", ["e", "f"]]];
+console.log(arr4.flat(2)); // [ 'a', 'b', 'c', 'd', 'e', 'f' ]
+
+const arr5 = ["a", "b", ["c", "d", ["e", "f", ["g", "h"], ["i", "j"]]]];
+console.log(arr5.flat(Infinity));
+// [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ]
+```
+
+> reduce
+
+`reduce` is yet another powerful function which will let you loop over
+the entire array and has a concept of accumulator which accumulates results
+over the array.
+
+Simplest reduce function you'll see is addition of array elements. At each step the
+accumulator adds the element into itself and starts at 0 which is the starting
+point.
+
+```javascript
+console.log([1, 4, 6].reduce((acc, x) => acc + x, 0)); // 11
+```
+
+| index | value | accumulator |
+| ----- | ----- | ----------- |
+| 0     | 1     | 0 + 1 = 1   |
+| 1     | 4     | 1 + 4 = 5   |
+| 2     | 6     | 5 + 6 = 11  |
+
+`reduce` is very powerful and many people use it to create complex-objects out
+or even changing the structure of elements. Ideally, I try to use `reduce` only when I want my function to
+return a singular element.
+
+Let's look at an example below for `reduce` where we'll count the value of elements.
+
+```javascript
+const items = [
+  { x: 2, y: 1 },
+  { y: 2, z: 4 },
+  { z: 1, a: 1 },
+];
+
+const summation = objects => {
+  return objects.reduce((acc, objItem) => {
+    return {
+      ...acc,
+      ...Object.keys(objItem).reduce(
+        (keyAcc, key) => ({ ...keyAcc, [key]: objItem[key] + (acc[key] || 0) }),
+        {}
+      ),
+    };
+  }, {});
+};
+
+console.log(summation(items)); // { x: 2, y: 3, z: 5, a: 1 }
+```
+
+Let's walk thro this in brief via the same tabular approach:
+
+| index | value          | accumulator                |
+| ----- | -------------- | -------------------------- |
+| 0     | { x: 2, y: 1 } | { x: 2, y: 1 }             |
+| 1     | { y: 2, z: 4 } | { x: 2, y: 3, z: 4 }       |
+| 2     | { z: 1, a: 1 } | { x: 2, y: 3, z: 5, a: 1 } |
+
+We also have a function called `reduceRight` which runs from right-side of
+the array instead of from left.
+
+> from/of/fill
+
+So I'd like to discuss 3 Array functions viz. `from`, `of` and `fill` together:
+
+- `from` returns a shallow copy from an array-like structure.
+
+It also has a length property which you could set and get an
+array of that length and map with a callback function.
+
+```javascript
+console.log(Array.from("the")); // ["t", "h", "e"]
+console.log(Array.from(1)); // []
+console.log(Array.from("1")); // ["1"]
+console.log(Array.from([1, 2, 3], x => x * 2)); // [2, 4, 6]
+
+console.log(Array.from({ length: 3 })); // ['undefined', 'undefined', 'undefined']
+console.log(Array.from({ length: 3 }, (_, index) => index)); // [0, 1, 2]
+```
+
+- `of` creates an Array from the number of arguments provided
+
+```javascript
+Array.of(); // []
+Array.of(1); // [1]
+Array.of(1, 2, 3); // [1, 2, 3]
+Array.of("a", "b"); // ["a", "b"]
+```
+
+- `fill` fills the array in-place and returns the modified array back
+
+It has the mandatory first parameter which is what gets filled in the entire array.
+It also has start(defaults to 0) and end (defaults to length of array)
+parameters which are inclusive, exclusive respectively.
+
+```javascript
+const arr = [1, 2, 3, 4];
+console.log(arr.fill(0, 0, 2)); // [0, 0, 3, 4]
+console.log(arr.fill(5, 1)); // [1, 5, 5, 5]
+console.log(arr.fill(10)); // [10, 10, 10, 10]
+```
+
+> sort
+
+A simple `sort` function assumes the natural ordering and orders the elements
+in ascending order for numeric elements by itself.
+
+An important fact to remember is, sorting is **in-place** and default ordering
+converts numbers to strings and sorts them - checkout the 70 in the below example.
+
+```javascript
+console.log([7, 5, 6, 9].sort()); // [5, 6, 7, 9]
+console.log([70, 5, 6, 9].sort()); // [5, 6, 70, 9]
+```
+
+Subtracting the numbers and converting them is also something lots of people do
+to maintain ordering like below.
+
+```javascript
+console.log([70, 6, 5, 9].sort((a, b) => a - b)); // [5, 6, 9, 70]
+```
+
+## Fancies
+
+Let's look at some fun stuff as well:
+
+> fisher-yates-shuffle
+
+The famous Fisher Yates shuffle algorithm. I won't dive much into the working
+and logic of it, but briefly state it out:
+
+Algorithm:
+
+- init a variable called i as `let i = array.length`
+- Pick an element randomly from 0 - i, lets call it `j`
+- Swap the `i` element with this picked element `j`
+- Shrink the size of picking the elements, so `i--`. Repeat from step 2.
+
+This ensures "unbaised permutation". Wikipedia is a better teacher than I am TBH - but below is the code
+
+```typescript
+const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+const fisherYatesShuffle = <T>(array: T[]): T[] => {
+  let i = array.length;
+  let temp: T;
+  let j: number;
+
+  // while there remain elements to shuffle
+  while (i) {
+    // Pick a remaining element
+    j = Math.floor(Math.random() * i--);
+
+    // And swap it with the current element
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+
+  return array;
+};
+
+console.log(fisherYatesShuffle(letters)); // ["I", "J", "A", "G", "C", "E", "H", "D", "F", "B"];
+```
+
+Great links to read about Fisher Yates Algorithm:
+
+- https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+- https://bost.ocks.org/mike/shuffle/
+
+> Letter Generate function
+
+We all know what's the ascii for character 'A', its numeric 65.
+But how do we check that in JS?
+
+Well luckily function called `charCodeAt` tells us what's the
+ascii code for the same and `String.fromCharCode` tells us the
+reverse mapping for it.
+
+```javascript
+console.log("A".charCodeAt(0)); // 65;
+console.log(String.fromCharCode(65)); // "A";
+```
+
+Now let's try and write a function which gives us letters from 'A'
+to a particular letter - which might look like this:
+
+```typescript
+const generateLetters = (startAscii: number, length: number = 1): string[] => {
+  const letters: string[] = Array.from({ length }).map((_, index) =>
+    String.fromCharCode(startAscii + index)
+  );
+
+  return letters;
+};
+
+console.log(generateLetters(65)); // ['A']
+console.log(generateLetters(65, 3)); // ['A', 'B', 'C']
+console.log(generateLetters(97, 3)); // ['a', 'b']
+```
+
+> PQ
+
+Let's look at a naive Priority Queue implementation. Tries to treat an sorted
+array as PQ and add/return values based on it for offer/poll respectively.
+
+```javascript
+function Tuple(val, freq) {
+  val = val;
+  freq = freq;
+  function toString() {
+    return JSON.stringify({ val, freq });
+  }
+  return {
+    toString,
+    val,
+    freq,
+  };
+}
+function PQ() {
+  lst = [];
+  function offer(x) {
+    lst.push(x);
+    lst.sort((x, y) => x.freq - y.freq);
+  }
+  function poll() {
+    if (isEmpty()) return null;
+    let val = lst.shift();
+    return val;
+  }
+  function isEmpty() {
+    return lst.length === 0;
+  }
+  return {
+    offer,
+    poll,
+    isEmpty,
+  };
+}
+
+let pq = new PQ();
+for (let i = 0; i < 10; i++) {
+  pq.offer(new Tuple(i, Math.random()));
+}
+while (!pq.isEmpty()) {
+  console.log("element " + pq.poll());
+}
+
+// element {"val":8,"freq":0.0407238060411359}
+// element {"val":7,"freq":0.23583407354383357}
+// element {"val":6,"freq":0.24117641809409118}
+// element {"val":1,"freq":0.33821747985965533}
+// element {"val":9,"freq":0.40546659473293256}
+// element {"val":2,"freq":0.43895218033432615}
+// element {"val":5,"freq":0.5993946400967103}
+// element {"val":4,"freq":0.7927179659616519}
+// element {"val":0,"freq":0.887932230384556}
+// element {"val":3,"freq":0.999269467360683}
+```
+
+> custom-iterator
+
+A custom JS iterator. JS offers a iterator which you can attach into
+the actual object like so:
+
+```javascript
+nums[Symbol.iterator] = iteratorFn;
+```
+
+Now you can use this object in `for..of`, `for..in` and `...` spread statements.
+
+The function iterator has only two gotchas I'd say:
+
+- return done as false and a value. Use closure values to find position of value.
+- return done as true with undefined value, when truly finished
+
+```javascript
+const iterator = function() {
+  // Get all the values in an array
+
+  const values = Object.values(this);
+
+  // Store the current array key and value being iterated in the key
+  let currentKeyIndex = 0;
+  let currentValueIndex = 0;
+
+  // Implementation of next()
+  return {
+    next() {
+      const currentValArray = values[currentValueIndex];
+
+      if (!(currentKeyIndex < currentValArray.length)) {
+        // reset
+        currentValueIndex++;
+        currentKeyIndex = 0;
+      }
+
+      if (!(currentValueIndex < values.length)) {
+        return {
+          value: undefined,
+          done: true,
+        };
+      }
+
+      return {
+        value: values[currentValueIndex][currentKeyIndex++],
+        done: false,
+      };
+    },
+  };
+};
+const nums = {
+  x: [1, 2, 3],
+  y: [4, 5, 6],
+  z: [9, 10, 11],
+};
+
+nums[Symbol.iterator] = iterator;
+
+for (const num of nums) {
+  console.log(num); // 1, 2, 3, 4, 5, 6, 9, 10, 11
+}
+
+console.log(...nums); // 1, 2, 3, 4, 5, 6, 9, 10, 11
+console.log([...nums].length); // 9
+```

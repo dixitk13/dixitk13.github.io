@@ -613,3 +613,42 @@ for (const num of nums) {
 console.log(...nums); // 1, 2, 3, 4, 5, 6, 9, 10, 11
 console.log([...nums].length); // 9
 ```
+
+> Sieve of Eratosthenes
+
+The sieve of Eratosthenes is an algorithm for finding prime numbers up to
+any given limit in a very clever manner. Please refer to [wikipedia](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) for detailed
+explaination.
+
+```typescript
+function* generatePrimes() {
+  let current: number = 2;
+  // map of non-primes
+  let map: Map<number, number[]> = new Map();
+
+  while (true) {
+    if (map.has(current)) {
+      const primes: number[] = map.get(current) || [];
+      primes.forEach(prime => {
+        let nextNonPrime = prime + current;
+        // creating map of non-primes
+        if (map.has(nextNonPrime)) {
+          map.get(nextNonPrime)?.push(prime);
+        } else {
+          map.set(nextNonPrime, [prime]);
+        }
+      });
+      map.delete(current);
+    } else {
+      yield current;
+      map.set(current ** 2, [current]);
+    }
+    current += 1;
+  }
+}
+
+let primes = generatePrimes();
+for (let i = 0; i < 10; i++) {
+  primes.next().value;
+}
+```

@@ -61,8 +61,6 @@ const TitleLogo = styled.span`
 const Href = ({ href, title, imgsrc, scale, transform, alt, ...rest }) => {
   return (
     <Link
-      alt={alt}
-      aria-label={alt}
       transform={transform}
       scale={scale}
       rel="noopener noreferrer"
@@ -70,7 +68,7 @@ const Href = ({ href, title, imgsrc, scale, transform, alt, ...rest }) => {
       href={href}
     >
       {imgsrc ? (
-        <MentionsLogo src={imgsrc} alt={alt} {...rest}>
+        <MentionsLogo src={imgsrc} alt={`Click to open ${alt}`} {...rest}>
           {title}
         </MentionsLogo>
       ) : (
@@ -116,7 +114,11 @@ const LogosView = ({ extraMentions = [], enableLayout }) => {
   if (extraMentions) mentions = [...mentions, ...extraMentions];
 
   return (
-    <Mentions enableLayout={enableLayout}>
+    <Mentions
+      enableLayout={enableLayout}
+      ariaLabel="Contact me"
+      role="navigation"
+    >
       {mentions.map((mention, i) => (
         <Href
           key={`mentions-${i}`}

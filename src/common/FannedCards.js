@@ -77,7 +77,7 @@ export const FannedCards = ({ images }) => {
   const three = images.length <= 3 || images.length === 4;
   const showLength = three ? 3 : 5;
   return (
-    <FanCardContainer aria-label="Fanned Technology Card Preview" three={three}>
+    <FanCardContainer three={three}>
       {images.slice(0, showLength).map((image, i) => (
         <Item three={three} key={`fanned-image-${i}`}>
           <img alt={image} width="50px" height="50px" src={Icons[image]} />
@@ -86,4 +86,3 @@ export const FannedCards = ({ images }) => {
     </FanCardContainer>
   );
 };
-

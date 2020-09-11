@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { SimpleButton } from "../../common/SimpleButton";
 
 const SwitchViewContainer = styled(SimpleButton).attrs({
-  "aria-label": "Change Theme",
+  "aria-label": "Change the current theme",
 })``;
 
 export const SwitchView = ({ selected, children, handleClick, toggleOn }) => {

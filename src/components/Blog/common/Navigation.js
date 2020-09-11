@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { flattenDeep } from "lodash";
 
@@ -48,10 +48,11 @@ const NavUnorderedList = styled.ul`
   li {
     padding: ${rhythm(0.5)} ${rhythm(0.75)} 0 0;
     font-size: 21px;
+    outline: none;
   }
   .active-nav-link {
     margin: 0;
-    color: gray;
+    color: #707070;
     text-decoration: none;
     text-decoration: none !important;
   }
@@ -73,9 +74,10 @@ export const Navigation = ({ background }) => {
     { title: "Home", to: "/" },
     { title: "Blog", to: "/blog" },
     { title: "Tags", to: "/tags" },
-    { title: "About", to: "/about" },
+    { title: "About Me", to: "/about" },
   ];
   const activeClassNames = { className: "active-nav-link" };
+  const activeRef = useRef();
 
   const active = (pathname, link) => {
     // base condition
@@ -97,8 +99,15 @@ export const Navigation = ({ background }) => {
 
     return {};
   };
+
+  useEffect(() => {
+    if (activeRef.current) {
+      activeRef.current.focus();
+    }
+  }, []);
+
   return (
-    <Nav background={background}>
+    <Nav background={background} aria-label="Main menu">
       <NavUnorderedList>
         {items.map((item, index) => (
           <li key={`nav-link-${item.to}-${index}`}>
@@ -106,6 +115,7 @@ export const Navigation = ({ background }) => {
               to={item.to}
               title={item.title}
               getProps={({ location }) => active(location.pathname, item.to)}
+              ref={window.location.pathname === item.to ? activeRef : undefined}
             >
               {item.title}
             </NavLink>

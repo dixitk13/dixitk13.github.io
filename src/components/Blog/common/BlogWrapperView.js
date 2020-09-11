@@ -53,9 +53,7 @@ export const BlogWrapperView = styled.div`
     }
   }
 `;
-export const BlogHeader = styled.header.attrs({
-  id: "web-header",
-})`
+export const BlogHeader = styled.header`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -110,8 +108,8 @@ export const BlogHeaderView = ({ children }) => {
         <BlogHead>
           <CircularImage src={dixitk13} />
           <BlogName>
-            <Link as="h1" to="/">
-              Dixit
+            <Link to="/">
+              <h1>Dixit</h1>
             </Link>
             <span>Software Engineer</span>
           </BlogName>

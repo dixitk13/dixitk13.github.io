@@ -31,8 +31,7 @@ const DownloadButton = styled(SimpleButton)`
 `;
 
 const ButtonGroup = styled.div.attrs({
-  role: "group",
-  "aria-label": "Resume and Theme Button",
+  role: "presentation",
 })`
   display: flex;
   flex-direction: row;
@@ -43,14 +42,9 @@ const ButtonGroup = styled.div.attrs({
 const DownloadButtonsView = ({ theme, toggleOn }) => (
   <ButtonGroup>
     <DownloadButton
-      type="button"
-      ariaLabel="Download Resume"
+      ariaLabel="Download resume"
       onClick={() => window.open(resume)}
       data-hover="Download"
-      // target="_blank"
-      // href={resume}
-      // as="a"
-      // rel="noopener noreferrer"
     >
       Resume
     </DownloadButton>

@@ -13,8 +13,7 @@ import { Blockquote } from "../../../common";
 import { device, rhythm } from "../../../utils";
 
 const AboutMeFlex = styled.aside.attrs({
-  "aria-label": "About me",
-  tabIndex: "0",
+  tabIndex: 0,
 })`
   display: flex;
   flex-direction: column;
@@ -53,16 +52,15 @@ const AboutMeContainer = styled.div`
   }
 `;
 
-const Name = styled.button.attrs({
+const Name = styled.h1.attrs({
   tabIndex: 0,
 })`
   color: ${fontColor};
   font-size: ${rhythm(1.5)};
-  margin: 0 0 ${rhythm(0.5)} 0;
+  margin: ${rhythm(0.5)} 0;
   cursor: pointer;
   font-weight: 600;
-
-  padding: 0;
+  text-align: center;
   &:hover {
     color: ${fontHover};
   }
@@ -82,9 +80,7 @@ const Image = styled.img.attrs({
   animation: ${polygons} 60s infinite;
 `;
 
-const Quote = styled(Blockquote).attrs({
-  tabIndex: 0,
-})`
+const Quote = styled(Blockquote)`
   margin-left: unset;
   color: ${fontColor};
   font-size: ${rhythm(0.65)};
@@ -126,25 +122,27 @@ const ToggleHeartContainer = styled.span`
 
 export const AboutMeCardView = ({ on, toggleOn }) => {
   return (
-    <AboutMeFlex>
+    <AboutMeFlex role="presentation">
       <RealFlex />
-      <AboutMeContainer>
+      <AboutMeContainer
+        aria-labelledby="name-heading"
+        aria-describedby="name-subheading"
+      >
         <ToggleHeartContainer>
           <input
             id="toggle-heart"
             checked={on}
             onChange={toggleOn}
             type="checkbox"
+            role="switch"
           />
           <label htmlFor="toggle-heart">❤</label>
         </ToggleHeartContainer>
-        <Name aria-label="Click to send Love" onClick={toggleOn}>
+        <Name id="name-heading" onClick={toggleOn}>
           Dixit Keshavbhai Patel
         </Name>
-        <Image src={dixitk13} alt="Dixit" />
-        <Quote aria-label="My Quote just another software engineer">
-          just another software engineer
-        </Quote>
+        <Image src={dixitk13} alt="" />
+        <Quote id="name-subheading">just another software engineer</Quote>
         <Logos />
         <DownloadButtons toggleOn={toggleOn} />
         <MadeWith />

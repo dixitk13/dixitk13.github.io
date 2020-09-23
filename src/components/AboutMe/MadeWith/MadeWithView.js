@@ -18,7 +18,7 @@ const items = [
   { name: "github", url: "https://www.github.com/" },
 ];
 
-const Footer = styled.div`
+const Footer = styled.footer`
   justify-self: flex-end;
   display: flex;
   flex-direction: column;
@@ -32,10 +32,11 @@ const Footer = styled.div`
   }
 `;
 
-const Heart = styled.span`
+const Heart = styled.span.attrs({ "aria-label": "love " })`
   color: #d32f2f;
   &:after {
     content: "❤";
+    aria-label: "love ";
   }
 `;
 
@@ -61,9 +62,12 @@ const IconImage = styled.img`
   height: 22px;
   margin-bottom: 0;
   background: ${(props) => props.background || ""};
+  &:focus {
+    outline: none;
+  }
 `;
 
-const Title = styled.button`
+const Title = styled.div`
   text-align: center;
   border: none;
   background: none;
@@ -74,14 +78,14 @@ const Title = styled.button`
 const MadeWithView = () => {
   return (
     <Footer>
-      <Title>Made with {<Heart />} using</Title>
-      <IconList>
+      <Title id="footer-title">Made with {<Heart />} using</Title>
+      <IconList aria-labelledby="footer-title">
         {items.map((item) => (
           <Icon key={item.name}>
             <Link
+              alt=""
               href={item.url}
-              alt="Image"
-              aria-label={`Technology Image ${item.name}`}
+              aria-label={item.name}
               target="_blank"
               rel="noopener noreferrer"
             >

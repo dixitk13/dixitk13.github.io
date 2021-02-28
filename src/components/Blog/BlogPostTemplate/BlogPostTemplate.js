@@ -13,28 +13,28 @@ import { SEO } from "../../SEO";
 export default function BlogPostTemplate({ data }) {
   const { mdx: post } = data;
   if (!post) return null;
-  
-  const { frontmatter, excerpt, body, timeToRead } = post;
+
+  const { frontmatter, excerpt, body, fields } = post;
   const { title, date } = frontmatter;
+  const {
+    readingTime: { text: timeToRead },
+  } = fields;
   return (
     <BlogWrapper>
       <SEO
         title={frontmatter.title}
         description={excerpt || "nothin’"}
-        // pathname={fields.slug}
         article
       />
       <BlogMain>
         <BlogHeader>
           <BlogTitle>{title}</BlogTitle>
           <p>
-            Last updated: {date} • {timeToRead} min read
+            Last updated: {date} • {timeToRead}
           </p>
         </BlogHeader>
         <MDXProvider components={mdxComponents}>
-          <MDXRenderer>
-            {body}
-          </MDXRenderer>
+          <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
       </BlogMain>
     </BlogWrapper>
@@ -110,6 +110,11 @@ export const query = graphql`
       excerpt(truncate: true)
       timeToRead
       body
+      fields {
+        readingTime {
+          text
+        }
+      }
     }
   }
 `;

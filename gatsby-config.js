@@ -14,6 +14,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-sitemap`, //  TODO: maybe customize this later
     "gatsby-plugin-robots-txt",
+    `gatsby-remark-reading-time`,
     {
       resolve: `gatsby-plugin-feed-mdx`,
       options: {
@@ -32,7 +33,7 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.edges.map((edge) => {
+              return allMdx.edges.map(edge => {
                 let body = edge.node.html;
                 const siteUrl = site.siteMetadata.siteUrl;
                 const url = siteUrl + edge.node.frontmatter.path;
@@ -161,38 +162,38 @@ module.exports = {
             },
           },
           {
-            resolve: 'gatsby-remark-emojis',
+            resolve: "gatsby-remark-emojis",
             options: {
               // Deactivate the plugin globally (default: true)
               active: true,
               // Add a custom css class
-              class: 'emoji-icon',
+              class: "emoji-icon",
               // Select the size (available size: 16, 24, 32, 64)
               size: 64,
               // Add custom styles
               styles: {
-                display: 'inline',
-                margin: '0',
-                'margin-top': '1px',
-                position: 'relative',
-                top: '5px',
-                width: '25px',
+                display: "inline",
+                margin: "0",
+                "margin-top": "1px",
+                position: "relative",
+                top: "5px",
+                width: "25px",
               },
             },
           },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
-              inlineCodeMarker: '›',
-              aliases: { js: 'javascript', sh: 'bash' },
-              classPrefix: 'language-',
+              inlineCodeMarker: "›",
+              aliases: { js: "javascript", sh: "bash" },
+              classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {},
-              showLineNumbers: true,
+              showLineNumbers: false,
               noInlineHighlight: false,
               prompt: {
-                user: 'root',
-                host: 'localhost',
+                user: "root",
+                host: "localhost",
                 global: false,
               },
             },
@@ -204,8 +205,8 @@ module.exports = {
   ],
 };
 
-const formatTags = (tags) => {
-  return tags.reduce(function (prev, curr, idx) {
-    return idx == 0 ? `#${curr}` : prev + ' #' + curr
-  }, '');
-}
+const formatTags = tags => {
+  return tags.reduce(function(prev, curr, idx) {
+    return idx == 0 ? `#${curr}` : prev + " #" + curr;
+  }, "");
+};

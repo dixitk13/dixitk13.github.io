@@ -25,7 +25,7 @@ button {
 }
 
 .auto-link-header-class:hover svg {
-  fill: rgb(39, 110, 241);  
+  fill: rgb(39, 110, 241);
 }
 /********* Custom Override Prism Styles *******/
 /**
@@ -41,12 +41,14 @@ button {
  * Overriding the pre classes
  * 1. remove text-shadow
  * 2. remove border
+ * 3. aligns the code line to line# 
  */
 .gatsby-highlight pre[class*="language-"],
 pre code[class*="language-"] {
   width: 100%;
   text-shadow: unset;
   box-shadow: unset;
+  top: -17px;
 }
 
 pre[class*="language-"],
@@ -64,6 +66,18 @@ pre[class*="language-"],
 .token.attr-value,
 .token.keyword {
   color: #f92672 !important; /* monokoi color */
+}
+
+/* updating line-number padding/border */
+pre[class*="language-"].line-numbers {
+  padding-left: 2.8rem !important; /* reduced from 3.8rem */
+}
+.line-numbers > .line-numbers-rows {
+  padding-left: 5px;
+  border-right: unset !important;
+}
+.line-numbers-rows > span {
+  /* line-height: 1.2rem; */
 }
 
 /* Prompt for all users */

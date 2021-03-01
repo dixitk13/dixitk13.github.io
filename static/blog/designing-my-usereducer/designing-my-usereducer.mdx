@@ -1,0 +1,432 @@
+---
+title: "Designing my TypeScript useReducer"
+date: "2021-02-01"
+path: "/designing-my-reducer"
+type: "blog"
+tags: ["react", "typescript"]
+---
+
+In this article we'll go over how I design my application state in a TypeScript & React app
+using useReducer hook & Context API. I use this technique across my app for maintaining the
+application state.
+
+## Why useReducer?
+
+State-management libraries like Redux/MobX still hold their pros/cons
+for maintaing application state, but react state owns its position.
+
+Since the introduction of hooks, I've primarily used react state
+for state management, and when clubbed with Context API,
+it starts behaving like `all-purpose-flour`.
+
+React state is pretty lightweight, needs no extra libraries &
+can be quickly setup for smaller lightweight projects.
+
+But before we jump into this, lets do a quick recap.
+
+## Recap useReducer
+
+`useReducer` is the preferred hook you'd want to use when dealing with
+complex state.
+
+`useReducer` uses a reducer function, along with initialState to define the
+initial "reducer", which then returns you the current state value and
+a special dispatch function.
+
+This dispatch function can be used to "dispatch" actions to the reducer
+which can be handled with a simple switch statement (just like `redux` does) &
+the state then would have the updated values. The reference to the dispatch function
+stays the same between FC (Functional Component) renders and can be directly passed down as props.
+
+Let's look at a quick example, taken from [React's documentation](https://reactjs.org/docs/hooks-reference.html#usereducer):
+
+```javascript
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+    </>
+  );
+}
+```
+
+In this example above, we see dispatch is sent special "instructions" like
+`increment` and `decrement` to update the reducer state values. One can construct
+special instructions here to update the state as desired.
+
+Hopefully that summarizes `useReducer`. If not, do head over to
+React's documentation.
+
+> Pro-tip
+
+`useState` uses `useReducer` under the hood! Let's see how.
+
+```javascript
+const myreducer = (_, action) => {
+  return action.state;
+};
+
+const [state, dispatch] = React.useReducer(myreducer, true);
+const setState = flag => dispatch({ state: flag });
+
+setState(false);
+setState(true);
+
+// is equaivalent to
+
+const [state, setState] = useState(true);
+setState(false);
+setState(true);
+```
+
+So if one were to modify the dispatch function to just take the state
+you want the reducer to set, you'd get the `useState` behavior right away!
+
+## Recap useContext
+
+The React Context API helps developers truely have "global" react state that can be
+accessed without props being passed to children and grandchildren, AKA prop-drilling,
+and helps skip re-rendering components which don't use that context-state -
+ultimately leading to dynamic UI and cleaner code.
+
+The `useContext` hook is an alternative of `Context.Consumer` API, allowing
+developers to consume values under a Provider.
+
+```tsx{numberLines: true}
+type Theme = "light" | "dark";
+
+interface ThemeContextState {
+  theme?: Theme;
+  setTheme?: Function;
+}
+
+const ThemeContext = React.createContext<ThemeContextState>({});
+
+export const UseContextApp = () => {
+  return (
+    <ThemeWrapperApp>
+      <Radios />
+      <Status />
+      <Card title="Child #1" size="large" enableRenderCount={true}>
+        <Card title="Child #2" enableRenderCount={true}>
+          <ChildWithContext />
+        </Card>
+      </Card>
+    </ThemeWrapperApp>
+  );
+};
+
+const Radios = () => {...}
+
+const Status = () => {
+  const { theme } = React.useContext(ThemeContext);
+  return <div className="status-bar">VALUE: {String(theme)}</div>;
+};
+
+const ThemeWrapperApp = ({ children }: React.PropsWithChildren<{}>) => {
+  const [theme, setTheme] = React.useState<Theme>("light");
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+const ChildWithContext = () => {
+  const { theme } = React.useContext(ThemeContext);
+  return (
+    <>
+      <span>{theme}</span>
+      <Card title="Child-N" size="mini" enableRenderCount={true} />
+    </>
+  );
+};
+
+```
+
+The above example looks like the gif shown here. Each child card has
+a number at the top right corner, indicating how many times it was rendered.
+
+We start by creating the context at L8, and using the Provider API to wrap all its
+children like L31. The Status component consumes the context and updates the same.
+At L17 the `ChildWithContext` is a Child which is two level's from the top-context.
+
+In the GIF we see all the Child cards are skipped from rendering when the radio buttons
+actually change the value from the parent, except the one's consuming it.
+
+![usecontext-skipping-children](/blog/designing-my-usereducer/context-skipping-children.gif)
+
+That's React Context!
+
+## Counter
+
+Now its time to merge `useReducer` and `useContext`! Let's try this with Counter
+example first. But before we jump into the example, lets look at the core
+file structure and follow that with the contents of the files.
+
+### File Structure
+
+I like to keep my files co-located, so I try and keep them in a single folder, at least
+the ones which are related. I've tried another way as well, i.e. keeping hooks,
+actions, styles, etc. together. There's pros and cons to both these approaches IMO, but
+lets stick with single folder approach for this one.
+
+```sh
+src
+├── App.tsx
+└── Counter
+│   ├── Counter.tsx
+│   ├── actions.ts
+│   ├── index.ts
+│   ├── interface.ts
+│   ├── reducer.ts
+│   └── useCounterState.tsx
+└── index.tsx
+```
+
+High-level overview for the files:
+
+- `interface.ts`: holds the interfaces across the entire Counter example
+- `reducer.ts`: defines the reducer itself, along w/ initial state etc
+- `actions.ts`: functions which use the action interface & can be used in React FCs
+- `Counter.tsx`: the real React FC, which will use the actions, state, etc
+- `useCounterState.tsx`: is the hook where the reducer and context API are fused together
+
+### Interfaces
+
+For this quick example, the state will only capture the current value which
+will be called `CounterState`.
+
+There will be only two kinds of actions viz. Increment and Decrement.
+We'll create a Enum for that, let's call it `CounterStateEnum`. This will behave
+like a [typescript discriminator](https://dixitk13.github.io/typescript-discriminator)
+for reducer switch case - the case will switch on `action.type` but we'll get to
+that in the reducer section.
+
+To enable that we create a generic union type called `CounterAction` - which
+will be a combination of `CounterIncrementAction` and `CounterDecrementAction`.
+
+```typescript
+export interface CounterState {
+  value: number;
+}
+
+export enum CounterStateEnum {
+  COUNTER_STATE_INCREMENT = "COUNTER_STATE_INCREMENT",
+  COUNTER_STATE_DECREMENT = "COUNTER_STATE_DECREMENT",
+}
+
+export interface CounterIncrementAction {
+  type: CounterStateEnum.COUNTER_STATE_INCREMENT;
+}
+
+export interface CounterDecrementAction {
+  type: CounterStateEnum.COUNTER_STATE_DECREMENT;
+}
+
+export type CounterAction = CounterIncrementAction | CounterDecrementAction;
+
+export type CounterDispatch = React.Dispatch<CounterAction>;
+```
+
+## Actions
+
+Moving on to action creators, as some may call them. These will be functions
+which we can directly invoke from the components themselves.
+
+We'll define two viz. `counterIncrement` and `counterDecrement` and
+incrementing/decrementing respectively.
+
+```typescript
+export const counterIncrement = (): CounterIncrementAction => {
+  return {
+    type: CounterStateEnum.COUNTER_STATE_INCREMENT,
+  };
+};
+
+export const counterDecrement = (): CounterDecrementAction => {
+  return {
+    type: CounterStateEnum.COUNTER_STATE_DECREMENT,
+  };
+};
+```
+
+## Reducer
+
+The core-functionality of your hook will be defined here. For the counter example,
+it might seem very simple use-case, the same technique can be extended further handle
+more complex states. Let's take a look at the implementation now.
+
+```typescript
+export const initialCounterState: CounterState = {
+  value: 0,
+};
+
+export const reducer = (state: CounterState, action: CounterAction) => {
+  switch (action.type) {
+    case CounterStateEnum.COUNTER_STATE_INCREMENT:
+      return {
+        ...state,
+        value: state.value + 1,
+      };
+    case CounterStateEnum.COUNTER_STATE_DECREMENT:
+      return {
+        ...state,
+        value: state.value - 1,
+      };
+    default:
+      throw new Error(`Unhandled action type`);
+  }
+};
+```
+
+## useReducerState
+
+We'll use two context instances here:
+
+- `CounterDispatchContext`: for storing the dispatch function
+- `CounterStateContext`: for consuming the state
+
+Splitting this into two sections, helps one prevent re-rendering
+components which dispatch an update in state but don't really
+consume the state itself.
+
+```typescript
+const CounterStateContext = React.createContext<CounterState>(
+  initialCounterState
+);
+const CounterDispatchContext = React.createContext<CounterDispatch>(
+  () => undefined
+);
+```
+
+We can define corresponding hooks to take advantage of the `useContext` hooks
+and even define a hook to extract both these variables together!
+
+```typescript
+export const useCounterState = (): CounterState => {
+  return React.useContext(CounterStateContext);
+};
+
+export const useCounterDispatch = (): CounterDispatch => {
+  return React.useContext(CounterDispatchContext);
+};
+
+export const useCounterContext = () => {
+  const state = useCounterState();
+  const dispatch = useCounterDispatch();
+  return {
+    state,
+    dispatch,
+  };
+};
+```
+
+We also define a Provider `CounterProvider` which sprinkles and allows children
+variables to consume state/dispatch along with initializing `useReducer`. This
+`CounterProvider` can be used for consuming both these context instances defined
+allow for a cleaner import.
+
+```typescript
+interface CounterProviderProps {
+  children: React.ReactChild | React.ReactChildren;
+}
+
+export const CounterProvider = (props: CounterProviderProps) => {
+  const [state, dispatch] = React.useReducer(reducer, initialCounterState);
+
+  return (
+    <CounterDispatchContext.Provider value={dispatch}>
+      <CounterStateContext.Provider value={state}>
+        {props.children}
+      </CounterStateContext.Provider>
+    </CounterDispatchContext.Provider>
+  );
+};
+```
+
+This above is how the `CounterProvider` looks like.
+
+### index.ts
+
+An index file to export everything.
+
+```typescript
+export * from "./useCounterState";
+
+export * from "./interface";
+export * from "./actions";
+export * from "./reducer";
+
+...and more
+```
+
+### Counter
+
+The simple FC, consuming the state & using the dispatch functions
+
+```typescript
+import {
+  counterDecrement,
+  counterIncrement,
+  useCounterState,
+  useCounterDispatch,
+} from "./";
+
+export const Counter = () => {
+  const dispatch = useCounterDispatch();
+  const { value } = useCounterState();
+
+  const increment = () => dispatch(counterIncrement());
+  const decrement = () => dispatch(counterDecrement());
+
+  return (
+    <div className="counter-container">
+      <h1>{value}</h1>
+      <div className="actions">
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## App
+
+How would you consume this inside an App?
+
+```typescript
+import { CounterProvider, Counter } from "./Counter";
+
+export default function App() {
+  return (
+    <CounterProvider>
+      <div className="App">
+        <Counter />
+      </div>
+    </CounterProvider>
+  );
+}
+```
+
+![demo-app](/blog/designing-my-usereducer/demo-app.gif)
+
+Here's a codepen putting all of it together. https://codesandbox.io/s/my-context-0k8dd

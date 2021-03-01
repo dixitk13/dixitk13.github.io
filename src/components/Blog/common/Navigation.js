@@ -18,7 +18,7 @@ export const Nav = styled.nav.attrs({
   color: ${fontColor};
   height: ${offset}px;
 
-  ${(props) =>
+  ${props =>
     props.background &&
     css`
       background: ${entireBackgroundImage};
@@ -76,35 +76,36 @@ export const Navigation = ({ background }) => {
     { title: "Tags", to: "/tags" },
     { title: "About Me", to: "/about" },
   ];
-  const activeClassNames = { className: "active-nav-link" };
+
   const activeRef = useRef();
-
-  const active = (pathname, link) => {
-    // base condition
-    if (link === pathname || `${link}/` === pathname) return activeClassNames;
-
-    // condition for tag paths true
-    if (pathname.includes("/tags") && link === "/tags") {
-      return activeClassNames;
-    }
-
-    // condition to make all blog paths true
-    if (
-      !pathname.includes("/tags") &&
-      !flattenDeep(items.map((x) => [x.to, `${x.to}/`])).includes(pathname) &&
-      link === "/blog"
-    ) {
-      return activeClassNames;
-    }
-
-    return {};
-  };
-
   useEffect(() => {
     if (activeRef.current) {
       activeRef.current.focus();
     }
   }, []);
+
+  const activeProps = { className: "active-nav-link", ref: activeRef };
+
+  const getActiveProps = (pathname, link) => {
+    // base condition
+    if (link === pathname || `${link}/` === pathname) return activeProps;
+
+    // condition for tag paths true
+    if (pathname.includes("/tags") && link === "/tags") {
+      return activeProps;
+    }
+
+    // condition to make all blog paths true
+    if (
+      !pathname.includes("/tags") &&
+      !flattenDeep(items.map(x => [x.to, `${x.to}/`])).includes(pathname) &&
+      link === "/blog"
+    ) {
+      return activeProps;
+    }
+
+    return {};
+  };
 
   return (
     <Nav background={background} aria-label="Main menu">
@@ -114,8 +115,9 @@ export const Navigation = ({ background }) => {
             <NavLink
               to={item.to}
               title={item.title}
-              getProps={({ location }) => active(location.pathname, item.to)}
-              ref={window.location.pathname === item.to ? activeRef : undefined}
+              getProps={({ location }) =>
+                getActiveProps(location.pathname, item.to)
+              }
             >
               {item.title}
             </NavLink>

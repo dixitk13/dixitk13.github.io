@@ -39,7 +39,7 @@
     "gatsby-source-filesystem": "^2.3.2",
     "kind-of": "^6.0.3",
     "localstorage": "^1.0.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "prismjs": "^1.23.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -46,7 +46,7 @@
     "react-helmet": "^6.0.0",
     "react-is": "^16.13.1",
     "react-typography": "^0.16.19",
-    "set-value": "^3.0.2",
+    "set-value": "^4.0.1",
     "styled-components": "^5.1.0",
     "styled-theming": "^2.2.0",
     "typography": "^0.16.19"

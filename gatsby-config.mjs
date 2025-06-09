@@ -181,6 +181,7 @@ const config = {
               },
             },
           },
+
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

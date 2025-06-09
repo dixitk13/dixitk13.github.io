@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { device } from "../../utils/device";
 import ProjectCard from "./ProjectCard";
 
-export default ({ data, cardNumber, ...rest }) => {
+const ProjectsView = ({ data, cardNumber, ...rest }) => {
   const { edges } = data.projects;
 
   return (
@@ -67,3 +67,5 @@ const MainContainer = styled.main`
     max-width: 40vw;
   }
 `;
+
+export default ProjectsView;

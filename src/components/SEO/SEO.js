@@ -8,7 +8,7 @@ import favicon from "../../../static/favicon.ico";
 import { Twitter } from "./Twitter";
 import { OpenGraph } from "./OpenGraph";
 
-export const SEO = ({ title, description, image, article }) => {
+export const SEOComponent = ({ title, description, image, article }) => {
   const { pathname } = useLocation();
   const { site } = useStaticQuery(query);
 
@@ -72,14 +72,14 @@ export const SEO = ({ title, description, image, article }) => {
   );
 };
 
-SEO.propTypes = {
+SEOComponent.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
   article: PropTypes.bool,
 };
 
-SEO.defaultProps = {
+SEOComponent.defaultProps = {
   title: null,
   description: null,
   image: null,

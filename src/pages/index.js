@@ -1,18 +1,20 @@
 import React from "react";
 
 import { Layout } from "../components/Layout";
-import { SEO } from "../components/SEO";
+import { SEOComponent } from "../components/SEO";
 import { HomeView, HomeNavWrapper } from "../components/Home";
 import { Navigation } from "../components/Blog";
 
-export default () => {
+const Home = () => {
   return (
     <Layout>
       <HomeNavWrapper>
-        <SEO />
+        <SEOComponent />
         <Navigation background />
         <HomeView />
       </HomeNavWrapper>
     </Layout>
   );
 };
+
+export default Home;

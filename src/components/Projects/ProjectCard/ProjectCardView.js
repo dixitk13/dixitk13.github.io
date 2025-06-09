@@ -1,6 +1,9 @@
-import React from "react";
-import { MDXProvider } from "@mdx-js/react";
-import { MDXRenderer } from "gatsby-plugin-mdx";
+import React, { useEffect, useState } from "react";
+import * as runtime from "react/jsx-runtime";
+import { compileSync, runSync } from "@mdx-js/mdx";
+
+// import { MDXProvider } from "@mdx-js/react";
+// import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import {
   Card,
@@ -15,10 +18,23 @@ import {
   ExpanderBody,
   ExpanderClose,
 } from "../../../common/ExpandableCard";
-import { FannedCards, mdxComponents } from "../../../common";
+import {
+  FannedCards,
+  // mdxComponents
+} from "../../../common";
 
+function compileMDX(mdx) {
+  const code = String(
+    compileSync(mdx, {
+      outputFormat: "function-body",
+      development: false,
+    })
+  );
 
-export default ({
+  return code;
+}
+
+const ProjectCardView = ({
   id,
   title,
   link,
@@ -41,6 +57,16 @@ export default ({
     toggleOpen(id);
   };
 
+  // MDXProvider no longer seems to be an option for rendering a raw string
+  // as rendered MDX components. Picking this compileMDX from issues
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    const code = compileMDX(body);
+    const { default: Content } = runSync(code, runtime);
+    setContent(Content());
+  }, [body]);
+
   return (
     <Card active={active} index={index} open={open} cardId={id}>
       <CardContainer open={open}>
@@ -53,15 +79,17 @@ export default ({
           {title}
         </HeaderContainer>
         <FannedCards images={images} />
-        <Excerpt ariaLabel="Project Overview">{excerpt}</Excerpt>
+        {excerpt && <Excerpt ariaLabel="Project Overview">{excerpt}</Excerpt>}
       </CardContainer>
       <Expander cardId={id} open={open}>
         <ExpanderBody open={open}>
-          <MDXProvider components={mdxComponents}>
-            <MDXRenderer>
+          {content && content}
+          {/* 
+            <MDXProvider components={mdxComponents}>
               {body}
-            </MDXRenderer>
-        </MDXProvider>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider> 
+          */}
         </ExpanderBody>
         <Tags open={open}>
           {tags.map((tag, i) => (
@@ -84,3 +112,5 @@ export default ({
     </Card>
   );
 };
+
+export default ProjectCardView;

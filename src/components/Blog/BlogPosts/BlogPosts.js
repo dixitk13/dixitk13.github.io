@@ -6,20 +6,20 @@ import { BlogPostsView } from "./BlogPostsView";
 export const getAllBlogs = graphql`
   query getAllBlogs {
     blogs: allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { type: { eq: "blog" } } }
     ) {
       edges {
         node {
           id
           body
+          excerpt(pruneLength: 150)
           frontmatter {
             path
             type
             date(formatString: "MMM DD, YYYY")
             title
           }
-          excerpt(truncate: true)
         }
       }
       totalCount

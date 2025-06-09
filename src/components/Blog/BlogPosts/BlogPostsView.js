@@ -38,7 +38,10 @@ const PostHeading = styled(BlogHeader)`
     font-size: 40px;
     color: ${fontColor};
     text-decoration: none;
-    font-family: "Futura PT", -apple-system, sans-serif;
+    font-family:
+      "Futura PT",
+      -apple-system,
+      sans-serif;
     &:hover {
       color: ${fontHover};
       cursor: pointer;
@@ -90,7 +93,7 @@ export const BlogItem = ({ id, path, title, date, excerpt }) => {
         <Link to={`${path}`}>{title}</Link>
         <p>{date}</p>
       </PostHeading>
-      <p>{excerpt}</p>
+      {excerpt && <p>{excerpt}</p>}
     </BlogItemArticle>
   );
 };

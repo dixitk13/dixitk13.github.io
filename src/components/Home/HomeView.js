@@ -26,11 +26,11 @@ export const HomeViewContainer = styled.div`
 export const HomeView = () => {
   const myRef = useRef(null);
   const timeout = useRef(0);
-  
+
   // todo: stop scrolling if user has started scrolling
   useEffect(() => {
     timeout.current = setTimeout(() => {
-      window.scrollTo(0, myRef.current?.offsetTop - 4)
+      window.scrollTo(0, myRef.current?.offsetTop - 4);
     }, 1000);
     return () => timeout.current && clearTimeout(timeout.current);
   }, []);

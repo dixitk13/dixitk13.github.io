@@ -1,14 +1,14 @@
 import React from "react";
 
 import { BlogWrapper } from "../components/Blog";
-import { SEO } from "../components/SEO";
+import { SEOComponent } from "../components/SEO";
 
 import AboutMe from "../components/AboutMe";
 
 const About = () => {
   return (
     <BlogWrapper>
-      <SEO />
+      <SEOComponent />
       <AboutMe flat />
     </BlogWrapper>
   );

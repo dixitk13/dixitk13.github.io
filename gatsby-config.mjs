@@ -1,4 +1,11 @@
-module.exports = {
+import remarkGfm from "remark-gfm";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const config = {
   siteMetadata: {
     title: `Dixit Keshavbhai Patel`,
     titleTemplate: "%s · just another software Engineer",
@@ -14,45 +21,34 @@ module.exports = {
   plugins: [
     `gatsby-plugin-sitemap`, //  TODO: maybe customize this later
     "gatsby-plugin-robots-txt",
-    `gatsby-remark-reading-time`,
+    // `gatsby-remark-reading-time`,
     {
-      resolve: `gatsby-plugin-feed-mdx`,
+      resolve: `gatsby-plugin-feed`,
       options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                site_url: siteUrl
-              }
-            }
-          }
-        `,
         feeds: [
           {
             serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.edges.map(edge => {
-                let body = edge.node.html;
+              return allMdx.nodes.map((node) => {
+                // let body = node.html;
+                let body = node.excerpt;
                 const siteUrl = site.siteMetadata.siteUrl;
-                const url = siteUrl + edge.node.frontmatter.path;
-                const postText = `<div style="margin-top=60px;">Click Here to read on my website <a href="${url}">clicking here</a></div>`;
+                const url = siteUrl + node.frontmatter.path;
+                const postText = `\nClick Here to read on my website by <a rel="self" href="${url}">clicking here</a>`;
                 body = body
                   .replace(/href="\//g, `href="${siteUrl}/`)
                   .replace(/src="\//g, `src="${siteUrl}/`)
                   .replace(/"\/static\//g, `"${siteUrl}/static/`)
                   .replace(/,\s*\/static\//g, `,${siteUrl}/static/`);
 
-                return Object.assign({}, edge.node.frontmatter, {
+                return Object.assign({}, node.frontmatter, {
                   url,
-                  description: edge.node.excerpt,
-                  date: edge.node.frontmatter.date,
-                  guid: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  guid: site.siteMetadata.siteUrl + node.frontmatter.path,
                   custom_elements: [
                     { "content:encoded": body + postText },
                     {
-                      "content:tags": formatTags(edge.node.frontmatter.tags),
+                      "content:tags": formatTags(node.frontmatter.tags),
                     },
                   ],
                 });
@@ -61,19 +57,16 @@ module.exports = {
             query: `
               {
                 allMdx(
-                  sort: { order: DESC, fields: [frontmatter___date] },
+                  sort: { frontmatter: { date: DESC } }
                   filter: { frontmatter: { type: { eq: "blog" } } }
                 ) {
-                  edges {
-                    node {
-                      excerpt
-                      html
-                      frontmatter {
-                        title
-                        path
-                        tags
-                        date
-                      }
+                  nodes {
+                    excerpt(pruneLength: 250)
+                    frontmatter {
+                      title
+                      path
+                      tags
+                      date
                     }
                   }
                 }
@@ -112,9 +105,11 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        // The unique name for each instance
         name: `src`,
         path: `${__dirname}/static/`,
       },
+      __key: "src",
     },
     {
       resolve: `gatsby-plugin-typography`,
@@ -127,7 +122,12 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
+        // path: `${__dirname}/static`,
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+        },
         gatsbyRemarkPlugins: [
+          // Add GitHub Flavored Markdown (GFM) support
           {
             resolve: `gatsby-remark-autolink-headers`,
             options: {
@@ -205,8 +205,10 @@ module.exports = {
   ],
 };
 
-const formatTags = tags => {
-  return tags.reduce(function(prev, curr, idx) {
+const formatTags = (tags) => {
+  return tags.reduce(function (prev, curr, idx) {
     return idx == 0 ? `#${curr}` : prev + " #" + curr;
   }, "");
 };
+
+export default config;

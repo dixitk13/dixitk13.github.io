@@ -116,7 +116,7 @@ const LogosView = ({ extraMentions = [], enableLayout }) => {
   return (
     <Mentions
       enableLayout={enableLayout}
-      ariaLabel="Contact me"
+      aria-label="Contact me"
       role="navigation"
     >
       {mentions.map((mention, i) => (

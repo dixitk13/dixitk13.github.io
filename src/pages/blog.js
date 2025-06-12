@@ -1,12 +1,12 @@
 import React from "react";
 
 import { BlogPosts, BlogWrapper } from "../components/Blog";
-import { SEO } from "../components/SEO";
+import { SEOComponent } from "../components/SEO";
 
 const Blog = () => {
   return (
     <BlogWrapper>
-      <SEO />
+      <SEOComponent />
       <BlogPosts />
     </BlogWrapper>
   );

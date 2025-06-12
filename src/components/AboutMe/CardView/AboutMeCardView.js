@@ -72,7 +72,7 @@ const Image = styled.img.attrs({
   flex: 1 5 30%;
   min-height: 0;
   max-height: 350px;
-  width: 350px;
+  width: 310px;
   align-self: center;
   margin-bottom: 1rem;
   background-size: cover;

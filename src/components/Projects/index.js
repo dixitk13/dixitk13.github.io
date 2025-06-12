@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import ProjectsView from "./ProjectsView";
 import { StaticQuery, graphql } from "gatsby";
+
+import ProjectsView from "./ProjectsView";
+
 const getAllProjects = graphql`
   query {
     projects: allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { type: { eq: "project" } } }
     ) {
       edges {
         node {
           id
           body
+          excerpt(pruneLength: 120)
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
@@ -18,7 +21,6 @@ const getAllProjects = graphql`
             tags
             images
           }
-          excerpt(truncate: false)
         }
       }
     }

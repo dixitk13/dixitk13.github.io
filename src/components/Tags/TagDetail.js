@@ -52,10 +52,10 @@ export default function TagDetail({ pageContext, data }) {
 }
 
 export const pageQuery = graphql`
-  query($tag: String) {
+  query ($tag: String) {
     allMdx(
       limit: 2000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tags: { in: [$tag] }, type: { eq: "blog" } } }
     ) {
       totalCount
@@ -69,7 +69,6 @@ export const pageQuery = graphql`
             path
             date(formatString: "MMM DD, YYYY")
           }
-          excerpt(truncate: true)
         }
       }
     }

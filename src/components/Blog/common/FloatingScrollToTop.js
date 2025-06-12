@@ -39,6 +39,7 @@ const EmojiImage = styled.div.attrs({
   right: 12px;
 `;
 
+// FIXME: Doesn't work before/after v5 upgrade
 export const FloatingScrollToTop = () => {
   const [enable, setEnable] = useState(false);
   // gatsby wants to add in useEffect a document check
@@ -50,7 +51,7 @@ export const FloatingScrollToTop = () => {
   /*eslint-enable */
 
   const onClick = () => {
-    document.getElementById("web-header").scrollIntoView({
+    document.getElementById("web-header")?.scrollIntoView({
       behavior: "smooth",
     });
   };

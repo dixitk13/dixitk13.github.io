@@ -2,40 +2,30 @@ import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
-import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import { BlogWrapper, BlogMain } from "../common";
 import { mdxComponents } from "../../../common";
 import { rhythm } from "../../../utils";
 import { fontColor } from "../../../styles";
-import { SEO } from "../../SEO";
+import { SEOComponent } from "../../SEO";
 
-export default function BlogPostTemplate({ data }) {
-  const { mdx: post } = data;
-  if (!post) return null;
+export default function BlogPostTemplate({ data, children, pageContext }) {
+  if (!pageContext) return null;
 
-  const { frontmatter, excerpt, body, fields } = post;
-  const { title, date } = frontmatter;
-  const {
-    readingTime: { text: timeToRead },
-  } = fields;
+  const { frontmatter, excerpt, timeToReadInWords } = pageContext ?? {};
+  const { title, date } = frontmatter ?? {};
   return (
     <BlogWrapper>
-      <SEO
-        title={frontmatter.title}
-        description={excerpt || "nothin’"}
-        article
-      />
+      <SEOComponent title={title} description={excerpt || "nothin"} article />
       <BlogMain>
         <BlogHeader>
           <BlogTitle>{title}</BlogTitle>
           <p>
-            Last updated: {date} • {timeToRead}
+            Last updated: {date} •{" "}
+            {timeToReadInWords && <span>{timeToReadInWords}</span>}
           </p>
         </BlogHeader>
-        <MDXProvider components={mdxComponents}>
-          <MDXRenderer>{body}</MDXRenderer>
-        </MDXProvider>
+        <MDXProvider components={mdxComponents}>{children}</MDXProvider>
       </BlogMain>
     </BlogWrapper>
   );
@@ -68,7 +58,10 @@ const BlogTitle = styled.h1`
   color: ${fontColor};
   font-weight: 900;
   font-size: 40px;
-  font-family: "Futura PT", -apple-system, sans-serif;
+  font-family:
+    "Futura PT",
+    -apple-system,
+    sans-serif;
 `;
 
 // const BlogBody = styled.article.attrs({
@@ -100,20 +93,12 @@ const BlogTitle = styled.h1`
 
 export const query = graphql`
   query blogPostByPath($path: String!) {
-    mdx(frontmatter: { type: { eq: "blog" }, path: { eq: $path } }) {
-      id
+    mdx(frontmatter: { path: { eq: $path } }) {
+      timeToReadInWords
       frontmatter {
         title
         type
         date(formatString: "MMM DD, YYYY")
-      }
-      excerpt(truncate: true)
-      timeToRead
-      body
-      fields {
-        readingTime {
-          text
-        }
       }
     }
   }

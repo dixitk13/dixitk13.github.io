@@ -4,6 +4,7 @@ const process = "⚙️";
 const back = "🔙";
 const top = "🔝";
 const regex = "*️⃣";
+const leadership = "🗣️";
 
 const topArrow = "⬆️";
 const rightArrow = "➡️";
@@ -17,4 +18,5 @@ export const Emojis = {
   communication,
   process,
   regex,
+  leadership,
 };

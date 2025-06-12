@@ -25,7 +25,7 @@ an inline function and a function which sits outside like `isEven` defined below
 ```typescript
 const arr: number[] = [1, 2, 3, 4];
 
-console.log(arr.filter(x => x % 2)); // [1, 3]
+console.log(arr.filter((x) => x % 2)); // [1, 3]
 
 const isEven = (x: number): boolean => x % 2 === 0;
 console.log(arr.filter(isEven)); // [2, 4]
@@ -54,7 +54,7 @@ const arr3: KV[] = [
   { k: "a", v: 3 },
 ];
 
-console.log(arr3.filter(x => x.v % 2 === 0)); // [{k: "y", v: 4}]
+console.log(arr3.filter((x) => x.v % 2 === 0)); // [{k: "y", v: 4}]
 ```
 
 > findIndex
@@ -97,8 +97,8 @@ Refer `includes` to find out how its different than `some`.
 
 ```javascript
 const arr1 = [2, 4, 6, 7];
-console.log(arr1.some(x => x % 2 !== 0)); // true
-console.log([2, 4, 6].some(x => x % 2 !== 0)); // false
+console.log(arr1.some((x) => x % 2 !== 0)); // true
+console.log([2, 4, 6].some((x) => x % 2 !== 0)); // false
 ```
 
 > includes
@@ -188,7 +188,7 @@ functions can't be async and won't wait for async operations to finish.
 const fileDates = readFiles();
 
 // doens't work and won't wait for generateForDate to finish
-fileDates.forEach(async date => await generateForDate(date));
+fileDates.forEach(async (date) => await generateForDate(date));
 
 // works, below is the right way
 for (const date of fileDates) {
@@ -206,8 +206,8 @@ function doesn't get satisfied.
 And yes it'll also take into consideration sparse arrays.
 
 ```javascript
-console.log([1, 2, 4, ,].every(x => x % 2 === 0)); // false
-console.log([2, 4, ,].every(x => x % 2 === 0)); // true
+console.log([1, 2, 4, ,].every((x) => x % 2 === 0)); // false
+console.log([2, 4, ,].every((x) => x % 2 === 0)); // true
 ```
 
 > find
@@ -223,10 +223,10 @@ If not found, it'll return undefined.
 conditional logic in mind when using the function.
 
 ```typescript
-console.log(strs.find(x => x === "nox")); // undefined
-console.log(strs.find(x => x === "fox")); // fox (first fox not the second fox)
+console.log(strs.find((x) => x === "nox")); // undefined
+console.log(strs.find((x) => x === "fox")); // fox (first fox not the second fox)
 
-console.log(strs.find(x => x && x.startsWith("fo"))); // fox (first fox not the second fox)
+console.log(strs.find((x) => x && x.startsWith("fo"))); // fox (first fox not the second fox)
 ```
 
 > reverse
@@ -256,13 +256,13 @@ the returned array.
 
 ```typescript
 const arr: number[] = [1, 5, 3];
-console.log(arr.map(x => x * 2)); // [2, 10, 6]
-console.log(arr.map(x => ({ x: x * 2 }))); // [ { x: 2 }, { x: 10 }, { x: 6 } ]
+console.log(arr.map((x) => x * 2)); // [2, 10, 6]
+console.log(arr.map((x) => ({ x: x * 2 }))); // [ { x: 2 }, { x: 10 }, { x: 6 } ]
 console.log(arr.map((x, index) => ({ x: x * 2, idx: index })));
 // [ { x: 2, idx: 0 }, { x: 10, idx: 1 }, { x: 6, idx: 2 } ]
 
 console.log(
-  arr.map(x => {
+  arr.map((x) => {
     if (x % 2 === 0) return x;
   })
 ); // [undefined, undefined, undefined]
@@ -323,7 +323,7 @@ const items = [
   { z: 1, a: 1 },
 ];
 
-const summation = objects => {
+const summation = (objects) => {
   return objects.reduce((acc, objItem) => {
     return {
       ...acc,
@@ -340,11 +340,11 @@ console.log(summation(items)); // { x: 2, y: 3, z: 5, a: 1 }
 
 Let's walk thro this in brief via the same tabular approach:
 
-| index | value          | accumulator                |
-| ----- | -------------- | -------------------------- |
-| 0     | { x: 2, y: 1 } | { x: 2, y: 1 }             |
-| 1     | { y: 2, z: 4 } | { x: 2, y: 3, z: 4 }       |
-| 2     | { z: 1, a: 1 } | { x: 2, y: 3, z: 5, a: 1 } |
+| index | value            | accumulator                  |
+| ----- | ---------------- | ---------------------------- |
+| 0     | \{ x: 2, y: 1 \} | \{ x: 2, y: 1 \}             |
+| 1     | \{ y: 2, z: 4 \} | \{ x: 2, y: 3, z: 4 \}       |
+| 2     | \{ z: 1, a: 1 \} | \{ x: 2, y: 3, z: 5, a: 1 \} |
 
 We also have a function called `reduceRight` which runs from right-side of
 the array instead of from left.
@@ -362,7 +362,7 @@ array of that length and map with a callback function.
 console.log(Array.from("the")); // ["t", "h", "e"]
 console.log(Array.from(1)); // []
 console.log(Array.from("1")); // ["1"]
-console.log(Array.from([1, 2, 3], x => x * 2)); // [2, 4, 6]
+console.log(Array.from([1, 2, 3], (x) => x * 2)); // [2, 4, 6]
 
 console.log(Array.from({ length: 3 })); // ['undefined', 'undefined', 'undefined']
 console.log(Array.from({ length: 3 }, (_, index) => index)); // [0, 1, 2]
@@ -564,7 +564,7 @@ The function iterator has only two gotchas I'd say:
 - return done as true with undefined value, when truly finished
 
 ```javascript
-const iterator = function() {
+const iterator = function () {
   // Get all the values in an array
 
   const values = Object.values(this);

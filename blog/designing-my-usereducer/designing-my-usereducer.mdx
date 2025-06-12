@@ -83,7 +83,7 @@ const myreducer = (_, action) => {
 };
 
 const [state, dispatch] = React.useReducer(myreducer, true);
-const setState = flag => dispatch({ state: flag });
+const setState = (flag) => dispatch({ state: flag });
 
 setState(false);
 setState(true);
@@ -309,9 +309,8 @@ components which dispatch an update in state but don't really
 consume the state itself.
 
 ```typescript
-const CounterStateContext = React.createContext<CounterState>(
-  initialCounterState
-);
+const CounterStateContext =
+  React.createContext<CounterState>(initialCounterState);
 const CounterDispatchContext = React.createContext<CounterDispatch>(
   () => undefined
 );

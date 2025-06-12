@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkdixitk13_github_io=self.webpackChunkdixitk13_github_io||[]).push([[94],{3286:function(e,t,i){i.r(t);var a=i(6540),l=i(5048),u=i(684),r=i(7276);t.default=e=>{let{data:{allMdx:{group:t},site:{siteMetadata:{title:i}}}}=e;return a.createElement(u.Cc,null,a.createElement(l.T,{title:i}),a.createElement(r.L,{group:t}))}}}]);
+//# sourceMappingURL=component---src-pages-tags-js-57997e3f8876fe7e72d6.js.map

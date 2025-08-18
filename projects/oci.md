@@ -1,20 +1,26 @@
 ---
 title: "What I do today @ Oracle"
 date: "2021-05-05"
-link: "https://console.us-phoenix-1.oraclecloud.com/"
+link: "https://cloud.oracle.com/"
 type: "project"
 tags:
+  - typescript
   - react
   - redux
-  - typescript
-  - react-hooks
-  - oui
+  - terraform
+  - python
+  - data-center
 images:
   - react
   - typescript
   - redux
+  - terraform
+  - python
 ---
 
-I am currently a console developer on OCI(Oracle Cloud Infrastructure).
+I am currently a console developer on OCI (Oracle Cloud Infrastructure).
 
-- We build and maintain next generation console applications on OCI.
+- Collaborating with cross-functional teams, product management, and engineering to build and enhance web experiences for OCI Console, OCI Compute, Observability, and Monitoring products.
+- Identify and execute improvements in existing architectures; suggest and implement best practices to drive efficiency.
+- Built & owned products in Oracle Cloud, viz. OCI Console, Logging, Monitoring, Connector-Hub, OCI Dashboards widgets, etc.
+- Participating in organizational roadmap planning, mentorship programs & regular hiring activities in the organization.

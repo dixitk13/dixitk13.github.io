@@ -110,6 +110,14 @@ const LogosView = ({ extraMentions = [], enableLayout }) => {
       transform: "scale(0.75)",
       scale: "scale(0.85)",
     },
+    {
+      href: "https://linkedin.com/in/dixitk13",
+      imageName: "linkedin",
+      alt: "linkedin",
+      width: "48px",
+      transform: "scale(0.75)",
+      scale: "scale(0.85)",
+    },
   ];
   if (extraMentions) mentions = [...mentions, ...extraMentions];
 

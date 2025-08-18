@@ -6,6 +6,7 @@ import styledIcon from "./styled.png";
 import webpackIcon from "./webpack.svg";
 import babelIcon from "./babel.svg";
 import githubIcon from "./github.svg";
+import linkedinIcon from "./linkedin.svg";
 
 import stravaIcon from "./strava.png";
 import twitterIcon from "./twitter.svg";
@@ -36,6 +37,7 @@ import computerscienceIcon from "./computerscience.svg";
 import hatIcon from "./hat.png";
 import apolloIcon from "./apollo.svg";
 import typescript from "./typescript.svg";
+import terraform from "./terraform.svg";
 import heroku from "./heroku.svg";
 import redis from "./redis.svg";
 import node from "./node.svg";
@@ -57,6 +59,7 @@ export const Icons = {
   cisco: ciscoIcon,
   blueprintjs: blueprintjsIcon,
   javascript: javascriptIcon,
+  linkedin: linkedinIcon,
   sql: mysqlIcon,
   python: pythonIcon,
   redux: reduxIcon,
@@ -79,6 +82,7 @@ export const Icons = {
   apollo: apolloIcon,
   heroku,
   typescript,
+  terraform,
   node,
   redis,
 };

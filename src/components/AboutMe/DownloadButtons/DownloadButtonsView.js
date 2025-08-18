@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2019.pdf";
+import resume from "../../../../static/misc/Dixit_Keshavbhai_Patel_2025.pdf";
 import Switch from "../../Switch";
 import { SimpleButton } from "../../../common/SimpleButton";
 
@@ -21,7 +21,9 @@ const DownloadButton = styled(SimpleButton)`
     color: black;
     content: attr(data-hover);
     transform: translate(0, 0);
-    transition: 0.4s, opacity 0.6s;
+    transition:
+      0.4s,
+      opacity 0.6s;
   }
   &:hover:before {
     opacity: 1;

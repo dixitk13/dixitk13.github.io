@@ -57,7 +57,7 @@ export const FloatingScrollToTop = () => {
   };
 
   return (
-    <FloatingButton enable={enable} onClick={onClick}>
+    <FloatingButton enable={enable ? `${enable}` : ""} onClick={onClick}>
       <EmojiImage>{Emojis["top"]}</EmojiImage>
     </FloatingButton>
   );

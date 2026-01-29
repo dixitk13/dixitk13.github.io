@@ -1,0 +1,236 @@
+---
+title: "Advent of Code - 2025"
+date: "2026-01-18"
+path: "/aoc-2025"
+type: "blog"
+tags: ["algorithms", "typescript"]
+---
+
+This has been the first year-end I've been able to try out AOC (Advent of Code) during the December holidays. And it's been a fabulous journey!
+
+I was always aware of AOC, but never took the time to attempt it. With December being a high travel month, it was easy to let it slip. But alas, these are just excuses.
+
+This year, I've had company and was motivated by my teammate, who helped me keep pace. So I thank him dearly. I'm pretty sure my SO isn't that thankful 😅 because of the amount of time I've spent solving AOC.
+
+It would be futile to attempt to explain the questions, so I've left a link to them instead.
+
+So what did I really learn? Lots of string parsing, data structures, because of the way inputs are given, along with algorithms - of course! I wrote this article to share the specific technical hurdles, my transition from intuition to formal algorithms, and the lessons learnt with respect to software engineering.
+
+## Day 1️⃣ [Secret entrance](https://adventofcode.com/2025/day/1)
+
+✨Circular queue
+
+The secret entrance began as a circular queue problem where one would count the number of times you reach the starting position given inputs to rotate left or right on a given “dial” or circular queue.
+
+Part 1 is straightforward; it asks you to count how many times you land on the starting point while moving clockwise or counterclockwise. I started off with a simple loop, keeping a counter and applying a modulo to every operation to figure out if we land on the defined starting point.
+
+As you move to part 2, the problem picks up its pace and forces you to think out of the modulo operation, and advances to counting the number of times you'd “touch” the starting point of a circular queue when moving around. Here, I took some back and forth to realize a bit of math would be useful and relied on maintaining previous and next plus division by 100 to account for touching the starting point.
+
+## Day 2️⃣ [Gift shop](https://adventofcode.com/2025/day/2)
+
+✨Two-pointers & pattern-match
+
+The gift shop starts as a pattern-matching problem where one needs to find “Invalid ID” between ranges of numbers, and I tried to attempt that with two pointers for part 1.
+
+As you move to part 2, the invalid algorithm changes, and I had to resort to using brute force in finding a repeating pattern across the given number. I sliced the string in an incremental manner and validated towards the ending if the number of times a slice of string matched the `length-of-string / slice-length` .
+
+I tried a bunch of other algorithms to attempt this, but resorted to brute force towards the end. I'm sure there's a more optimized way to do the gift shop, but so be it.
+
+## Day 3️⃣ [Lobby](https://adventofcode.com/2025/day/3)
+
+✨Greedy algorithm & monotonic stack
+
+Lobby focusses on giving a numeric input and finding the maximum number that can be formed using the digits in the input. So if the given input is `81111111111119` the part 1 answer would be `89`, and the part two answer would be `8<10-number-of-1s>9` ⇒ `811111111119`.
+
+Part 1 began with finding two digits in a number for it to become the maximum number possible while maintaining relative positions. I greedily selected the maximum number from the list of numbers and then proceeded to find a second number from the previously maximum found number index, allowing to find the maximum two-digit number. This was again a brute force attempt.
+
+As you move to part 2, this algorithm becomes futile because now you're asked to find the maximum number using 12 such numbers, whilst maintaining relative positions. I had to skip this one on the specific day because the stack did not strike me at all! When re-attempting monotonic stack helped keep numbers in increasing order while maintaining relative positions to find the maximum formed number.
+
+## Day 4️⃣ [Printing department](https://adventofcode.com/2025/day/4)
+
+✨Grid traversal. Breadth-first search.
+
+The printing department focused on a grid-based input and needed one to apply logical calculations based on the cells around a grid index.
+
+Part 1 focuses on finding cells that have fewer than 4 neighbor `"@"` (roll) symbols in the given input grid. This is a straight-up grid traversal problem.
+
+Part 2 focuses on continuously removing the number of rolls based on grid density until the grid is stable - I attempted it via a normal loop, re-computed the grid, and did the entire grid scan again to remove additional rolls.
+
+I'd say this could be attempted in a BFS fashion for efficiency by reducing the `O(N^2)` incurred via rescans. The BFS could enqueue all the grid indexes with less than 4 rolls, and when we dequeue, we could enqueue if a grid index had dropped below 4 count. The result would be the number of elements we dequeued. The complexity would drop to. `O(E + V)` where `V` being the vertices enqueued for grid indexes with less than 4 rolls and `E` would be the edges processed. The BFS again did not strike me at that very time because the brute-force was pretty easy; I wish the input size had stopped my brute-force.
+
+**Bonus:**
+
+The problem focused on grid traversal, and I learnt two new terms here viz. Moore neighborhood and Von Neumann neighborhood.
+
+Usually, in grids, one looks at the N, S, E, and W directions are shown below. This is known as the [Von Neumann neighborhood](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood) (4-neighborhood). (The hyphens (-) are not counted)
+
+```
+[ - , N, - ]
+[ W,  P, E ]
+[ - , S, - ]
+```
+
+Whereas the [Moore neighborhood](https://en.wikipedia.org/wiki/Moore_neighborhood) consists of the 8 cells that surround the centerpiece, viz. NW, N, NE, W, E, SW, S, SE.
+
+```
+[ NW, N, NE]
+[ W,  P,  E]
+[ SW, S, SE]
+```
+
+## Day 5️⃣ [Cafeteria](https://adventofcode.com/2025/day/5)
+
+✨ Merge Intervals
+
+Cafeteria begins with a list of “fresh ingredients”, ranges, and product IDs that need to be evaluated as being fresh.
+
+Day 1 was easy: check if a number is between any of the possible ranges.
+Day 2 asks to determine the number of fresh ingredients from the given ranges. I tried building on top of the existing code to calculate, but there were more use-cases of overlapping intervals. Like a lazy developer, I tried applying a set to maintain uniqueness, but it failed miserably with a memory out of bounds error, which was interesting to say the least. Then I tried a fancy bloom filter to see if I could uniquely identify the fresh ingredients, to avoid processing already processed elements when looping through overlapping intervals, and that didn't work either.
+
+With some hints about “pre-preprocessing” from a friend, it struck me - OMG - this is merge intervals! Merge intervals and then calculate the difference between two intervals and add one to offset! A simple merge is shown below to understand the use-case, and of-course the ranges are sorted.
+
+```
+const processRanges = (ranges: number[][]): number[][] => {
+  if (ranges.length <= 1) return ranges;
+
+  const result = [];
+  let prev = ranges[0];
+
+  for (let i = 1; i < ranges.length; i++) {
+    let curr = ranges[i];
+    if (curr[0] <= prev[1]) {
+      prev = [prev[0], Math.max(prev[1], curr[1])];
+    } else {
+      result.push(prev);
+      prev = curr;
+    }
+  }
+  if (prev) result.push(prev);
+
+  return result;
+};
+```
+
+## Day 6️⃣ [Trash Compactor](https://adventofcode.com/2025/day/6)
+
+✨ Matrix processing
+
+Trash compactor was about a certain math variation that involved treating the input like a matrix and performing mathematical operations on it in a columnar fashion.
+
+For part 1, the math focussed on using the last row as a mathematical operators to apply on all of the rows above the operator. Which was pretty straightforward. Splitting the array on space would give out the matrix values, and one could operate as per the logic requested.
+
+For part 2, the question twists itself, which makes you consider each cell index in the input as a singular column, along with treating the topmost row as the Most Significant Bit (MSB) and the lowest bit as the Least Significant Bit (LSB). This significantly changed the way I designed the input parsing and needed me to design an algorithm that would iterate the input from top-right to bottom and move left iteratively - alongside applying the MSB logic. It reminded me of school math, but not really! 😄
+
+## Day 7️⃣ [Laboratories](https://adventofcode.com/2025/day/7)
+
+✨Grid traversal and DFS
+
+```
+Tachyon: A tachyon or tachyonic particle is a hypothetical particle that always
+travels faster than light
+```
+
+Laboratories began with an input grid consisting of a start of tachyon beam light, and then the light splits into two at grid indexes where the input string would be `^`. A beautiful input diagram is shown in the question itself.
+
+Part 1 began with an input location and splitters (`^` ) and requests to find how many times the beam would split. I tried solving this by updating the grid with the beam positions ( `|` ) after a split and moving top-to-bottom on the grid.
+
+Part 2 twists this question and requests to figure out how many unique paths would that tachyon beam light would take. This was a straight-up DFS (Depth First Search) question, but since my prior solution worked by updating the grid, I basically did a backtracking solution which updates the grid by marking the beam positions and cleaning them up before trying another path, and calculates all paths that make it to the end of the grid. After a lot of back-and-forth, I realized this is better solved with a DFS. I honestly wasn't able to write this DFS would, and I was pretty bumped about it, but looking back, that DFS quote, unquote, “was straightforward to come up with”.
+
+## Day 8️⃣ [Playground](https://adventofcode.com/2025/day/8)
+
+✨Union-find (or via DFS)
+
+Playground begins with a list of input co-ordinates for “junction boxes” in 3D space.
+
+Part 1 requests you to find out the multiplication of the top 3 “islands” you can form in the 3D space. This is a classical leetcode style problem, and you can either use DFS or Union Find(UF).
+
+Part 2 takes it one step forward and requests you to find the last two remaining “junction boxes” (or points) whilst performing the union. Maintaining the size of UF - one can determine this easily. It takes a bit of back & forth sometimes to determine who becomes a parent while joining a set.
+
+Pro-tip for distance calculation is just using the squared values instead of trying to really create a Euclidean distance by taking `Math.sqrt`.
+
+Bonus: Union-Find has been my favorite algorithm for a few years now. The “week” I discovered it, I basically have formulated a pattern around how you can apply this in problems, and its a fantastic algorithm! A very brief overview of how simple the algorithm can be is shown below:
+
+```
+// declare union-find parent array, initialize with self as parent
+let uf = Array.from({ length: points.length }).map((_, idx) => idx);
+
+// a find function which recursively goes up the parent chain
+const find = (x: number, uf: number[]): number => {
+  if (uf[x] !== x) {
+    uf[x] = find(uf[x], uf);
+  }
+  return uf[x];
+};
+
+// during your algorithm, find parent's for the two items
+// you'd like to join in a set
+let pi = find(i, uf);
+let pj = find(j, uf);
+
+// union them
+uf[pi] = pj;
+```
+
+If you've not tried or heard of UF before, I suggest watching a few videos and trying this out with a paper & pen.
+
+## Day 9️⃣ [Movie theater](https://adventofcode.com/2025/day/9)
+
+✨Brute-force
+
+Movie theater input consisted of `#` tiles given as `(x,y)` co-ordinates and requests to find the largest rectangle for part 1. I tried to attempt this via brute force, which solved the use-case but did not finish part 2.
+
+## Day 1️⃣0️⃣ [Factory](https://adventofcode.com/2025/day/10)
+
+✨Power-set. Math-trick → bifurcate
+
+The factory began with indicators, buttons, and joltage. I'm not even going to try explaining this input, but this is an interesting question.
+
+- Indicators are a list of indices we need in the `ON` state.
+- Buttons are a tuple of indexes that can turn Indicators `ON` or `OFF`, but all the indexes listed in the tuple get applied together to turn the indicators `ON` or `OFF`.
+- Joltage is the number of a button index is needed to be pressed for `ON` .
+
+Part 1 focuses on finding a set of buttons that can create the list of Indicators. The buttons can turn the indicator `ON` and `OFF`, so you'd need to formulate the logic such that you end with all the indicators in the `ON` state. I created a variety of helper functions that would simulate whether the list of buttons would give a valid end state. Along with parsing logic and a backtracking subsets function. I did a brute force of finding a power set given the list of tuples. The complexity of a power-set calculation is `O(2^N)`, after which I applied a filtering logic via a helper function to find if that specific set of buttons would end in a valid state.
+
+Part 2, and by far I think this is the hardest question I've seen in AOC, needed to form the joltage values via the buttons. I wasn't able to solve this question by myself and needed help, but here's an excellent explanation from [reddit](https://www.reddit.com/r/adventofcode/comments/1pk87hl/2025_day_10_part_2_bifurcate_your_way_to_victory/) which will make more sense than me trying to explain.
+
+The author breaks part 2 down to part 1 and applies a recursive function & math trick to find the number of sets, which help find the answer.
+
+## Day 1️⃣1️⃣ [Reactor](https://adventofcode.com/2025/day/11)
+
+✨Adjacency list, DFS and math tricks
+
+Reactor input consisted of adjaceny list as input and variable start or end points.
+
+Part 1 problem was a straight up DFS, which requested to find the number of paths between a given start and end input points.
+
+Part 2 was also a DFS-ish question which requested to count the number of paths between given start and end points, but needed to visit two intermediary points. I tried amending my prior DFS for part 1 to include the two intermediary points and count the paths. It worked for the sample input, but did not finish running for the larger input, even after applying caching. After a bit of searching on the web, the solution seems to indicate math tricks and explained why regular DFS would not finish in time - basically the number of paths explode which makes the DFS take longer.
+
+The math trick goes like this, and it blows my mind 🤯:
+
+```
+// Starting point being "A", ending being "Z"
+// and your intermediary points being P and Q
+
+	// a function which returns the number of paths between start end
+  function dfs (start, end) { ... }
+
+  let series1 = dfs("A", "P") * dfs("P", "Q") * dfs("Q", "Z")
+  let series2 = dfs("A", "Q") * dfs("Q", "P") * dfs("P", "Z")
+  let result = series1 + series2;
+```
+
+What it tries to do is calculate the dfs path count from `A` to `P` multiply them with path counts from `P` to `Q` and further multiple them with `Q` to `Z`. This would give out all the paths possible from `A` to `Z` via `P` and `Q`. Trying this out with a smaller example is extremely helpful!
+
+## Day 1️⃣2️⃣ [Christmas tree farm](https://adventofcode.com/2025/day/12)
+
+✨Brute-force
+
+Christmas tree farm input consists of irregularly shaped presents denoted via `#` and regions, denoted via length (`l`) and width (`w`) of the region, followed by the count of presents required in that region. The task is to determine if a region can accommodate all the present listed items.
+
+Honestly, for part 1, I pondered for an hour and quickly gave up because I was unsure how to design the packing algorithm. Turns out people solved this with a brute force without implementing any shape fitting logic and subtracting area with `l * w`.
+
+And since I couldn't finish all the above part 2 questions, I couldn't attempt the Christmas tree farm part 2.
+
+## ⭐ Closing thoughts
+
+Overall, I felt that applying algorithmic problem-solving skills to unknown questions makes us all better engineers.
